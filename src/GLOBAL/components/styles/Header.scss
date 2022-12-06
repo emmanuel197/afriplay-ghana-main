@@ -1,0 +1,189 @@
+@import "../../../_global.scss";
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  a {
+    white-space: nowrap;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .active-link {
+    color: $kg_color;
+  }
+}
+
+.chevron-icon {
+  margin-right: 20px;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.header {
+  z-index: 100;
+  position: relative;
+  background-color: $primary_color;
+  padding: 1rem;
+  position: relative;
+
+  .logo img {
+    width: 130px
+  }
+
+  .header-left-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  button,
+  a {
+    outline: none;
+    text-decoration: none;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border: none;
+    font-size: $normal_font;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .right-content {
+    display: flex;
+    align-items: center;
+    color: $kg_color;
+
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+
+      input {
+        position: relative;
+        // top: -8px;
+        margin: 0 10px;
+        margin-left: 0;
+        // margin-left: -100px;
+        border: 2px solid $kg_color ;
+        background: transparent;
+        padding: 3px;
+        border-radius: 5px;
+        color: $kg_color;
+        // width: 100%;
+        outline: none;
+      }
+    }
+
+    .search-icon {
+      margin-right: 20px;
+    }
+  }
+
+  .profile-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: .2s linear;
+
+    .profile-icon {
+      width: 35px;
+      height: 35px;
+      margin-right: 20px;
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+
+    p {
+      margin-right: 3px;
+    }
+  }
+
+  .sign-in-up {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    div {
+      display: flex;
+
+      p {
+        margin-top: 3px;
+      }
+    }
+
+    img {
+      position: relative;
+      margin-right: 5px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .sign-in {
+      background-color: $primary_color;
+      color: #fff;
+      transition: 0.4s all;
+
+      &:hover {
+        color: $tertiary_color;
+      }
+    }
+
+    .sign-up {
+      background-color: $kg_color;
+      color: $primary_color;
+      border-radius: 2px;
+      transition: 0.4s all;
+
+      &:hover {
+        background-color: $tertiary_color;
+      }
+    }
+  }
+}
+
+.account-dropdown {
+  background: #000;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 300px;
+  position: absolute;
+  right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+
+  nav {
+    background: red;
+    display: none;
+  }
+
+  .menu-btn {
+    display: block;
+    margin-left: 20px;
+  }
+
+  .header .right-content .search-icon {
+    margin-right: -20px;
+  }
+
+  :root {
+
+    .sign-in-up {
+      display: none;
+      background: red;
+    }
+  }
+}

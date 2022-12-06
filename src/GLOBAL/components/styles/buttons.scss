@@ -1,0 +1,71 @@
+@import '../../../global';
+
+.filled-btn {
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+
+    div {
+        background-color: $kg_color;
+        color: #1a052b;
+        transition: 0.4s all;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: max-content;
+        gap: 0.5rem;
+        user-select: none;
+        padding: .82rem;
+        white-space: nowrap;
+        // cursor: pointer;
+        border-radius: 2px;
+
+        &:hover {
+            background-color: $tertiary_color;
+        }
+    }
+}
+
+.outline-btn {
+    border-radius: 2px;
+    transition: 0.4s all;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: max-content;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    white-space: nowrap;
+    // cursor: pointer;
+    border-radius: 2px;
+    border: 2px solid #fff;
+    color: #fff;
+    width: max-content;
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+        background: #fff;
+        color: #000;
+    }
+}
+
+button {
+    border: none;
+    outline: none;
+    user-select: none;
+
+    &:disabled {
+        cursor: no-drop;
+    }
+}
+
+// @media screen and (max-width:480px) {
+//     .outline-btn,
+//     .filled-btn div {
+// width: 100%;
+// justify-content: center;
+//     }
+// }

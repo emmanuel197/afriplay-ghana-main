@@ -1,0 +1,18 @@
+import { Link } from "react-router-dom"
+import '../../components/styles/buttons.scss'
+
+const Subscribe = () => {
+    return (
+        <>
+            <Link to="/signup" className="filled-btn">
+                <div>
+                    <img src='/assets/svg/padlock.svg' alt='padlock' />
+                    <p>SUBSCRIBE TO WATCH</p>
+                </div>
+            </Link>
+        </>
+
+    )
+}
+
+export default Subscribe

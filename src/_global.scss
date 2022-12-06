@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+body {
+  overflow-x: hidden;
+}
+
+body,
+html,
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+// normal pc
+$primary_color: #1a052b;
+$secondary_color: #39234b;
+$tertiary_color: #fff;
+$kg_color: #C4BD47;
+$account_gray: #b5aeae;
+$account_edit_color: #219728;
+$kinder_color: #2d0b48;
+$normal_font: 1rem;
+$border_rad: 5px;
+$banner_text: 3rem;
+$banner_font_weight: normal;
+$headings_font_size: 2rem;
+$gray: gray;
+$account_desc_font: 1.2rem;
+$device_info_font: 0.7rem;
+// mobile
+$m_banner_text: 2rem;
+$m_normal_font: 1rem;
+$m_headings_font_size: 1.5rem;
+
+.primary-text {
+  color: $kg_color;
+}
+
+button {
+  display: block !important;
+}
+
+.primary-color-text {
+  color: $kg_color
+}
+
+.watch-movie video {
+  background-color: $primary_color !important;
+}
+
+.lines-max-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.lines-max-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.lines-max-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.lines-max-4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.lines-max-5 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+}

@@ -1,0 +1,149 @@
+@import "../../../_global.scss";
+
+footer {
+  background: #090016;
+  color: #fff;
+  padding: 3rem 20px;
+  font-size: 13px;
+  position: relative;
+
+  .col {
+    line-height: 35px;
+    margin: 0 80px;
+    margin-right: 0;
+
+    ul li {
+      font-size: small;
+    }
+  }
+
+  .logo img {
+    width: 130px
+  }
+
+  .footer-wrapper {
+    max-width: 1300px;
+    margin: auto;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+  }
+
+  .date-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    ul {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      a {
+        padding: 10px;
+      }
+    }
+  }
+
+  li {
+    list-style: none;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      transition: .1s linear;
+
+      &:hover {
+        color: $kg_color;
+      }
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+
+    div {
+      line-height: 40px;
+    }
+
+    div:nth-child(1) {
+      margin-right: 50px;
+    }
+  }
+}
+
+// .footer {
+//   background-color: $secondary_color;
+//   padding-top: 2rem;
+//   padding-bottom: 1rem;
+
+//   .footer {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+
+//     img {
+//       display: block;
+//       margin: 0 auto;
+//     }
+//   }
+//   .nav {
+//     margin-top: 3rem;
+//     display: flex;
+//     width: 70%;
+//     text-align: center;
+//     a {
+//       flex: 1;
+//       color: white;
+//       font-size: $normal_font;
+//       text-decoration: none;
+//     }
+//   }
+//   p {
+//     margin-top: 3rem;
+//     color: $kg_color;
+//     font-size: $normal_font;
+//   }
+// }
+
+@media only screen and (max-width: 650px) {
+  .date-footer {
+    flex-direction: column-reverse;
+
+    ul {
+      margin-bottom: 30px;
+      margin-left: -10px;
+    }
+  }
+
+  footer {
+
+    .col {
+      margin-top: 30px;
+    }
+
+    .links {
+      margin-left: -80px;
+    }
+  }
+
+  // .nav {
+  //   flex-direction: column;
+  //   a {
+  //     font-size: $m_normal_font !important;
+  //     margin-top: 1rem;
+  //     text-decoration: none;
+  //   }
+  // }
+
+  // .footer p {
+  //   font-size: $m_normal_font;
+  // }
+}

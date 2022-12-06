@@ -1,0 +1,97 @@
+@import "../../../global";
+
+.drawer {
+    height: 100vh;
+    background: transparent;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 11111;
+    animation: showDrawer .12s linear;
+    // z-index: 12;
+
+    ul {
+        li {
+            list-style: none;
+            margin: 30px -10px;
+            display: block;
+
+            a {
+                color: #fff;
+                font-weight: medium;
+                text-decoration: none;
+                transition: .2s linear;
+
+                &:hover {
+                    opacity: .5;
+                }
+            }
+        }
+    }
+
+    @keyframes showDrawer {
+        0% {
+            opacity: 0;
+            transform: translateX(60px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .drawer-wrapper {
+        padding: 20px;
+        background: $secondary_color;
+        width: 100%;
+        max-width: 400px;
+        position: absolute;
+        right: 0;
+        height: 100vh;
+        box-shadow: 260px 0 0 2737px #000a;
+        color: #fff;
+    }
+
+    .close-btn {
+        font-size: 50px;
+        cursor: pointer;
+    }
+
+    button,
+    a {
+        outline: none;
+        text-decoration: none;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        border: none;
+        font-size: $normal_font;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .btn-ghost {
+        background: transparent;
+        color: $kg_color;
+        transition: 0.4s all;
+        width: 100%;
+        margin-top: 10px;
+
+        &:hover {
+            color: $tertiary_color;
+        }
+    }
+
+    .btn-filled {
+        background-color: $kg_color;
+        color: $primary_color;
+        border-radius: $border_rad;
+        transition: 0.4s all;
+        width: 100%;
+
+        &:hover {
+            background-color: $tertiary_color;
+        }
+    }
+
+}

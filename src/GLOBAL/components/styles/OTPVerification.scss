@@ -1,0 +1,85 @@
+@import "../../../_global.scss";
+
+.signup {
+  height: 80vh;
+  background: linear-gradient(rgba(26, 5, 43, 0.58), rgba(26, 5, 43, 0.58)),
+    url("https://res.cloudinary.com/dou9sjstz/image/upload/v1664554166/auth-page-bg_hx5p9o.png");
+  background-size: cover;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+
+    .inside-signup {
+      max-width: 400px;
+      width: 100%;
+      background: $tertiary_color;
+      padding: 2rem;
+      border-radius: $border_rad;
+
+      h4 {
+        font-size: $normal_font;
+        color: gray;
+        font-weight: normal;
+      }
+
+      .otp {
+        margin-top: 3rem;
+
+        label {
+          color: $gray;
+        }
+
+        input {
+          margin-top: 0.3rem;
+          min-width: 50px !important;
+          height: 50px !important;
+          border-radius: 5px;
+          outline: none;
+          padding: 0.5rem;
+          border: 1px solid gray;
+          font-size: 2rem;
+          padding: 0.5rem;
+
+          &:focus {
+            border: 2px solid black !important;
+          }
+        }
+
+        button {
+          width: 100%;
+          border-radius: 50px;
+          padding: 0.5rem;
+          margin: 2rem 0rem;
+          background: $kg_color;
+          border: none;
+          font-size: $normal_font;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .signing-disable {
+    opacity: 0.6;
+    cursor: not-allowed !important;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  html .signup .container .inside-signup {
+    padding: 20px;
+
+    .otp input {
+      width: 10px;
+      height: 10px;
+      margin: -2px;
+    }
+  }
+}

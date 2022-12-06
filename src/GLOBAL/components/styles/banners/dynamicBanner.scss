@@ -1,0 +1,262 @@
+@import '../../../../global';
+
+.hero-player-container {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.react-player {
+    width: 100vw;
+    height: 100vh;
+
+    video {
+        object-fit: cover;
+    }
+}
+
+.hero {
+    height: 100vh;
+    margin-top: -70px;
+    position: relative;
+
+    .hero-gradient {
+        background: linear-gradient(to left, #0000, #000000);
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    .hero-container {
+        margin-top: 70px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        max-width: 1460px;
+        margin: 0 auto;
+        color: #fff;
+        position: relative;
+        z-index: 23;
+
+        .hero-content-wrapper {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            // justify-content: center;
+            max-width: 1000px;
+            // background: green;
+
+            .hero-content {
+                width: 100%;
+                padding: 20px;
+                // background: red;
+                max-width: 700px;
+
+                h1 {
+                    text-align: left;
+                    // font-family: 'Open Sans';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 3rem;
+                    text-transform: uppercase;
+                    margin-bottom: 30px;
+                }
+
+                .hero-content-description {
+                    line-height: 32px;
+                }
+
+                .hero-content-description,
+                h1 {
+                    font-family: "-apple-system", BlinkMacSystemFont, "-webkit-system-font", "Malgun Gothic", "Segoe UI", "Helvetica Neue", Helvetica, sans-serif;
+                }
+
+                h3 {
+                    margin-top: -30px;
+                    margin-bottom: 50px;
+                }
+
+                .cast {
+                    margin: 30px 0;
+                }
+
+                .hero-buttons {
+                    display: flex;
+                    margin-top: 30px;
+                }
+            }
+        }
+
+        .hero-slider-container {
+            width: 100%;
+            max-height: 300px;
+
+            .active-hero-slider-item {
+                filter: grayscale(1);
+            }
+        }
+
+        .hero-slider-item {
+            height: 170px;
+            width: 100%;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                mix-blend-mode: normal;
+                border-radius: 14px;
+            }
+        }
+
+        .livetv-hero-slider-item {
+            height: 100px;
+            transform: scale(1.1);
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+
+            &>div {
+                // background: red;
+                height: 100%;
+                display: flex;
+                // align-items: center;
+                flex-direction: column;
+                justify-content: space-between;
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .livetv-gradient {
+        background: linear-gradient(180deg, rgba(21, 5, 34, 0) 0%, #150522 93.66%);
+    }
+
+    .afripremiere-hero-gradient {
+        background: linear-gradient(200.32deg, rgba(217, 217, 217, 0) -60.01%, #150522 74.62%);
+    }
+
+    .genre-year-age-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 270px;
+        margin-bottom: 30px;
+
+        .age {
+            border: 2px solid #FFFEFF;
+            border-radius: 7px;
+            padding: 0 3px
+        }
+    }
+
+    .afripremiere-hero-slider-item {
+        width: 440px;
+        height: 145px;
+        background: red;
+        border-radius: 8px;
+        background: linear-gradient(154.58deg, rgba(156, 156, 155, 0.57) 1.98%, rgba(208, 208, 208, 0.1881) 64.22%);
+        mix-blend-mode: screen;
+        filter: blur(0.5px);
+        border-radius: 12px;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+
+        &>div {
+            // background: red;
+            padding: 0 20px;
+            color: #fff;
+            width: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            img {
+                background: linear-gradient(154.58deg, rgba(156, 156, 155, 0.57) 8.03%, rgba(208, 208, 208, 0.1881) 70.27%);
+                width: 30px;
+                height: 30px;
+                border-radius: 9999px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 6px;
+                padding-left: 6px;
+                padding-left: 9px;
+            }
+        }
+
+        img {
+            // width: 40%;
+            width: 30%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: normal;
+            border-radius: 8px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    .active-afripremiere-hero-slider-item {
+        border: 4px solid #C4BD47;
+    }
+
+    .afriplaylive-hero-gradient {
+        background: none;
+    }
+
+    .live-date-wrapper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .live-label {
+            color: #fff;
+            width: max-content;
+            padding: 2px 15px;
+            border-radius: 6px;
+            font-weight: 500;
+            background: red;
+            margin-right: -50px;
+        }
+
+        p {
+            margin-left: 80px;
+        }
+    }
+
+    .slider-title {
+        font-weight: 500;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .pay-per-view-btn {
+        background: $kg_color;
+        width: max-content;
+        padding: 8px 14px;
+        border-radius: 8px;
+        color: #150522;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-slider-container {
+        display: none;
+    }
+}
