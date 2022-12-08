@@ -55,9 +55,9 @@ const SignUpPage = () => {
           <div className="auth-wrapper">
             <div className="auth-container">
               <div className="form-container">
-                <h2>Sign Up</h2>
+                <h2>Enter your phone number</h2>
                 <div>
-                  <label>Phone number</label>
+                  {/* <label>Phone number</label> */}
                   <input
                     placeholder="eg. 0541234567"
                     value={mobileNumber}

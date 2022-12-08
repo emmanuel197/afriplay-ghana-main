@@ -77,7 +77,7 @@ const Banner = () => {
                 value={mobileNumber}
                 onChange={handleMobileNumberInput}
               />
-              <button onClick={initAuth}>SIGN UP</button>
+              <button onClick={initAuth}>LOGIN</button>
             </div>
           </div>
         </div>

@@ -22,6 +22,8 @@ const prefixedMobileNumber = mobileNumber => {
 }
 
 export const verifyMSISDN = async (isPhoneNumber, mobileNumber, email, navigate) => {
+  const user_info = COOKIES.get("user_info");
+
   if (!isPhoneNumber) {
     if (_verifyEmail(email)) {
       TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail)
@@ -61,15 +63,14 @@ export const verifyMSISDN = async (isPhoneNumber, mobileNumber, email, navigate)
   //   return
   // }
 
-
-  // email and mobile number checks passed
+  // on email and mobile number checks passed
   window.localStorage.setItem("afri_email", email)
   window.localStorage.setItem("afri_mobile_number", mobileNumber)
   window.localStorage.setItem("afri_username", prefixedMobileNumber(mobileNumber))
 
 
   // msisdn verification failed
-  if (!_verifyMSISDN(mobileNumber)) {
+  if (!user_info || !_verifyMSISDN(mobileNumber)) {
     /** 
      * signup user
      * login user
