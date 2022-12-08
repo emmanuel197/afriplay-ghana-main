@@ -6,7 +6,9 @@ const accountSlice = createSlice({
         accountPurchases: [],
         messages: [],
         FAQs: [],
-        profile: {}
+        profile: {
+            first_name:""
+        }
     },
     reducers: {
         getPurchases: (state, action) => {

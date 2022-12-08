@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { Navigate } from "react-router-dom"
 import checkUserAllowed from "../../utils/checkUserAllowed"
 import { COOKIES } from "../../utils/constants"
+import { errorLog } from "../logger"
 import { sendLog } from "../redux/account"
 
 const ProtectedRoute = ({ children }) => {
@@ -38,7 +39,12 @@ const ProtectedRoute = ({ children }) => {
         return () => window.removeEventListener('beforeunload', handleTabClose)
     }, [])
 
-    if (!user_info) return <Navigate replace to='/select-network' />
+    if (!user_info) {
+        errorLog('Navigating to home without user_info')
+        // console.warn("%%%%%%", user_info)
+        return <Navigate replace to='/select-network' />
+    }
+    // return <Navigate replace to='/select-network' />
     return children
 }
 
