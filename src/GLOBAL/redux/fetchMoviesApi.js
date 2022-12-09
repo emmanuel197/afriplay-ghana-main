@@ -389,7 +389,7 @@ export const fetchMovie = async (dispatch) => {
         });
 
         const trendingnow = movies.data.data.filter((item) => {
-          return item.id === _packageNameToId["trendingnow"];
+          return item.id === _packageNameToId["trending"];
         });
 
         const afriplaytop10 = movies.data.data.filter((item) => {
