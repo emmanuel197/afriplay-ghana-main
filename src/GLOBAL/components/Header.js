@@ -83,7 +83,7 @@ const Header = (prop) => {
               <div className="sign-in-up">
                 {prop.signup > 2 ? (
                   <>
-                    <Link to="/select-network" className="sign-up">
+                    <Link to="/signup" className="sign-up">
                       <div>
                         <img src='/assets/svg/padlock.svg' alt='padlock' />
                         <p>SIGN UP</p>

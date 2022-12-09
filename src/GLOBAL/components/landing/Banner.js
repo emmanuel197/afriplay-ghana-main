@@ -26,7 +26,7 @@ const Banner = () => {
     }
 
     window.localStorage.setItem('afri_mobile_number', mobileNumber)
-    navigate('/select-network')
+    navigate('/signup')
   }
 
   const handleMobileNumberInput = e => {

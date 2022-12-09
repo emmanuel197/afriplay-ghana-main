@@ -18,8 +18,10 @@ const MovieCard = ({ movie, type }) => {
     //     for (let i = 0; i < allImages.length; i++) {
     //         const element = allImages[i];
     //         // setImgSrc(await convertImage(element))
-    //         // setImgSrc(element.src)
-    //         // console.warn("image", await convertImage(element))
+    //         // `https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie.image_id}?accessKey=WkVjNWNscFhORDBLCg==`
+    //         setImgSrc(element.src)
+    //         // console.warn(await convertImage(element))
+    //         // await convertImage(element)
     //     }
     // }
 
@@ -51,7 +53,7 @@ const MovieCard = ({ movie, type }) => {
                         <div className="poster-div">
                             <LazyLoadImage
                                 src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie.image_id}?accessKey=WkVjNWNscFhORDBLCg==`}
-                                // src={imgSrc}
+                                // src={imgSrc ? imgSrc : `https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie.image_id}?accessKey=WkVjNWNscFhORDBLCg==`}
                                 alt={movie.alt}
                                 width="100%"
                                 placeholder={<div className="poster-img-placeholder"></div>}

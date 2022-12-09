@@ -32,14 +32,14 @@ const Drawer = () => {
                     <li><Link to='/profile'>Profile</Link></li>
                 </ul> : <></>}
 
-                <div className='drawer-content'>
+                {!user_info ? <div className='drawer-content'>
                     <Link to='/select-network'>
                         <button className='btn-filled'>Subscribe</button>
                     </Link>
                     <Link to='/select-network'>
                         <button className='btn-ghost'>Sign In</button>
                     </Link>
-                </div>
+                </div> : <></>}
             </div>
         </section>
     </>

@@ -27,7 +27,7 @@ function App() {
         <Route index element={<Landing />} />
         <Route path="/otp-verification" element={<OTPVerification />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/select-network" element={<SelectNetwork />} />
+        {/* <Route path="/select-network" element={<SelectNetwork />} /> */}
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/series/:id" element={<ProtectedRoute><SeriesDetails /></ProtectedRoute>} />

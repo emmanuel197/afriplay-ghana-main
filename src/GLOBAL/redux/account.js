@@ -87,7 +87,7 @@ const clearStorage = async () => {
     cookies.remove('device_info')
     cookies.remove('device')
     cookies.remove('afri_msisdn')
-    window.location.href = '/select-network'
+    window.location.href = '/signup'
 }
 
 export const initGetPurchases = (dispatch) => {
@@ -115,14 +115,19 @@ export const initGetPurchases = (dispatch) => {
 
 export const fetchUserDevices = async () => {
     try {
-        const operator_uid = 'glotv'
+        // const operator_uid = 'glotv'
         const subscriber_uid = 'g08156676289'
 
-        const { user_id, access_token } = user_info
+        const { access_token, user_id, operator_uid } = user_info.data.data
 
-        const response = await axios.get(`https://tvanywhereonline.com/api/client/v1/${operator_uid}/users/${user_id}/devices?operator_uid=${operator_uid}&subscriber_uid=${subscriber_uid}&limit=30&status=Active`)
+        // const response = await axios.get(`https://tvanywhereonline.com/api/client/v1/${operator_uid}/users/${user_id}/devices?operator_uid=${operator_uid}&subscriber_uid=${subscriber_uid}&limit=30&status=Active`)
+
+        const response = await axios.get(`https://tvanywhereonline.com/api/client/v1/${operator_uid}/users/${user_id}/devices`)
+
+        console.log("DEVICES ----", response.data.data)
 
         if (response.data.status === "ok") return response.data.data
+
     } catch (e) {
         console.error('fetchUserDevices', e.message)
     }
