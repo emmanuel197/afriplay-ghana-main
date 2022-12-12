@@ -36,10 +36,10 @@ const Drawer = () => {
                 </ul> : <></>}
 
                 {!user_info ? <div className='drawer-content'>
-                    <Link to='/select-network'>
+                    <Link to='/signup'>
                         <button className='btn-filled'>Sign Up</button>
                     </Link>
-                    <Link to='/select-network'>
+                    <Link to='/signup'>
                         <button className='btn-ghost'>Sign In</button>
                     </Link>
                 </div> : <></>}

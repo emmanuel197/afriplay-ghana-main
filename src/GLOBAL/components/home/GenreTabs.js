@@ -6,7 +6,9 @@ import '../../components/styles/landing/genreTabs.scss'
 const GenreTabs = () => {
     const dispatch = useDispatch()
     const { activeGenreTab } = useSelector(state => state.genreTab)
-    const _setActiveGenreTab = (_genreTab = 'ALL') => dispatch(setActiveGenreTab(_genreTab))
+    const _setActiveGenreTab = (_genreTab = 'ALL') => {
+        dispatch(setActiveGenreTab(_genreTab))
+    }
 
     return (
         <>

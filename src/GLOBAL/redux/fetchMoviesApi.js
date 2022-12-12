@@ -133,42 +133,54 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
       }
     );
 
-    switch (activeGenre) {
-      case 'DRAMA':
-        dispatch(fetchMoviesByCategory({
-          movies: movies.data.data,
-          category: activeGenre
-        }))
-        return;
+    // switch (activeGenre) {
+    // case 'DRAMA':
+    //   dispatch(fetchMoviesByCategory({
+    //     movies: movies.data.data,
+    //     category: activeGenre
+    //   }))
+    //   return;
 
-      case 'ACTION':
-        dispatch(fetchMoviesByCategory({
-          movies: movies.data.data,
-          category: activeGenre
-        }))
-        return;
+    // case 'ACTION':
+    //   dispatch(fetchMoviesByCategory({
+    //     movies: movies.data.data,
+    //     category: activeGenre
+    //   }))
+    //   return;
 
-      case 'COMEDY':
-        dispatch(fetchMoviesByCategory({
-          movies: movies.data.data,
-          category: activeGenre
-        }))
-        return;
+    // case 'COMEDY':
+    //   dispatch(fetchMoviesByCategory({
+    //     movies: movies.data.data,
+    //     category: activeGenre
+    //   }))
+    //   return;
 
-      case 'FAMILY':
-        dispatch(fetchMoviesByCategory({
-          movies: movies.data.data,
-          category: activeGenre
-        }))
-        return;
+    // case 'FAMILY':
+    //   dispatch(fetchMoviesByCategory({
+    //     movies: movies.data.data,
+    //     category: activeGenre
+    //   }))
+    //   return;
 
-      default:
-        dispatch(fetchMoviesByCategory({
-          category: 'ALL',
-          movies: [],
-        }))
-        break;
-    }
+    // default:
+    //   dispatch(fetchMoviesByCategory({
+    //     category: 'ALL',
+    //     movies: [],
+    //   }))
+    //   break;
+    // }
+
+    // console.log(movies.data.data)
+
+    if (activeGenre === "ALL") {
+      dispatch(fetchMoviesByCategory({
+        category: 'ALL',
+        movies: [],
+      }))
+    } else dispatch(fetchMoviesByCategory({
+      movies: movies.data.data,
+      category: activeGenre
+    }))
   }
 
   catch (e) {
@@ -388,7 +400,7 @@ export const fetchMovie = async (dispatch) => {
           return item.id === _packageNameToId["comingsoon"];
         });
 
-        const trendingnow = movies.data.data.filter((item) => {
+        const trending = movies.data.data.filter((item) => {
           return item.id === _packageNameToId["trending"];
         });
 
@@ -412,7 +424,7 @@ export const fetchMovie = async (dispatch) => {
             mostwatched: mostwatched || [],
             recentlyadded: recentlyadded || [],
             comingSoon: comingSoon || [],
-            trendingnow: trendingnow || [],
+            trending: trending || [],
             afriplaytop10: afriplaytop10 || [],
             afriPlaylive: afriPlaylive || [],
             afriPremiere: afriPremiere || [],

@@ -6,6 +6,7 @@ const fetchMovieSlice = createSlice({
     movies: [],
     drama: [],
     action: [],
+    family: [],
     // romance: [],
     recentlyadded: [],
     similarMovies: [],
@@ -45,12 +46,12 @@ const fetchMovieSlice = createSlice({
     },
 
     comingSoon: [],
-    trendingnow: [],
+    trending: [],
     afriplaytop10: [],
     afriPlaylive: [],
     afriPremiere: [],
     ageRatings: [],
-    
+
 
     genres: [],
   },
@@ -122,7 +123,7 @@ const fetchMovieSlice = createSlice({
       // state.afriPremiereexclusive = action.payload.afriPremiereexclusive.length > 0 ? action.payload.afriPremiereexclusive : []
       state.mostwatched = action.payload.mostwatched.length > 0 ? action.payload.mostwatched[0]["content"] : []
       state.comingSoon = action.payload.comingSoon.length > 0 ? action.payload.comingSoon[0]["content"] : []
-      state.trendingnow = action.payload.trendingnow.length > 0 ? action.payload.trendingnow[0]["content"] : []
+      state.trending = action.payload.trending.length > 0 ? action.payload.trending[0]["content"] : []
       state.afriplaytop10 = action.payload.afriplaytop10.length > 0 ? action.payload.afriplaytop10[0]["content"] : []
       state.recentlyadded = action.payload.recentlyadded.length > 0 ? action.payload.recentlyadded[0]["content"] : []
       state.afriPlaylive = action.payload.afriPlaylive.length > 0 ? action.payload.afriPlaylive[0]["content"] : []

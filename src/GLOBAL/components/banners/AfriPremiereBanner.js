@@ -38,6 +38,11 @@ const AfriPremiereBanner = () => {
     const [trailer, setTrailer] = useState('')
     const [isMuted, setIsMuted] = useState(true)
     const { afriPremiere, ageRatings, genres } = useSelector((state) => state.fetchMovies)
+    const [showTitle, setShowTitle] = useState(true)
+
+    setTimeout(() => {
+        setShowTitle(false)
+    }, 5000);
 
     useEffect(() => {
         const initFetchBannerTrailer = async () => {
@@ -77,11 +82,11 @@ const AfriPremiereBanner = () => {
 
     return (
         <section>
-            <div className="hero">
+            <div className="hero" onClick={() => setShowTitle(true)}>
                 <div className="hero-container">
                     <div className="hero-content-wrapper">
                         {
-                            bannerContentInfo ?
+                            bannerContentInfo && showTitle ?
                                 <div className="hero-content">
                                     <div className='genre-year-age-container'>
                                         <p>{getGenreName(bannerContentInfo.movie_genres, genres)}</p>
@@ -134,7 +139,7 @@ const AfriPremiereBanner = () => {
 
                 <BannerBackground muted={isMuted} bannerImg={bannerContent.preview_image_id} _trailer={trailer} _onPlayTrailer={isPlayingTrailer} _bannerContent={bannerContent} />
 
-                <div className="hero-gradient afripremiere-hero-gradient" />
+                {showTitle ? <div className="hero-gradient afripremiere-hero-gradient" /> : <></>}
             </div>
         </section>
     )

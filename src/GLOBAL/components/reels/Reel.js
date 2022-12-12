@@ -4,14 +4,14 @@ import HomeBannerSlider from "../HomeBannerSlider";
 import '../../components/styles/landing/slides.scss'
 
 const Reel = ({ title }) => {
-    const { recentlyadded, mostwatched, afriPlaylive, afriPremiere, comingSoon, trendingnow, afriplaytop10 } = useSelector((state) => state.fetchMovies);
+    const { recentlyadded, mostwatched, afriPlaylive, afriPremiere, comingSoon, trending, afriplaytop10 } = useSelector((state) => state.fetchMovies);
     const { activeGenreTab } = useSelector(state => state.genreTab)
 
     const _allMovies = {
         mostwatched,
         recentlyadded,
         comingSoon,
-        trendingnow,
+        trending,
         afriplaytop10,
         afriPlaylive,
         afriPremiere,
@@ -20,10 +20,10 @@ const Reel = ({ title }) => {
     if (activeGenreTab === 'ALL') {
         if (title === 'AFRIPREMIERE') return <HomeBannerSlider title='AFRIPREMIERE' />
         if (title === 'AFRIPLAY LIVE') return <HomeBannerSlider title='AFRIPLAY LIVE' />
-        if (title === 'RECENTLY ADDED') return <ReelGenreWrapper title='RECENTLY ADDED' allMovies={_allMovies} movies={recentlyadded} />
-        if (title === 'COMING SOON') return <ReelGenreWrapper title='COMING SOON' allMovies={_allMovies} movies={comingSoon} />
-        if (title === 'TRENDING') return <ReelGenreWrapper title='TRENDING' allMovies={_allMovies} movies={trendingnow} />
-        if (title === 'MOST WATCHED') return <ReelGenreWrapper title='MOST WATCHED' allMovies={_allMovies} movies={mostwatched} />
+        if (title === 'RECENTLY ADDED' && recentlyadded.length > 0) return <ReelGenreWrapper title='RECENTLY ADDED' allMovies={_allMovies} movies={recentlyadded} />
+        if (title === 'COMING SOON' && comingSoon.length > 0) return <ReelGenreWrapper title='COMING SOON' allMovies={_allMovies} movies={comingSoon} />
+        if (title === 'TRENDING' && trending.length > 0) return <ReelGenreWrapper title='TRENDING' allMovies={_allMovies} movies={trending} />
+        // if (title === 'MOST WATCHED' && mostwatched.length > 0) return <ReelGenreWrapper title='MOST WATCHED' allMovies={_allMovies} movies={mostwatched} />
     }
 
     return <></>

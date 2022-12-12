@@ -9,6 +9,7 @@ import { setDeviceInCookies } from "../constants/setDeviceInCookies";
 import Devices from "../components/landing/Devices";
 import Logo from "../components/Logo";
 import { sendLog } from "../redux/account";
+import DataFriendly from "../components/landing/DataFriendly";
 
 const Landing = () => {
   // I am setting cookies that ll later check for user browser when user logs in
@@ -34,6 +35,7 @@ const Landing = () => {
         <Header links={1} signup={5} />
         <Banner />
         <Devices />
+        <DataFriendly />
         <Faq />
         <Logo w='200px' />
         <Footer />

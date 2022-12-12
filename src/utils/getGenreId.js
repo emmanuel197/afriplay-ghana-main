@@ -6,6 +6,7 @@ const getGenreId = (str) => {
         'comedy': 1005,
         'crime': 1004,
         'drama': 1001,
+        'family': 7034,
     }
 
     const id = _genresToId[str.toLowerCase()]
