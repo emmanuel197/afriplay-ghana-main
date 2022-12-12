@@ -82,11 +82,11 @@ const AfriPremiereBanner = () => {
 
     return (
         <section>
-            <div className="hero" onClick={() => setShowTitle(true)}>
-                <div className="hero-container">
+            <div className="hero">
+                <div className="hero-container" onClick={() => setShowTitle(true)}>
                     <div className="hero-content-wrapper">
                         {
-                            bannerContentInfo && showTitle ?
+                            bannerContentInfo ?
                                 <div className="hero-content">
                                     <div className='genre-year-age-container'>
                                         <p>{getGenreName(bannerContentInfo.movie_genres, genres)}</p>
@@ -139,7 +139,9 @@ const AfriPremiereBanner = () => {
 
                 <BannerBackground muted={isMuted} bannerImg={bannerContent.preview_image_id} _trailer={trailer} _onPlayTrailer={isPlayingTrailer} _bannerContent={bannerContent} />
 
-                {showTitle ? <div className="hero-gradient afripremiere-hero-gradient" /> : <></>}
+                {/* {showTitle ? <div className="hero-gradient afripremiere-hero-gradient" /> : <></>} */}
+
+                <div className="hero-gradient afripremiere-hero-gradient" />
             </div>
         </section>
     )
