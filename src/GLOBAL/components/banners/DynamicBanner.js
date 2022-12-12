@@ -152,7 +152,6 @@ const DynamicBanner = ({ showSlides = true }) => {
                                 <b>Subtitles: </b> English[CC] */}
                             {/* </div > */}
 
-
                             {
                                 selectedMovie.id
                                     ? <div className='hero-buttons'>
