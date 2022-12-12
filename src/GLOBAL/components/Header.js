@@ -83,10 +83,10 @@ const Header = (prop) => {
               <div className="sign-in-up">
                 {prop.signup > 2 ? (
                   <>
-                    <Link to="/select-network" className="sign-up">
+                    <Link to="/signup" className="sign-up">
                       <div>
                         <img src='/assets/svg/padlock.svg' alt='padlock' />
-                        <p>SIGN UP</p>
+                        <p>SIGN IN</p>
                       </div>
                     </Link>
                     {/* <Link to="/signin" className="sign-in">SIGN IN</Link> */}
@@ -122,7 +122,7 @@ const Header = (prop) => {
           </div>
         </div >
         {showAccountDropdown ? <div className="account-dropdown">
-          < Button label='Log Out' action={() => logout()} />
+          <Button label='Log Out' action={() => logout()} />
           <Link Link to='/profile' > <p style={{ color: '#fff', marginTop: '10px' }}>Profile</p></Link >
         </div > : <></>}
       </header >

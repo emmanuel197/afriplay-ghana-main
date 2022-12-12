@@ -4,6 +4,7 @@ import Footer from "../components/Footer"
 import Watchlist from "../components/profileTabs/Watchlist";
 import { fetchUserDevices, getProfile, updateProfile } from "../redux/account";
 import "../components/styles/profile.scss"
+import Devices from "../components/profileTabs/Devices";
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState("watchlist");
@@ -68,12 +69,12 @@ const Settings = ({ active }) => {
     return <></>
 }
 
-const Devices = ({ active }) => {
-    if (active === 'devices') return (
-        <>Devices</>
-    )
-    return <></>
-}
+// const Devices = ({ active }) => {
+//     if (active === 'devices') return (
+//         <>Devices</>
+//     )
+//     return <></>
+// }
 
 const Payment = ({ active }) => {
     useEffect(() => {

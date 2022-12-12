@@ -19,7 +19,7 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (!localStorage.getItem('afri_selected_operator')) {
-      navigate('/select-network')
+      navigate('/signup')
     }
 
     setMobileNumber(localStorage.getItem('afri_mobile_number') || '')

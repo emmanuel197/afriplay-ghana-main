@@ -14,6 +14,7 @@ const GenreMovies = () => {
     const [genreMovies, setGenreMovies] = useState([])
 
     useEffect(() => {
+        // console.log("activeGenreTab", activeGenreTab)
         fetchMovieByGenre(activeGenreTab, dispatch)
     }, [activeGenreTab, dispatch])
 

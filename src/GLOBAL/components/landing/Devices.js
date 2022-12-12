@@ -16,18 +16,11 @@ const Devices = () => {
           </div>
           <div className="texts">
             <h1>All Your Devices</h1>
-            <p>Get endless entertainment, across all your devices from one subscription.</p>
+            <p>Stream movies, series, live Channels entertainment, across all your devices from one subscription. From GHC5.</p>
             <div className="store-icons">
               <img src='/assets/android-store.svg' alt='android-store' />
               <img src='/assets/apple-store-icon.svg' alt='apple-store' />
             </div>
-            {/* <h1>
-              Get endless <span className="yellow-span"> entertainment </span> 
-              <br />
-              <span className="yellow-span">live sports </span> and the shows 
-              <br /> and
-              <span className="yellow-span"> movies </span> you love.
-            </h1> */}
           </div>
         </div>
       </div>

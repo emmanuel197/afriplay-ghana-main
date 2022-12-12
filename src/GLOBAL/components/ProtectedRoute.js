@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { Navigate } from "react-router-dom"
 import checkUserAllowed from "../../utils/checkUserAllowed"
 import { COOKIES } from "../../utils/constants"
+import OPERATORS from "../../utils/operators"
 import { errorLog } from "../logger"
 import { sendLog } from "../redux/account"
 
@@ -41,8 +42,9 @@ const ProtectedRoute = ({ children }) => {
 
     if (!user_info) {
         errorLog('Navigating to home without user_info')
+        // localStorage.setItem('afri_selected_operator', JSON.stringify(OPERATORS.afriplayghana))
         // console.warn("%%%%%%", user_info)
-        return <Navigate replace to='/select-network' />
+        return <Navigate replace to='/signup' />
     }
     // return <Navigate replace to='/select-network' />
     return children

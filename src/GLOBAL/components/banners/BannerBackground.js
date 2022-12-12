@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ReactPlayer from "react-player"
 
-const BannerBackground = ({ bannerImg, _trailer, _onPlayTrailer, _bannerContent }) => {
+const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerContent }) => {
     const [onPlayTrailer, setOnPlayTrailer] = useState(_onPlayTrailer)
     const [isPlaying, setIsPlaying] = useState(true)
 
@@ -24,7 +24,7 @@ const BannerBackground = ({ bannerImg, _trailer, _onPlayTrailer, _bannerContent 
                 className='react-player'
                 url={_trailer}
                 playing={isPlaying}
-                muted={true}
+                muted={muted}
                 autoPlay={true}
                 controls={false}
                 onEnded={() => {

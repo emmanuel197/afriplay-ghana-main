@@ -6,11 +6,14 @@
   padding-bottom: 6rem;
   padding-top: 6rem;
 
+
   .inside-family {
     display: flex;
     gap: 2rem;
-    margin-top: -130px;
-    margin-bottom: -100px;
+    margin-top: -150px;
+    margin-bottom: -120px;
+    max-width: 1300px;
+    margin: auto;
 
     p {
       color: #fff;
@@ -68,6 +71,11 @@
   }
 }
 
+
+.family .container .data-friendly {
+  margin-top: -200px;
+}
+
 .store-icons {
   display: flex;
   justify-content: center;
@@ -93,6 +101,12 @@
 @media only screen and (max-width: 650px) {
   .inside-family {
     flex-direction: column;
+  }
+
+  .data-friendly {
+    .texts {
+      margin-top: 150px;
+    }
   }
 
   .texts {

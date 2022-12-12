@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllSeries, fetchTrailer, returnMovieOrSeriesDetails } from '../../redux/fetchMoviesApi'
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import ReactPlayer from 'react-player'
 import Slider from 'react-slick'
 import Button from '../buttons/Button'
@@ -54,6 +54,12 @@ const DynamicBanner = ({ showSlides = true }) => {
     const { recentlyadded, genres } = useSelector((state) => state.fetchMovies);
     const slides = useMemo(() => fetchDataForBannerSlider(recentlyadded), [recentlyadded])
     const [allSlides, setAllSlides] = useState([])
+    const [isMuted, setIsMuted] = useState(true)
+    const [showTitle, setShowTitle] = useState(true)
+
+    setTimeout(() => {
+        setShowTitle(false)
+    }, 5000);
 
     useEffect(() => {
         const initGetAllSlides = async () => {
@@ -132,30 +138,45 @@ const DynamicBanner = ({ showSlides = true }) => {
 
     return (
         <section>
-            <div className="hero">
+            <div className="hero" onClick={() => setShowTitle(true)}>
                 <div className="hero-container">
                     <div className="hero-content-wrapper">
-                        <div className="hero-content">
-                            <h1>{movieDetails.title}</h1>
-                            <p className="lines-max-4">{movieDetails.description}</p>
-                            {/* <div className="cast">
+                        {
+                            showTitle
+                                ? <div className="hero-content">
+                                    <h1>{movieDetails.title}</h1>
+                                    <p className="lines-max-4">{movieDetails.description}</p>
+                                    {/* <div className="cast">
                                 {window.location.pathname !== '/series' ?
                                     <div>
                                         <b>CAST: </b>{movieDetails.cast}
                                     </div>
                                     : <></>}
                             </div> */}
-                            {/* <div className="genre-subtitles"> */}
-                            {/* <b>Genre: </b>{genreName} */}
-                            {/* <div style={{ margin: '10px' }} />
+                                    {/* <div className="genre-subtitles"> */}
+                                    {/* <b>Genre: </b>{genreName} */}
+                                    {/* <div style={{ margin: '10px' }} />
                                 <b>Subtitles: </b> English[CC] */}
-                            {/* </div > */}
-                            <div className='hero-buttons'>
-                                <Button page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`} label='PLAY' />
-                                {/* <div style={{ margin: '10px' }} />
-                                {window.location.pathname === '/series' ? <></> : <OutlineButton action={_playTrailer} label={isPlayingTrailer ? 'STOP TRAILER' : 'PLAY TRAILER'} />} */}
-                            </div>
-                        </div >
+                                    {/* </div > */}
+
+                                    {
+                                        selectedMovie.id
+                                            ? <div className='hero-buttons'>
+                                                <Button page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`} label='PLAY' />
+                                                <OutlineButton page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/movie/${selectedMovie.id}`} label="Info" />
+                                                <div className="mute-icon">
+                                                    {
+                                                        isMuted
+                                                            ? <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/speaker.svg" alt="speacker icon" />
+                                                            : <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/muted.svg" alt="mute icon" />
+                                                    }
+                                                </div>
+                                            </div>
+                                            : <></>
+                                    }
+                                </div>
+                                : <></>
+                        }
                     </div >
 
                     {showSlides ? <div className='hero-slider-container'>
@@ -175,13 +196,14 @@ const DynamicBanner = ({ showSlides = true }) => {
                 </div >
 
                 <BannerBackground
+                    muted={isMuted}
                     bannerImg={window.location.pathname === "/series" && selectedMovie.images ? selectedMovie.images.POSTER : selectedMovie.image_id}
                     _trailer={trailer}
                     _onPlayTrailer={isPlayingTrailer}
                     _bannerContent={selectedMovie}
                 />
 
-                <div className="hero-gradient" />
+                {showTitle ? <div className="hero-gradient" /> : <></>}
             </div >
         </section >
     )

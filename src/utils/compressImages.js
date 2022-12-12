@@ -1,3 +1,5 @@
+import { processLog } from "../GLOBAL/logger";
+
 const sizes = [
     {
         'big-low-quality': {
@@ -22,8 +24,6 @@ const sizes = [
     },
 ]
 
-
-
 export const waitForImage = (imgElem) => {
     return new Promise(res => {
         if (imgElem.complete) {
@@ -35,6 +35,10 @@ export const waitForImage = (imgElem) => {
 }
 
 export const convertImage = async (original, format = 'webp', quality = .20, size = 1) => {
+
+    // console.log('original', original)
+
+    processLog('converting images to webp')
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -48,6 +52,8 @@ export const convertImage = async (original, format = 'webp', quality = .20, siz
     // on top in the corner:
     ctx.scale(size, size);
     ctx.drawImage(original, 0, 0);
+
+    // console.log('webp', canvas.toDataURL(`image/${format}`, quality))
 
     return canvas.toDataURL(`image/${format}`, quality);
 };

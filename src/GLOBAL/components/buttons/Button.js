@@ -4,9 +4,9 @@ import '../../components/styles/buttons.scss'
 const Button = ({ label, action, page, isDisabled = false }) => {
     if (action) return (
         <>
-            <button disabled={isDisabled} onClick={action} >
-                <div className="filled-btn">
-                    <div><p>{label}</p></div>
+            <button disabled={isDisabled} onClick={action} className="filled-btn">
+                <div>
+                    <p>{label}</p>
                 </div>
             </button>
         </>

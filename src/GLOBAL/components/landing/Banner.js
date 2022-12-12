@@ -26,7 +26,7 @@ const Banner = () => {
     }
 
     window.localStorage.setItem('afri_mobile_number', mobileNumber)
-    navigate('/select-network')
+    navigate('/signup')
   }
 
   const handleMobileNumberInput = e => {
@@ -71,13 +71,13 @@ const Banner = () => {
         <div className="inside-banner">
           <div className="banner-text">
             <h1>Get endless <span className="yellow-span">entertainment</span>, <span className="yellow-span">series</span>, <span className="yellow-span">live events</span>, TV Shows and the <span className="yellow-span">movies</span> you love.</h1>
-            <p>Signup to enjoy great contents</p>
+            <p>Sign Up To Enjoy Must-See TV</p>
             <div className="input-wrapper">
               <input placeholder="eg. 0541234567"
                 value={mobileNumber}
                 onChange={handleMobileNumberInput}
               />
-              <button onClick={initAuth}>LOGIN</button>
+              <button onClick={initAuth}>SIGN UP</button>
             </div>
           </div>
         </div>

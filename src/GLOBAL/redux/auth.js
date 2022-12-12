@@ -1,6 +1,8 @@
 import axios from "axios"
 import { COOKIES, EMAIL_REGEXP, ERROR_MESSAGES, TOAST } from "../../utils/constants"
+import OPERATORS from "../../utils/operators"
 import { generateOTPAPI, loginAPI, signUpAPI, validateOTPAPI } from "../constants/apis"
+import { processLog } from "../logger"
 import { sendLog } from "./account"
 
 const _verifyMSISDN = (mobileNumber) => {
@@ -17,6 +19,8 @@ const _verifyMSISDN = (mobileNumber) => {
 const _verifyEmail = email => EMAIL_REGEXP.test(email)
 
 const prefixedMobileNumber = mobileNumber => {
+  localStorage.setItem('afri_selected_operator', JSON.stringify(OPERATORS.afriplayghana)) //! remove when users are supposed to choose network
+
   const storedSelectedOperator = JSON.parse(localStorage.getItem("afri_selected_operator"))
   return storedSelectedOperator.username_prefix + mobileNumber
 }
@@ -119,6 +123,8 @@ export const verifyOTP = async (isPhoneNumber, OTPCode) => {
   const username = window.localStorage.getItem('afri_username')
   const mobileNumber = window.localStorage.getItem('afri_mobile_number')
   const email = window.localStorage.getItem('afri_email')
+
+  processLog(`number: ${mobileNumber} with OTP: ${OTPCode}`)
 
   let OTP
 

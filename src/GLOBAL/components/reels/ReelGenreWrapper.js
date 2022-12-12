@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { processLog } from "../../logger"
 import ReelSlider from "../home/sliders/ReelSlider"
 import SliderWrapper from "../SliderWrapper"
 
@@ -6,6 +7,9 @@ const ReelGenreWrapper = ({ allMovies, movies, title }) => {
     const [loading, setLoading] = useState(true)
     const [moviesOnly, setMoviesOnly] = useState([])
     const [seriesOnly, setSeriesOnly] = useState([])
+
+    processLog(`seriesOnly: ${seriesOnly}`)
+    processLog(`moviesOnly: ${moviesOnly}`)
 
     useEffect(() => {
         const filterVOD = () => {
@@ -16,9 +20,11 @@ const ReelGenreWrapper = ({ allMovies, movies, title }) => {
 
             movies.forEach(vod => {
                 if (vod.type === 'series') {
+                    console.warn("found series", vod)
                     _series = [..._series, vod]
                     return
                 } if (vod.type === 'movie') {
+                    console.warn("found movie", vod)
                     _movies = [..._movies, vod]
                     return
                 }
