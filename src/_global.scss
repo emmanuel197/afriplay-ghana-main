@@ -28,7 +28,7 @@ $account_gray: #b5aeae;
 $account_edit_color: #219728;
 $kinder_color: #2d0b48;
 $normal_font: 1rem;
-$border_rad: 5px;
+$border_rad: 2px;
 $banner_text: 3rem;
 $banner_font_weight: normal;
 $headings_font_size: 2rem;
@@ -99,4 +99,28 @@ button {
   -webkit-line-clamp: 5;
   line-clamp: 5;
   -webkit-box-orient: vertical;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: $kg_color;
+  transition: 0.4s all;
+  // width: 100%;
+  margin-top: 10px;
+
+  &:hover {
+    color: $tertiary_color;
+  }
+}
+
+.btn-filled {
+  background-color: $kg_color;
+  color: $primary_color;
+  border-radius: $border_rad;
+  transition: 0.4s all;
+  // width: 100%;
+
+  &:hover {
+    background-color: $tertiary_color;
+  }
 }

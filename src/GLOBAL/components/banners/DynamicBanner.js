@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllSeries, fetchTrailer, returnMovieOrSeriesDetails } from '../../redux/fetchMoviesApi'
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import ReactPlayer from 'react-player'
 import Slider from 'react-slick'
 import Button from '../buttons/Button'
@@ -54,6 +54,7 @@ const DynamicBanner = ({ showSlides = true }) => {
     const { recentlyadded, genres } = useSelector((state) => state.fetchMovies);
     const slides = useMemo(() => fetchDataForBannerSlider(recentlyadded), [recentlyadded])
     const [allSlides, setAllSlides] = useState([])
+    const [isMuted, setIsMuted] = useState(true)
 
     useEffect(() => {
         const initGetAllSlides = async () => {
@@ -150,11 +151,23 @@ const DynamicBanner = ({ showSlides = true }) => {
                             {/* <div style={{ margin: '10px' }} />
                                 <b>Subtitles: </b> English[CC] */}
                             {/* </div > */}
-                            <div className='hero-buttons'>
-                                <Button page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`} label='PLAY' />
-                                {/* <div style={{ margin: '10px' }} />
-                                {window.location.pathname === '/series' ? <></> : <OutlineButton action={_playTrailer} label={isPlayingTrailer ? 'STOP TRAILER' : 'PLAY TRAILER'} />} */}
-                            </div>
+
+
+                            {
+                                selectedMovie.id
+                                    ? <div className='hero-buttons'>
+                                        <Button page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`} label='PLAY' />
+                                        <OutlineButton page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/movie/${selectedMovie.id}`} label="Info" />
+                                        <div className="mute-icon">
+                                            {
+                                                isMuted
+                                                    ? <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/speaker.svg" alt="speacker icon" />
+                                                    : <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/muted.svg" alt="mute icon" />
+                                            }
+                                        </div>
+                                    </div>
+                                    : <></>
+                            }
                         </div >
                     </div >
 
@@ -175,6 +188,7 @@ const DynamicBanner = ({ showSlides = true }) => {
                 </div >
 
                 <BannerBackground
+                    muted={isMuted}
                     bannerImg={window.location.pathname === "/series" && selectedMovie.images ? selectedMovie.images.POSTER : selectedMovie.image_id}
                     _trailer={trailer}
                     _onPlayTrailer={isPlayingTrailer}

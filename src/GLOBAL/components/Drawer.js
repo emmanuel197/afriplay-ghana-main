@@ -2,7 +2,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from "react-router-dom"
 import { COOKIES } from "../../utils/constants"
+import { logout } from "../redux/account"
 import { toggleDrawer } from '../redux/slice/drawerSlice'
+import Button from "./buttons/Button"
 import './styles/Drawer.scss'
 
 const Drawer = () => {
@@ -30,11 +32,12 @@ const Drawer = () => {
                     <li><Link to='/afripremiere'>AfriPremiere</Link></li>
                     <li><Link to='/afriplaylive'>Afrilive</Link></li>
                     <li><Link to='/profile'>Profile</Link></li>
+                    <button onClick={logout} className='btn-filled'>Logout</button>
                 </ul> : <></>}
 
                 {!user_info ? <div className='drawer-content'>
                     <Link to='/select-network'>
-                        <button className='btn-filled'>Subscribe</button>
+                        <button className='btn-filled'>Sign Up</button>
                     </Link>
                     <Link to='/select-network'>
                         <button className='btn-ghost'>Sign In</button>

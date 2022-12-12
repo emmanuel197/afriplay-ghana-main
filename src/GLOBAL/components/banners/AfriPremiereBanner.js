@@ -11,6 +11,7 @@ import getGenreName from "../../../utils/getGenreName";
 import Button from "../buttons/Button";
 import ReactPlayer from "react-player";
 import BannerBackground from "./BannerBackground";
+import OutlineButton from "../buttons/OutlineButton";
 
 // const fetchDataForBannerSlider = (_recentlyadded_) => {
 //     if (_recentlyadded_.length < 1) return []
@@ -35,6 +36,7 @@ const AfriPremiereBanner = () => {
     const [playTrailer, setPlayTrailer] = useState(true)
     const [isPlayingTrailer, setIsPlayingTrailer] = useState(true)
     const [trailer, setTrailer] = useState('')
+    const [isMuted, setIsMuted] = useState(true)
     const { afriPremiere, ageRatings, genres } = useSelector((state) => state.fetchMovies)
 
     useEffect(() => {
@@ -92,7 +94,22 @@ const AfriPremiereBanner = () => {
                                     {/* <div className="cast">
                                         <b>CAST: </b>{bannerContentInfo.cast}
                                     </div> */}
-                                    <Button page={`/movie/${bannerContentInfo.id}`} label='PLAY' />
+
+                                    {
+                                        bannerContentInfo.id
+                                            ? <div className='hero-buttons'>
+                                                <Button page={window.location.pathname === '/series' ? `/series/${bannerContentInfo.id}` : `/watch/movie/${bannerContentInfo.uid}`} label='PLAY' />
+                                                <OutlineButton page={window.location.pathname === '/series' ? `/series/${bannerContentInfo.id}` : `/movie/${bannerContentInfo.id}`} label="Info" />
+                                                <div className="mute-icon">
+                                                    {
+                                                        isMuted
+                                                            ? <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/speaker.svg" alt="speacker icon" />
+                                                            : <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/muted.svg" alt="mute icon" />
+                                                    }
+                                                </div>
+                                            </div>
+                                            : <></>
+                                    }
                                 </div>
                                 : <></>
                         }
@@ -115,7 +132,7 @@ const AfriPremiereBanner = () => {
                     </div>
                 </div>
 
-                <BannerBackground bannerImg={bannerContent.preview_image_id} _trailer={trailer} _onPlayTrailer={isPlayingTrailer} _bannerContent={bannerContent} />
+                <BannerBackground muted={isMuted} bannerImg={bannerContent.preview_image_id} _trailer={trailer} _onPlayTrailer={isPlayingTrailer} _bannerContent={bannerContent} />
 
                 <div className="hero-gradient afripremiere-hero-gradient" />
             </div>

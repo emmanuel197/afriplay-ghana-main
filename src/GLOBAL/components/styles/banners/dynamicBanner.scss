@@ -1,11 +1,27 @@
 @import '../../../../global';
 
+.mute-icon {
+    // background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .9;
+    }
+}
+
 .hero-player-container {
     height: 100vh;
     width: 100vw;
     position: absolute;
     top: 0;
     left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     img {
         width: 100%;
@@ -94,6 +110,10 @@
                 .hero-buttons {
                     display: flex;
                     margin-top: 30px;
+
+                    .outline-btn:nth-child(2) {
+                        margin-left: 10px;
+                    }
                 }
             }
         }
