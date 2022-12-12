@@ -19,8 +19,8 @@ const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerC
         // ! uncomment
         return <div className='hero-player-container'>
             <ReactPlayer
-                // height='100%'
-                // width='100%'
+                height='100%'
+                width='100%'
                 className='react-player'
                 url={_trailer}
                 playing={isPlaying}
