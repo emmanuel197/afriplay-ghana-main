@@ -9,13 +9,16 @@ import { verifyOTP } from "../../redux/auth"
 // import functions from redux API
 // import { verifyOTP } from "../../redux/loginApi"
 import "../styles/OTPVerification.scss"
-
+// password from state
+import { useLocation } from 'react-router-dom';
 const OTPVerificationComponent = () => {
   const { loading } = useSelector((state) => state.auth)
   const [otp, setOtp] = useState("")
-
+  const location = useLocation();
+  //gets password from navigate function after redirection
+  const { password } = location.state; 
   // Verifies OTP GENERATION
-  const initVerifyOTP = () => verifyOTP(true, otp)
+  const initVerifyOTP = () => verifyOTP(true, otp, password)
 
   return (
     <div className="signup">

@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./GLOBAL/pages/landing";
 import SignUpPage from "./GLOBAL/pages/signUpPage";
+import SignInPage from "./GLOBAL/pages/signInPage";
 import OTPVerification from "./GLOBAL/pages/otpVerification";
 import MovieDetailsPage from "./GLOBAL/pages/movieDetailsPage";
 import Home from "./GLOBAL/pages/home";
@@ -27,6 +28,7 @@ function App() {
         <Route index element={<Landing />} />
         <Route path="/otp-verification" element={<OTPVerification />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/signin" element={<SignInPage />} />
         {/* <Route path="/select-network" element={<SelectNetwork />} /> */}
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

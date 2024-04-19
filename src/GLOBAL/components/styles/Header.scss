@@ -131,17 +131,17 @@ nav {
       height: 20px;
     }
 
-    .sign-in {
-      background-color: $primary_color;
-      color: #fff;
-      transition: 0.4s all;
+    // .sign-in {
+    //   background-color: $primary_color;
+    //   color: #fff;
+    //   transition: 0.4s all;
 
-      &:hover {
-        color: $tertiary_color;
-      }
-    }
+    //   &:hover {
+    //     color: $tertiary_color;
+    //   }
+    // }
 
-    .sign-up {
+    .sign-up, .sign-in {
       background-color: $kg_color;
       color: $primary_color;
       border-radius: 2px;

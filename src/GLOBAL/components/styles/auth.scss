@@ -16,7 +16,7 @@
 
     .form-container {
         background: #fff;
-        max-width: 400px;
+        min-width: auto;
         padding: 2rem;
         border-radius: 20px;
 
@@ -55,14 +55,27 @@
         h2 {
             margin-bottom: 20px;
         }
-
         input {
-            width: 100%;
+            width: 25vw;
+            min-width: 150px;
             padding: 10px;
             border-radius: 9999px;
             border: 1px solid #D8D8D8;
             margin: 20px 0;
             margin-top: 5px;
         }
+
+        .margin-bottom {
+            margin-bottom: 0.75rem;
+        }
+
+        a {
+            color: #c4bd47;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: .2s linear;
+        }
+
+        
     }
 }

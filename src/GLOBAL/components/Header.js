@@ -81,15 +81,19 @@ const Header = (prop) => {
               </div>
 
               <div className="sign-in-up">
-                {prop.signup > 2 ? (
+                {prop.signup || prop.signin > 2 ? (
                   <>
                     <Link to="/signup" className="sign-up">
                       <div>
-                        <img src='/assets/svg/padlock.svg' alt='padlock' />
-                        <p>SIGN IN</p>
+                        {/* <img src='/assets/svg/padlock.svg' alt='padlock' /> */}
+                        <p>SIGN UP</p>
                       </div>
                     </Link>
-                    {/* <Link to="/signin" className="sign-in">SIGN IN</Link> */}
+                    <Link to="/signin" className="sign-in"><div>
+                        {/* <img src='/assets/svg/padlock.svg' alt='padlock' /> */}
+                        <p>SIGN IN</p>
+                      </div>
+                      </Link>
                   </>
                 ) : (
                   <div className="profile-wrapper" onClick={() => setShowAccountDropdown(!showAccountDropdown)}>

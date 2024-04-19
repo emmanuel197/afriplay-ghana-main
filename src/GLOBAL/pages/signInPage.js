@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setDeviceInCookies } from "../constants/setDeviceInCookies"
-import { verifyUserData } from "../redux/auth"
+import { LoginUnicast } from "../redux/auth"
 import { Link } from "react-router-dom"
 import checkUserAllowed from "../../utils/checkUserAllowed"
 import Button from "../components/buttons/Button"
@@ -10,28 +10,28 @@ import Footer from "../components/Footer"
 import Header from "../components/Header"
 import '../components/styles/auth.scss'
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const navigate = useNavigate()
   const { loading } = useSelector((state) => state.auth)
   const [email, setEmail] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
   const [password, setPassword] = useState(''); //new field for password
-  const [rePassword, setRePassword] = useState(''); //confirmation of new password
+  
    
   // const [useMobileNumber, setuseMobileNumber] = useState(true)
   // const [hasSelectedNetworks, setHasSelectedNetworks] = useState(false)
 
   useEffect(() => {
     if (!localStorage.getItem('afri_selected_operator')) {
-      navigate('/signup')
+      navigate('/signin')
     }
 
     setMobileNumber(localStorage.getItem('afri_mobile_number') || '')
   }, [navigate])
 
   //renamed func from _initVerifyMSISDN to _initVerifyUserData
-  const _initVerifyUserData = () => {
-    verifyUserData(true, mobileNumber, email, password, rePassword, navigate) //renamed func from verifyMSISDN to verifyUserData
+  const _initLoginUnicast = () => {
+    LoginUnicast(true, mobileNumber, email, password) //renamed func from verifyMSISDN to verifyUserData
   }
 
   const handleMobileNumberInput = e => {
@@ -46,9 +46,6 @@ const SignUpPage = () => {
     setPassword(e.target.value);
   }
 
-  const handleRePasswordInput = e => {
-    setRePassword(e.target.value);
-  };
 
 
   // I am setting cookies that ll later check for user browser when user logs in
@@ -63,14 +60,14 @@ const SignUpPage = () => {
 
   return (
     <>
-      <Header links={1} signup={5} />
+      <Header links={1} signin={5} />
       <main>
         <wc-toast></wc-toast>
         <div className="auth">
           <div className="auth-wrapper">
             <div className="auth-container">
               <div className="form-container">
-                <h2>Sign Up</h2>
+                <h2>Sign In</h2>
                 <div>
                   {/* <label>Phone number</label> */}
                   <input
@@ -90,25 +87,14 @@ const SignUpPage = () => {
                     required
                   />
                 </div>
-                <div>
-                  {/* <label>Confirm Password</label> */}
-                  <input
-                    placeholder="Confirm Password"
-                    type='password'
-                    value={rePassword}
-                    onChange={handleRePasswordInput}
-                    minLength='7'
-                    required
-                  />
-                </div>
                 <div className="margin-bottom">
                   <small >
-                    Already have an account? {" "}
-                    <Link to='/signin'>Sign in</Link>
+                    Don't have an account?  {" "}
+                    <Link to='/signup'>Sign up</Link>
                   </small>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', userSelect: 'none' }}>
-                  <Button action={_initVerifyUserData} isDisabled={loading} label='Continue' />
+                  <Button action={_initLoginUnicast} isDisabled={loading} label='Continue' />
                 </div>
               </div>
             </div>
@@ -120,4 +106,4 @@ const SignUpPage = () => {
   )
 }
 
-export default SignUpPage
+export default SignInPage

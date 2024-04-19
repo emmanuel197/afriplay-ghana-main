@@ -11,6 +11,7 @@ const SignUp = ({ text }) => {
   const [email, setEmail] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
   const [useMobileNumber, setuseMobileNumber] = useState(true)
+  const [password, setPassword] = useState('')
   const [hasSelectedNetworks, setHasSelectedNetworks] = useState(false)
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const SignUp = ({ text }) => {
   }, [])
 
   const _initVerifyMSISDN = () => {
-    verifyMSISDN(true, mobileNumber, email, navigate)
+    verifyMSISDN(true, mobileNumber, email, password, navigate)
   }
 
   const handleMobileNumberInput = e => {

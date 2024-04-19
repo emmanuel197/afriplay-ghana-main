@@ -3,44 +3,85 @@ import { COOKIES, EMAIL_REGEXP, ERROR_MESSAGES, TOAST } from "../../utils/consta
 import OPERATORS from "../../utils/operators"
 import { generateOTPAPI, loginAPI, signUpAPI, validateOTPAPI } from "../constants/apis"
 import { processLog } from "../logger"
-import { sendLog } from "./account"
+import { sendLog } from "./account" 
 
-const _verifyMSISDN = (mobileNumber) => {
-  console.warn('verifying MSISDN')
 
+//renamed func from _verifyMSISDN to verifyUserData
+const _verifyMSISDN = (mobileNumber, password, rePassword) => {
+  console.warn('verifying MSISDN') // renamed from MSISDN to UserData
+  
   let storedMSISDN = COOKIES.get('afri_msisdn')
+
   if (!storedMSISDN || storedMSISDN !== mobileNumber) {
     COOKIES.set('afri_msisdn', mobileNumber) // create msisdn with phone number
     return false // return true to test msisdn feature
   }
-  return true
+
+  return true // Return the validation status after evaluating all conditionals
 }
 
 const _verifyEmail = email => EMAIL_REGEXP.test(email)
 
 const prefixedMobileNumber = mobileNumber => {
-  localStorage.setItem('afri_selected_operator', JSON.stringify(OPERATORS.afriplayghana)) //! remove when users are supposed to choose network
-
+  localStorage.setItem('afri_selected_operator', JSON.stringify(OPERATORS.afriplaymtnghana)) //! remove when users are supposed to choose network
+  
   const storedSelectedOperator = JSON.parse(localStorage.getItem("afri_selected_operator"))
   return storedSelectedOperator.username_prefix + mobileNumber
 }
 
-export const verifyMSISDN = async (isPhoneNumber, mobileNumber, email, navigate) => {
-  const user_info = COOKIES.get("user_info");
-
+// Function to validate email, mobile number, and password
+const validateUserData = (isPhoneNumber, mobileNumber, email, password, rePassword) => {
   if (!isPhoneNumber) {
     if (_verifyEmail(email)) {
-      TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail)
-      return
+      TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail);
+      return false;
     }
+  } else if (mobileNumber.length < 10) {
+    TOAST.error(ERROR_MESSAGES.AUTH.invalidMobileNumber);
+    return false;
+  } else {
+    // Password validation
+    if (password.length < 7) {
+      TOAST.error(ERROR_MESSAGES.AUTH.invalidPassword);
+      return false;
+     } else if (rePassword && password !== rePassword) {
+      TOAST.error(ERROR_MESSAGES.AUTH.passwordMismatch);
+      return false;
+     }
   }
+  return true; // Return true if all validations pass
+};
 
-  else {
-    if (mobileNumber.length < 10) {
-      TOAST.error(ERROR_MESSAGES.AUTH.invalidMobileNumber)
-      return
-    }
+//renamed func from verifyMSISDN to verifyUserData
+export const verifyUserData = async (isPhoneNumber, mobileNumber, email, password, rePassword, navigate) => {
+  const user_info = COOKIES.get("user_info");
+
+  // Validate user data
+  if (!validateUserData(isPhoneNumber, mobileNumber, email, password, rePassword)) {
+    return; // Exit function if validation fails
   }
+  // if (!isPhoneNumber) {
+  //   if (_verifyEmail(email)) {
+  //     TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail)
+  //     return
+  //   }
+  // }
+  // else if (mobileNumber.length < 10) {
+  //   TOAST.error(ERROR_MESSAGES.AUTH.invalidMobileNumber)
+  //     return
+  // }
+  // else {
+  //   // Password validation
+  //   if (password.length < 7) {
+  //     TOAST.error(ERROR_MESSAGES.AUTH.invalidPassword);
+  //     return
+  //   } else if (password !== rePassword) {
+  //     TOAST.error(ERROR_MESSAGES.AUTH.passwordMismatch);
+  //     return
+  //   }
+  // } 
+   
+
 
   // verify network before sending OTP
   //TODO: uncomment when going live
@@ -71,7 +112,7 @@ export const verifyMSISDN = async (isPhoneNumber, mobileNumber, email, navigate)
   window.localStorage.setItem("afri_email", email)
   window.localStorage.setItem("afri_mobile_number", mobileNumber)
   window.localStorage.setItem("afri_username", prefixedMobileNumber(mobileNumber))
-
+  
 
   // msisdn verification failed
   if (!user_info || !_verifyMSISDN(mobileNumber)) {
@@ -85,9 +126,9 @@ export const verifyMSISDN = async (isPhoneNumber, mobileNumber, email, navigate)
      */
 
     console.warn('msisdn verification failed, generating OTP')
-
+  
     await generateOTP(isPhoneNumber, mobileNumber, email)
-    navigate('/otp-verification')
+    navigate('/otp-verification', { state: { password } })
     return
   }
 
@@ -114,7 +155,7 @@ export const generateOTP = async (isPhoneNumber, mobileNumber, email) => {
   }
 }
 
-export const verifyOTP = async (isPhoneNumber, OTPCode) => {
+export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
   if (OTPCode.length < 6) {
     TOAST.error(ERROR_MESSAGES.AUTH.wrongOTP)
     return
@@ -150,13 +191,14 @@ export const verifyOTP = async (isPhoneNumber, OTPCode) => {
       last_name: "Play",
       email: email,
       phone_number: mobileNumber,
+      password: password,
       username: username,
     })
 
     console.warn('signupResponse >>', signupResponse.data)
 
     if (signupResponse.data.message === "subscriber already exist") {
-      LoginUnicast()
+      LoginUnicast(true, mobileNumber, email, password)
       return
     }
 
@@ -168,31 +210,41 @@ export const verifyOTP = async (isPhoneNumber, OTPCode) => {
       return
     }
 
-    if (signupResponse.data.status === "ok") LoginUnicast()
+    if (signupResponse.data.status === "ok") LoginUnicast(true, mobileNumber, email, password)
   }
 }
 
 
-const LoginUnicast = async () => {
+export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password) => {
+  // Validate user data
+  if (!validateUserData(isPhoneNumber, mobileNumber, email, password)) {
+    return; // Exit function if validation fails
+  }
   const deviceInfoCookie = COOKIES.get("device_info")
+  
+  // Set username if not already present in local storage
+  if (!window.localStorage.getItem('afri_username')) {
+    window.localStorage.setItem("afri_username", prefixedMobileNumber(mobileNumber))
+  }
+  
   const username = window.localStorage.getItem('afri_username')
   const selectedOperator = JSON.parse(window.localStorage.getItem('afri_selected_operator'))
   const formattedOperator = username + `@${selectedOperator.operator_uid}`
-
+  
   console.warn('device', deviceInfoCookie)
-
+  
   try {
     const loginResponse = await axios.post(loginAPI, {
       username: formattedOperator,
-      password: "1234567",
+      password: password,
       device: COOKIES.get("device"),
       device_class: deviceInfoCookie.device.type ? deviceInfoCookie.device.type : "Desktop",
       device_type: deviceInfoCookie.device.vendor || "Desktop",
       device_os: "Windows"
     })
-
+    
     console.warn('login uniqcast response >>', loginResponse.data)
-
+ 
     if (loginResponse.data.status === "ok") {
       console.warn('uniqcast login pass >>', loginResponse.data)
       COOKIES.set("user_info", loginResponse)
@@ -201,9 +253,9 @@ const LoginUnicast = async () => {
       await sendLog({ action: 'login' })
       window.location.href = '/home'
     }
-  }
+ }
 
-  catch (e) {
+   catch (e) {
     console.warn('login uniqcast error >>', e.message)
   }
 }

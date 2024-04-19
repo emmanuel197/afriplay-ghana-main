@@ -31,6 +31,8 @@ const ERROR_MESSAGES = {
         wrongOTP: 'Invalid OTP code',
         invalidMobileNumber: 'Invalid Mobile Number',
         invalidEmail: 'Invalid Mobile Number',
+        invalidPassword: 'Your password should be a minimum of 7 characters',
+        passwordMismatch: 'Passwords do not match'
     },
     VERIFICATION: {
         invalidNetwork: 'Please continue with a valid network',
