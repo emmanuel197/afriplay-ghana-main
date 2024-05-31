@@ -1,9 +1,11 @@
 import axios from "axios"
 import { COOKIES, EMAIL_REGEXP, ERROR_MESSAGES, TOAST } from "../../utils/constants"
 import OPERATORS from "../../utils/operators"
-import { generateOTPAPI, loginAPI, signUpAPI, validateOTPAPI } from "../constants/apis"
+import { generateOTPAPI, loginAPI, signUpAPI, validateOTPAPI, fetchUserAPI } from "../constants/apis"
 import { processLog } from "../logger"
 import { sendLog } from "./account" 
+import { isAuthenticatedReducer, isLoadingReducer, isValidReducer } from "./slice/authSlice"
+import { store } from "../../GLOBAL/redux/store";
 
 
 //renamed func from _verifyMSISDN to verifyUserData
@@ -36,12 +38,12 @@ const validateUserData = (isPhoneNumber, mobileNumber, email, password, rePasswo
       TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail);
       return false;
     }
-  } else if (mobileNumber.length < 10) {
+  } else if (mobileNumber && mobileNumber.length < 10) {
     TOAST.error(ERROR_MESSAGES.AUTH.invalidMobileNumber);
     return false;
   } else {
     // Password validation
-    if (password.length < 7) {
+    if (password && password.length < 7) {
       TOAST.error(ERROR_MESSAGES.AUTH.invalidPassword);
       return false;
      } else if (rePassword && password !== rePassword) {
@@ -60,60 +62,37 @@ export const verifyUserData = async (isPhoneNumber, mobileNumber, email, passwor
   if (!validateUserData(isPhoneNumber, mobileNumber, email, password, rePassword)) {
     return; // Exit function if validation fails
   }
-  // if (!isPhoneNumber) {
-  //   if (_verifyEmail(email)) {
-  //     TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail)
-  //     return
-  //   }
-  // }
-  // else if (mobileNumber.length < 10) {
-  //   TOAST.error(ERROR_MESSAGES.AUTH.invalidMobileNumber)
-  //     return
-  // }
-  // else {
-  //   // Password validation
-  //   if (password.length < 7) {
-  //     TOAST.error(ERROR_MESSAGES.AUTH.invalidPassword);
-  //     return
-  //   } else if (password !== rePassword) {
-  //     TOAST.error(ERROR_MESSAGES.AUTH.passwordMismatch);
-  //     return
-  //   }
-  // } 
-   
 
-
-  // verify network before sending OTP
-  //TODO: uncomment when going live
-  // const storedOperatorInfo = window.localStorage.getItem('afri_selected_operator')
-  // const _ouid = JSON.parse(storedOperatorInfo).operator_uid
-
-  // const networkVerificationResponse = await axios.get(
-  //   `https://tvanywhereonline.com/cm/api/auth/?operator_uid=${_ouid}&usr=`, {
-  //   headers: {
-  //     'Password': 'tva12345#',
-  //     'Username': 'tva'
-  //   }
-  // })
-
-  // const networkValid = networkVerificationResponse.data.valid
-
-  // if (networkVerificationResponse.data.status === 'ok') {
-  //   if (!networkValid) {
-  //     TOAST.error(ERROR_MESSAGES.VERIFICATION.invalidNetwork)
-  //     return
-  //   }
-  // } else {
-  //   TOAST.error(ERROR_MESSAGES.errorOccured)
-  //   return
-  // }
 
   // on email and mobile number checks passed
   window.localStorage.setItem("afri_email", email)
   window.localStorage.setItem("afri_mobile_number", mobileNumber)
   window.localStorage.setItem("afri_username", prefixedMobileNumber(mobileNumber))
   
+   // verify network before sending OTP
+  // TODO: uncomment when going live
+  // const storedOperatorInfo = window.localStorage.getItem('afri_selected_operator')
+  // const _ouid = JSON.parse(storedOperatorInfo).operator_uid
+  // const username = window.localStorage.getItem('afri_username')
+  // const networkVerificationResponse = await axios.get(
+  //     `https://tvanywhereonline.com/cm/api/auth/?operator_uid=${_ouid}&usr=${username}`, {
+  //     headers: {
+  //       'Password': 'tva12345#',
+  //       'Username': 'tva'
+  //     }
+  //   })
 
+  //   const networkValid = networkVerificationResponse.data.valid
+
+  //   if (networkVerificationResponse.data.status === 'ok') {
+  //     if (!networkValid) {
+  //       TOAST.error(ERROR_MESSAGES.VERIFICATION.invalidNetwork)
+  //       return
+  //     }
+  //   } else {
+  //     TOAST.error(ERROR_MESSAGES.errorOccured)
+  //     return
+  //   }
   // msisdn verification failed
   if (!user_info || !_verifyMSISDN(mobileNumber)) {
     /** 
@@ -156,10 +135,10 @@ export const generateOTP = async (isPhoneNumber, mobileNumber, email) => {
 }
 
 export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
-  if (OTPCode.length < 6) {
-    TOAST.error(ERROR_MESSAGES.AUTH.wrongOTP)
-    return
-  }
+  // if (OTPCode.length < 6) {
+  //   TOAST.error(ERROR_MESSAGES.AUTH.wrongOTP)
+  //   return
+  // }
 
   const username = window.localStorage.getItem('afri_username')
   const mobileNumber = window.localStorage.getItem('afri_mobile_number')
@@ -167,14 +146,13 @@ export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
 
   processLog(`number: ${mobileNumber} with OTP: ${OTPCode}`)
 
-  let OTP
+  // OTP = await axios.post(validateOTPAPI(), {
+  //   mobile_number: mobileNumber,
+  //   otp: OTPCode
+  // })
+  const OTP = await validateOTP(mobileNumber, OTPCode);
 
-  OTP = await axios.post(validateOTPAPI(), {
-    mobile_number: mobileNumber,
-    otp: OTPCode
-  })
-
-  if (OTP.data.status === 'error') {
+  if (OTP.status === 'error') {
     console.warn('OTP response error >>', OTP.data)
     TOAST.error(OTP.data.message)
     return
@@ -182,10 +160,10 @@ export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
 
   console.warn('OTP response pass >>', OTP.data)
 
-  if (OTP.data.status === "ok") {
+  if (OTP.status === "ok") {
 
     console.warn('signing up...', mobileNumber, username)
-
+    store.dispatch(isLoadingReducer(true))
     const signupResponse = await axios.post(signUpAPI(), {
       first_name: "Afri",
       last_name: "Play",
@@ -206,6 +184,7 @@ export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
       signupResponse.data.status === "error" &&
       signupResponse.data.message !== "subscriber already exist"
     ) {
+      store.dispatch(isLoadingReducer(false))
       TOAST.error(`Oops! ${signupResponse.data.message}. Try again`)
       return
     }
@@ -214,8 +193,28 @@ export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
   }
 }
 
+// Function to validate OTP
+const validateOTP = async (mobileNumber, OTPCode) => {
+  
+  try {
+    if (OTPCode.length < 6) {
+      TOAST.error(ERROR_MESSAGES.AUTH.wrongOTP)
+      return
+    }
+
+    const OTP = await axios.post(validateOTPAPI(), {
+      mobile_number: mobileNumber,
+      otp: OTPCode
+    });
+    return OTP.data;
+  } catch (error) {
+    console.error('Error occurred during OTP validation:', error);
+    throw error;
+  }
+}
 
 export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password) => {
+  store.dispatch(isLoadingReducer(true))
   // Validate user data
   if (!validateUserData(isPhoneNumber, mobileNumber, email, password)) {
     return; // Exit function if validation fails
@@ -223,9 +222,8 @@ export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password)
   const deviceInfoCookie = COOKIES.get("device_info")
   
   // Set username if not already present in local storage
-  if (!window.localStorage.getItem('afri_username')) {
-    window.localStorage.setItem("afri_username", prefixedMobileNumber(mobileNumber))
-  }
+  
+  window.localStorage.setItem("afri_username", prefixedMobileNumber(mobileNumber))
   
   const username = window.localStorage.getItem('afri_username')
   const selectedOperator = JSON.parse(window.localStorage.getItem('afri_selected_operator'))
@@ -249,13 +247,102 @@ export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password)
       console.warn('uniqcast login pass >>', loginResponse.data)
       COOKIES.set("user_info", loginResponse)
 
-
       await sendLog({ action: 'login' })
+      store.dispatch(isAuthenticatedReducer(true))
+      store.dispatch(isLoadingReducer(false))
       window.location.href = '/home'
     }
  }
 
    catch (e) {
+    store.dispatch(isLoadingReducer(false))
+    TOAST.error(ERROR_MESSAGES.AUTH.invalidLogin)
     console.warn('login uniqcast error >>', e.message)
   }
 }
+
+const fetchUserAccount  = async (isPhoneNumber, mobileNumber, email, navigate) => {
+  window.localStorage.setItem("afri_username", prefixedMobileNumber(mobileNumber))
+
+  const subscriber_uid = window.localStorage.getItem("afri_username")
+  const selectedOperator = JSON.parse(window.localStorage.getItem("afri_selected_operator"))
+  const operator_uid = selectedOperator.operator_uid
+  
+  try {
+    const fetchUserAccountRes = await axios.get(fetchUserAPI(), {
+    params: {
+      operator_uid: operator_uid,
+      subscriber_uid: subscriber_uid
+    }
+    });
+    console.log(`user account: ${fetchUserAccountRes.data.data}`)
+    if (fetchUserAccountRes.data.status === "ok") {
+      if (fetchUserAccountRes.data.data.length === 0) {
+        TOAST.error(`${ERROR_MESSAGES.AUTH.invalidAccount}`)
+      } else {
+        await generateOTP(isPhoneNumber, mobileNumber, email)
+        navigate('/otp-verification', { state: {  } })
+       
+      }
+    }
+} catch (e) {
+    console.warn('fetch user account error >>', e.message)
+  }
+  
+}
+
+export const validateUserAccount = async (isPhoneNumber, mobileNumber, email, navigate) => {
+   // Validate user data
+  if (!validateUserData(isPhoneNumber, mobileNumber, email)) {
+    return; // Exit function if validation fails
+  }
+
+  fetchUserAccount(isPhoneNumber, mobileNumber, email, navigate)
+  
+}
+
+export const verifyResetOTP = async (mobileNumber, OTPCode, navigate) => {
+  const OTP = await validateOTP(mobileNumber, OTPCode);
+
+  if (OTP.status === 'error') {
+    console.warn('OTP response error >>', OTP.data)
+    TOAST.error(OTP.data.message)
+    return
+  }
+
+  console.warn('OTP response pass >>', OTP.data)
+
+  if (OTP.status === "ok") {
+    store.dispatch(isValidReducer(true))
+    navigate('/reset-password')
+  }
+}
+
+
+export const resetPassword = async (isPhoneNumber, mobileNumber, email, password, rePassword, navigate) => {
+  // Validate user data
+  if (!validateUserData(isPhoneNumber, mobileNumber, email, password, rePassword)) {
+    return; // Exit function if validation fails
+  }
+
+  const subscriber_uid = window.localStorage.getItem("afri_username")
+  const selectedOperator = JSON.parse(window.localStorage.getItem("afri_selected_operator"))
+  const operator_uid = selectedOperator.operator_uid
+  const url = `https://tvanywhereonline.com/cm/api/subscriber/?operator_uid=${operator_uid}&subscriber_uid=${subscriber_uid}`
+  try {
+    const resetPasswordRes = await axios.put(url, {
+      "password": password
+    }
+    );
+
+    if (resetPasswordRes.data.message === "subscriber account updated") {
+      navigate("/signin")
+      
+    }
+
+  } catch (e) {
+    console.warn('fetch user account error >>', e.message)
+  }
+
+}
+

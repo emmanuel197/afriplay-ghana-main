@@ -5,7 +5,7 @@ import drawerSlice from "./slice/drawerSlice";
 import genreTabSlice from "./slice/genreTabSlice";
 import inputSlice from "./slice/inputSlice";
 import FetchMovies from "./slice/moviesSlice";
-
+import fetchPackages from "./slice/subscriptionSlice"
 export const store = configureStore({
   reducer: {
     auth: AuthReducer,
@@ -14,5 +14,6 @@ export const store = configureStore({
     account: accountSlice,
     genreTab: genreTabSlice,
     input: inputSlice,
+    fetchPackages: fetchPackages
   }
 });

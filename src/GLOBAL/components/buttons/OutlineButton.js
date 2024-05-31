@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import '../../components/styles/buttons.scss'
+import { infoIcon } from "../../../utils/assets"
 
 const OutlineButton = (props) => {
     const { label, action, page } = props
@@ -19,8 +20,9 @@ const OutlineButton = (props) => {
         <>
             <>
                 <Link to={page} className="outline-btn">
-                    <div>
-                        <p>{label}</p>
+                    <div className='align-content'>
+                    <img src={infoIcon} alt="Info Icon"></img>
+                        <p> {label}</p>
                     </div>
                 </Link>
             </>

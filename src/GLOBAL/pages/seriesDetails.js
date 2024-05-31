@@ -11,7 +11,7 @@ import SliderWrapper from "../components/SliderWrapper"
 import Loader from "../components/Loader"
 import "../components/styles/series.scss"
 import getGenreName from "../../utils/getGenreName"
-
+import styles from "../components/styles/SubscriptionCard.scss"
 const SeriesDetails = () => {
     const dispatch = useDispatch()
     const { id } = useParams();
@@ -97,7 +97,7 @@ const SeriesDetails = () => {
     )
 }
 
-const NextArrow = ({ action }) => {
+export const  NextArrow = ({ action }) => {
     return <p onClick={action}>
         <svg xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -107,13 +107,15 @@ const NextArrow = ({ action }) => {
     </p>
 }
 
-const PrevArrow = ({ action }) => {
+export const PrevArrow = ({ action, style }) => {
     return <p onClick={action}>
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            viewBox="0 0 24 24">
+            viewBox="0 0 24 24"
+            style={style}
+            className={styles['prev-arrow-svg']}>
             <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z" /></svg>
 
     </p>

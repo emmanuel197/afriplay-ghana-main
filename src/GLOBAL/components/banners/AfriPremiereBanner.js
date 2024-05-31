@@ -103,7 +103,7 @@ const AfriPremiereBanner = () => {
                                     {
                                         bannerContentInfo.id
                                             ? <div className='hero-buttons'>
-                                                <Button page={window.location.pathname === '/series' ? `/series/${bannerContentInfo.id}` : `/watch/movie/${bannerContentInfo.uid}`} label='PLAY' />
+                                                <Button page={window.location.pathname === '/series' ? `/series/${bannerContentInfo.id}` : `/watch/movie/${bannerContentInfo.uid}`} selectedMovie={bannerContentInfo.id} label='PLAY' />
                                                 <OutlineButton page={window.location.pathname === '/series' ? `/series/${bannerContentInfo.id}` : `/movie/${bannerContentInfo.id}`} label="Info" />
                                                 <div className="mute-icon">
                                                     {

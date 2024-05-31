@@ -5,14 +5,32 @@ const authSlice = createSlice({
 
   initialState: {
     isAuthenticated: false,
-    token: null,
+    // token: null,
+    isValid: false,
+    isLoading: false
   },
 
-  reducers: {}
+  reducers: {
+    isValidReducer: (state, action) => {
+      state.isValid = action.payload
+    },
+    isLoadingReducer: (state, action) => {
+      state.isLoading = action.payload
+    },
+    isAuthenticatedReducer: (state, action) => {
+      state.isAuthenticated = action.payload
+      window.localStorage.setItem('isAuthenticated', JSON.stringify(action.payload));
+    }
+  },
+
 })
 
 export default authSlice.reducer;
-export const { } = authSlice.actions
+export const { 
+  isValidReducer,
+  isLoadingReducer,
+  isAuthenticatedReducer
+} = authSlice.actions
 
 // const authSlice = createSlice({
 //   name: "auth",

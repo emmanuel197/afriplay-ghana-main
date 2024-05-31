@@ -1,4 +1,22 @@
-.loader-wrapper {
+@import '../../../global';
+
+:root {
+    --size: 5;
+    
+    @property --nose {
+      syntax: '<percentage>';
+      initial-value: 0%;
+      inherits: false;
+    }
+  
+    @property --tail {
+      syntax: '<percentage>';
+      initial-value: 0%;
+      inherits: false;
+    }
+  }
+  
+#loader-wrapper {
     width: 100vw;
     height:100vh;
     display: flex;
@@ -7,6 +25,58 @@
     position: fixed;
     top:0;
     left:0;
-    background: #1a052b;
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 5;
+    flex-direction: column;
+    z-index: 9999;
+
+    #loader-header {
+        margin-bottom: 20px;
+        font-size: 1rem;
+        color:#fff;
+       }
+}
+
+
+
+.loader {
+    
+   
+    height: calc(var(--size) * 1vmin);
+    width: calc(var(--size) * 1vmin);
+    border-radius: 50%;
+    mask: conic-gradient(from 45deg, transparent 0 var(--tail), #000 0 var(--nose),
+    transparent 0 var(--nose)
+    );
+    border-style: solid;
+    border-width: 1vmin;
+    border-color: $kg_color transparent $kg_color transparent;
+    animation: spin 3.25s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load {
+    0% {
+        --tail: 0%;
+        --nose: 0%;
+      }
+      40%{
+        
+            --nose: 100%;
+            --tail: 0%;
+          }
+      
+      60% {
+        --nose: 100%;
+        --tail: 0%;
+      }
+      100% {
+        --nose: 100%;
+        --tail: 100%;
+      }
 }

@@ -24,7 +24,6 @@ const accountSlice = createSlice({
         },
 
         setProfile: (state, action) => {
-            console.log('state', action)
             state.profile = action.payload
         }
     }

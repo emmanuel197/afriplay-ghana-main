@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllSeries, fetchTrailer, returnMovieOrSeriesDetails } from '../../redux/fetchMoviesApi'
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import ReactPlayer from 'react-player'
 import Slider from 'react-slick'
 import Button from '../buttons/Button'
@@ -45,6 +45,7 @@ const fetchDataForBannerSlider = (recentlyAdded) => {
 const DynamicBanner = ({ showSlides = true }) => {
     const dispatch = useDispatch()
     const location = useLocation()
+    const navigate = useNavigate()
     const [playTrailer, setPlayTrailer] = useState(true)
     const [isPlayingTrailer, setIsPlayingTrailer] = useState(true)
     const [selectedMovie, setSelectedMovie] = useState({})
@@ -64,6 +65,7 @@ const DynamicBanner = ({ showSlides = true }) => {
     useEffect(() => {
         const initGetAllSlides = async () => {
             if (location.pathname === "/series") {
+                
                 let _allSeries = await fetchAllSeries()
                 let _allSlides = []
                 let randomSeriesIndexes = getRandomIndexes(_allSeries)
@@ -118,24 +120,29 @@ const DynamicBanner = ({ showSlides = true }) => {
 
     useEffect(() => {
         const initSetMovieDetails = async () => {
-            const _movie = await returnMovieOrSeriesDetails(selectedMovie.id, location.pathname === '/series' ? 'series' : 'movie')
-            setMovieDetails(_movie)
-            // console.warn("&&&&&&&&&&", selectedMovie.id, await fetchTrailer(selectedMovie.id))
-            setTrailer(await fetchTrailer(selectedMovie.id))
+            const _movie = await returnMovieOrSeriesDetails(selectedMovie.id, 'movie')
+            
+        
+            setMovieDetails(location.pathname === "/movies" ? _movie : selectedMovie)
+            
+            
+            setTrailer(await fetchTrailer(location.pathname === '/series' ? selectedMovie.seasons[0].episodes[0].id: selectedMovie.id))
         }
         initSetMovieDetails()
     }, [location.pathname, selectedMovie.id])
 
     useEffect(() => {
         const handleScroll = (event) => {
-            if (window.scrollY < 350) setPlayTrailer(true)
+            if (window.scrollY <
+                 350) setPlayTrailer(true)
             else setPlayTrailer(false)
         }
 
         window.addEventListener("scroll", handleScroll)
         return () => { window.removeEventListener("scroll", handleScroll) }
     }, [])
-
+    console.log(movieDetails.description)
+    
     return (
         <section>
             <div className="hero" onClick={() => setShowTitle(true)}>
@@ -162,8 +169,9 @@ const DynamicBanner = ({ showSlides = true }) => {
                                     {
                                         selectedMovie.id
                                             ? <div className='hero-buttons'>
-                                                <Button page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`} label='PLAY' />
-                                                <OutlineButton page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/movie/${selectedMovie.id}`} label="Info" />
+                                                <Button page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`}  selectedMovie={selectedMovie.id} label='PLAY'  />
+                                                {/* <Button page={handleClick} label='PLAY' /> */}
+                                                <OutlineButton page={window.location.pathname === '/series' ? `/series/${selectedMovie.id}` : `/movie/${selectedMovie.id}`}  label="Info" />
                                                 <div className="mute-icon">
                                                     {
                                                         isMuted
@@ -211,247 +219,5 @@ const DynamicBanner = ({ showSlides = true }) => {
 
 export default DynamicBanner
 
-// import { useState, useEffect, useMemo } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { fetchAllSeries, fetchTrailer, returnMovieOrSeriesDetails } from '../../redux/fetchMoviesApi'
-// import { useLocation } from "react-router-dom"
-// import ReactPlayer from 'react-player'
-// import Slider from 'react-slick'
-// import Button from '../buttons/Button'
-// import OutlineButton from '../buttons/OutlineButton'
-// import dynamicBannerSliderSettings from '../../../lib/sliderConfig/dynamicBannerSliderSettings'
-// import SliderItem from './SliderItem'
-// import getRandomIndexes from '../../../lib/getRandomIndexes'
-// import getGenreName from "../../../lib/getGenreName"
-// import isInViewport from "../../../lib/isInViewport"
-// import '../../components/styles/banners/dynamicBanner.scss'
-// import BannerBackground from "./BannerBackground"
-// import { errorLog, processLog, warnLog } from "../../logger"
-
-// /* **
-//  * display a recently added series in banner.picks a series from the recently added category
-//  */
-
-// const getBannerSlides = (vods, _location) => {
-//     if (vods.length < 1) return []
-
-//     // let vodSource
-
-//     // if (_location !== "/series") vodSource = _recentlyadded
-//     // else vodSource = async () => {
-//     //     console.warn("::::", await fetchAllSeries())
-//     //     return await fetchAllSeries()
-//     // }
-
-//     // const setVodSource = async () => {
-//     //     if (_location === "/series") {
-//     //         let _ = []
-//     //         _ = async () => { return await fetchAllSeries() }
-//     //         vodSource = await _()
-//     //     } else vodSource = _recentlyadded
-//     // }
-
-//     // const init = async () => {
-//     // }
-
-//     // setVodSource()
-
-//     // if (vodSource) console.log("****", vodSource)
-//     // else {
-//     //     console.warn("no vodSource")
-//     //     return []
-//     // }
 
 
-//     // const getAllSeries = async () => {
-//     //     // console.warn("::::", await fetchAllSeries())
-//     //     return await fetchAllSeries()
-//     // }
-
-//     // console.warn("** VODS **", vods)
-
-//     const slides = []
-//     let seriesSlides = []
-//     const indexes = getRandomIndexes(vods)
-
-//     // console.warn("INDEXES **", indexes)
-
-//     // if (_location === "/series") {
-//     //     const getAllSeries = async () => {
-//     //         // console.warn("::::", await fetchAllSeries())
-//     //         seriesSlides = await fetchAllSeries()
-//     //     }
-
-//     //     getAllSeries()
-//     //     // console.warn('getAllSeries', getAllSeries())
-//     // }
-
-//     // for (let i = 0; i < indexes.length; i++) {
-//     //     const element = indexes[i];
-//     //     const _ = vods[element]
-
-//     //     // console.warn("----", _.type,recentlyadded)
-
-//     //     // if (_ && !slides.includes(_)) {
-//     //     if (_.type === 'series') {
-//     //         // seriesSlides.push(_)
-//     //         console.warn("FOUND SERIES", _)
-//     //     } else {
-//     //         slides.push(_)
-//     //     }
-//     //     // }
-//     // }
-
-//     // console.warn('seriesSlides', seriesSlides)
-
-//     warnLog('slides for banner', seriesSlides)
-
-//     if (_location === '/series') return seriesSlides
-
-//     return slides
-// }
-
-// const DynamicBanner = ({ showSlides = true }) => {
-//     const dispatch = useDispatch()
-//     const location = useLocation()
-//     const [playTrailer, setPlayTrailer] = useState(true)
-//     const [isPlayingTrailer, setIsPlayingTrailer] = useState(true)
-//     const [selectedMovie, setSelectedMovie] = useState({})
-//     const [movieDetails, setMovieDetails] = useState({})
-//     // const [genreName, setGenreName] = useState('')
-//     const [trailer, setTrailer] = useState('')
-//     const { recentlyadded, genres, allSeries } = useSelector((state) => state.fetchMovies)
-//     // const slides = useMemo(() => getBannerSlides(location.pathname === "/series" ? allSeries : recentlyadded, location.pathname), [allSeries, location.pathname, recentlyadded])
-
-//     const slides = location.pathname === "/series" ? getRandomIndexes(allSeries) : getRandomIndexes(recentlyadded)
-
-//     const [slidesContent, setSlidesContent] = useState([])
-
-//     console.warn("slides", slides)
-
-//     // getRandomIndexes(vods)
-
-
-//     useEffect(() => {
-//         // processLog('set selected movie [effect]', slides.length)
-//         fetchAllSeries(dispatch)
-//         if (slides[0]) setSelectedMovie(slides[0])
-//     }, [slides, dispatch])
-
-//     const _setSelectedMovie = (vod) => {
-//         // processLog('set selected movie', vod)
-
-//         setSelectedMovie(vod)
-//         _playTrailer()
-//     }
-
-//     const _playTrailer = async () => {
-//         // processLog('play trailer')
-
-//         setPlayTrailer(true)
-//         setIsPlayingTrailer(true)
-//         // setTrailer(await fetchTrailer(selectedMovie.id))
-//     }
-
-//     // useEffect(() => {
-//     //     let _
-
-//     //     if (location.pathname === '/series') {
-//     //         _ = getGenreName(movieDetails.genres, genres)
-//     //     } else _ = getGenreName(movieDetails.movie_genres, genres)
-
-//     //     setGenreName(_)
-//     // }, [genres, location.pathname, movieDetails, selectedMovie.genres, selectedMovie.movie_genres])
-
-//     useEffect(() => {
-
-//         const initSetMovieDetails = async () => {
-
-//             // console.warn('selectedMovie', selectedMovie)
-//             // console.warn('slides', slides)
-//             // console.warn("::::", await fetchAllSeries())
-
-//             if (selectedMovie.id) {
-//                 processLog(`setting movie details`, selectedMovie.id)
-//                 const _movie = await returnMovieOrSeriesDetails(selectedMovie.id, location.pathname === '/series' ? 'series' : 'movie')
-//                 setMovieDetails(_movie)
-//                 setTrailer(await fetchTrailer(selectedMovie.id))
-//             }
-
-//             else errorLog('selected movie ID null', selectedMovie.id)
-
-//             // console.log('setMovieDetails', _movie)
-//         }
-
-//         // setTimeout(() => {
-//         initSetMovieDetails()
-//         // }, 4000)
-
-//     }, [location.pathname, selectedMovie, slides])
-//     // }, [location.pathname, selectedMovie.id])
-
-//     useEffect(() => {
-//         // processLog('handle scroll')
-
-//         const handleScroll = (event) => {
-//             if (window.scrollY < 350) setPlayTrailer(true)
-//             else setPlayTrailer(false)
-//         }
-
-//         window.addEventListener("scroll", handleScroll)
-//         return () => { window.removeEventListener("scroll", handleScroll) }
-//     }, [])
-
-//     return (
-//         <section>
-//             <div className="hero">
-//                 <div className="hero-container">
-//                     <div className="hero-content-wrapper">
-//                         <div className="hero-content">
-//                             <h1>{movieDetails.title}</h1>
-//                             <p className="lines-max-4 hero-content-description">{movieDetails.description}</p>
-//                             {/* <div className="cast">
-//                                 {window.location.pathname !== '/series' ?
-//                                     <div>
-//                                         <b>CAST: </b>{movieDetails.cast}
-//                                     </div>
-//                                     : <></>}
-//                             </div> */}
-//                             {/* <div className="genre-subtitles"> */}
-//                             {/* <b>Genre: </b>{genreName} */}
-//                             {/* <div style={{ margin: '10px' }} />
-//                                 <b>Subtitles: </b> English[CC] */}
-//                             {/* </div > */}
-//                             <div className='hero-buttons'>
-//                                 <Button page={selectedMovie.type === 'series' ? `/series/${selectedMovie.id}` : `/movie/${selectedMovie.id}`} label='PLAY' />
-//                                 {/* <div style={{ margin: '10px' }} />
-//                                 {window.location.pathname === '/series' ? <></> : <OutlineButton action={_playTrailer} label={isPlayingTrailer ? 'STOP TRAILER' : 'PLAY TRAILER'} />} */}
-//                             </div>
-//                         </div >
-//                     </div >
-
-//                     {showSlides ? <div className='hero-slider-container'>
-//                         <Slider Slider {...dynamicBannerSliderSettings} className='hero-slider-main' >
-//                             {
-//                                 slides.map((movie) => {
-//                                     return <SliderItem
-//                                         onClicked={() => _setSelectedMovie(movie)}
-//                                         title={movie.title}
-//                                         image_id={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie.image_id}?accessKey=WkVjNWNscFhORDBLCg==`}
-//                                         isSelected={selectedMovie.id === movie.id}
-//                                         key={movie.id} />
-//                                 })
-//                             }
-//                         </Slider>
-//                     </div > : <div></div>}
-//                 </div >
-
-//                 <BannerBackground bannerImg={selectedMovie.image_id} _trailer={trailer} _onPlayTrailer={isPlayingTrailer} _bannerContent={selectedMovie} />
-
-//                 <div className="hero-gradient" />
-//             </div >
-//         </section >
-//     )
-// }
-
-// export default DynamicBanner

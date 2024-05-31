@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./GLOBAL/pages/landing";
 import SignUpPage from "./GLOBAL/pages/signUpPage";
 import SignInPage from "./GLOBAL/pages/signInPage";
+import ResetPasswordPage from "./GLOBAL/pages/resetPasswordPage";
 import OTPVerification from "./GLOBAL/pages/otpVerification";
 import MovieDetailsPage from "./GLOBAL/pages/movieDetailsPage";
 import Home from "./GLOBAL/pages/home";
@@ -20,17 +21,27 @@ import PayPerView from "./GLOBAL/pages/payperview";
 import Search from "./GLOBAL/pages/search";
 import SelectNetwork from "./GLOBAL/pages/auth/selectNetwork";
 import "./_global.scss";
+import SubscriptionPage from "./GLOBAL/pages/subscriptionPage";
+import SubscriptionHistoryPage from "./GLOBAL/pages/subscriptionHistoryPage"
+import { useSelector } from "react-redux";
+// import RedirectAuthenticated from "./GLOBAL/components/RedirectAuthenticated";
 
 function App() {
+  // const isAuthenticated = window.localStorage.getItem('isAuthenticated')
+  
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route index element={<Landing />} />
         <Route path="/otp-verification" element={<OTPVerification />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         {/* <Route path="/select-network" element={<SelectNetwork />} /> */}
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        
+        <Route path="/subscriptions" element={<ProtectedRoute><SubscriptionPage /></ProtectedRoute>} />
+        <Route path="/subscription-history" element={<ProtectedRoute><SubscriptionHistoryPage /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/series/:id" element={<ProtectedRoute><SeriesDetails /></ProtectedRoute>} />
         <Route path="/movies" element={<ProtectedRoute><Movies /></ProtectedRoute>} />

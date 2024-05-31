@@ -5,7 +5,7 @@ import OtpInput from "react-otp-input"
 // React Router
 import { useNavigate } from "react-router-dom"
 // CSS
-import { verifyOTP } from "../../redux/auth"
+import { verifyOTP, verifyResetOTP } from "../../redux/auth"
 // import functions from redux API
 // import { verifyOTP } from "../../redux/loginApi"
 import "../styles/OTPVerification.scss"
@@ -15,17 +15,19 @@ const OTPVerificationComponent = () => {
   const { loading } = useSelector((state) => state.auth)
   const [otp, setOtp] = useState("")
   const location = useLocation();
+  const mobileNumber = localStorage.getItem("afri_mobile_number")
+  const navigate = useNavigate()
   //gets password from navigate function after redirection
   const { password } = location.state; 
   // Verifies OTP GENERATION
-  const initVerifyOTP = () => verifyOTP(true, otp, password)
-
+  const initVerifyOTP = () => !password ?  verifyResetOTP(mobileNumber, otp, navigate) :  verifyOTP(true, otp, password)
+  
   return (
     <div className="signup">
       <wc-toast></wc-toast>
       <div className="container">
         <div className="inside-signup">
-          <p> {localStorage.getItem("afri_mobile_number")} </p> <br />
+          <p> {mobileNumber} </p> <br />
           <h2> Enter Verification Code </h2>
           <div className="otp">
             <OtpInput

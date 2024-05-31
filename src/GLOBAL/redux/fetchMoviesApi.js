@@ -7,7 +7,7 @@ import { refresh_token } from "../constants/refreshToken";
 import { sendLog } from "./account";
 import { fetchChannelInfo } from "./channels";
 import { onSearchQueryType } from "./slice/inputSlice";
-
+import {store} from "../redux/store"
 import {
   fetchMovies_begin,
   fetchMovies_success,
@@ -50,7 +50,8 @@ export const fetchOneSeries = async (seriesId, dispatch) => {
         }
       }
     );
-
+    console.log(`seriesId: ${seriesId}`)
+    console.log('response_:', JSON.stringify(req.data.data, null, 2));
     dispatch(fetchOneSeriesReducer(req.data.data))
 
   } catch (e) {
@@ -196,14 +197,15 @@ export const fetchTrailer = async (id) => {
   try {
 
     const { access_token, operator_uid, user_id } = user_info.data.data;
-
+   
     interceptResponse()
 
     let url
-
-    if (window.location.pathname === '/series') url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/trailers/series/${id}`
+    // console.log(window.location.pathname)
+    // if (window.location.pathname.includes('/series') || window.location.pathname.includes('/live')) url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/trailers/episodes/${id}`
+    if (window.location.pathname.includes('/series')) url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/trailers/episodes/${id}`
     else url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/trailers/movies/${id}`
-
+    
     const trailer = await axios.get(
       url,
       {
@@ -216,7 +218,7 @@ export const fetchTrailer = async (id) => {
     // dispatch(fetchBannerTrailer(trailer.data.data.url))
 
     console.warn('TRAILER URL: ', id, window.location.pathname, trailer.data.data.url)
-
+    console.log(trailer.data.data.url)
 
     return trailer.data.data.url
   }
@@ -266,6 +268,7 @@ export const fetchAllSeries = async (dispatch) => {
         }
       }
     )
+    // console.log(`response: ${response.data}`)
 
     const response_ = await axios.get(
       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/series?series_id=${convertArrayToString(response.data.data)}`,
@@ -275,6 +278,8 @@ export const fetchAllSeries = async (dispatch) => {
         }
       }
     )
+
+    // console.log('response_:', JSON.stringify(response_.data.data, null, 2));
 
     // dispatch(fetchAllSeriesReducer(response_.data.data))
 
@@ -365,7 +370,7 @@ export const fetchMovie = async (dispatch) => {
       //   dispatch(fetchMovies_error());
       //   return;
       // }
-
+      console.log(`categories ${JSON.stringify(categories)}`)
       let _packageNameToId = {};
 
       categories.data.data.map((item) => {
@@ -664,7 +669,7 @@ export const fetchMovieDetails = async (dispatch, movieId) => {
   }
 };
 
-export const fetchPackageMovies = async (movieId, dispatch) => {
+export const fetchPackageMovies = async (dispatch) => {
   // dispatch(fetchMovieDetails_begin());
 
   try {
@@ -684,7 +689,7 @@ export const fetchPackageMovies = async (movieId, dispatch) => {
     //   dispatch(fetchMovieDetails_error());
     //   return;
     // }
-
+    
     if (packagesMovies.data.status === "ok") {
       dispatch(fetchPackageMoviesReducer(packagesMovies.data.data));
     }
@@ -841,11 +846,11 @@ export const returnMovieOrSeriesDetails = async (id, type) => {
   try {
     const { access_token, operator_uid, user_id } = user_info.data.data;
 
-    interceptResponse()
+    interceptResponse() 
 
     let url
 
-    if (type === 'series') url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/series/${id}`
+    if (type === 'series') url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/episodes/${id}`
     if (type === 'movie') url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/movies/${id}`
 
     const movie = await axios.get(url,
@@ -873,7 +878,7 @@ export const returnOneSeries = async (seriesId) => {
     interceptResponse()
 
     let req = await axios.get(
-      `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/series/${seriesId}`,
+      `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/episodes/${seriesId}`,
       {
         headers: {
           Authorization: `Bearer ${access_token}`
@@ -942,7 +947,7 @@ export const fetchMovieVideo = (dispatch, id, type) => {
   interceptResponse()
 
   if (type === "movie") _url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/movies/${id}`
-  if (type === "series") _url = `https://mtnss.tvanywhereafrica.com:11610/api/client/v1/${operator_uid}/users/${user_id}/vod/episodes/${id}`
+  if (type === "series") _url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/episodes/${id}`
   if (type === "live") _url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/live/channels/${id}`
 
   var config = {
@@ -1137,7 +1142,7 @@ export const fetchBannerContent = async (type) => {
       if (item.type === 'LIVE') liveTvBanners.push(item)
       return ''
     })
-
+    console.log(currentRoute)
     if (currentRoute === '/home') {
       const _ = []
       const movieSeriesBanners = _.concat(movieBanners, seriesBanners)

@@ -10,8 +10,10 @@ import "../styles/Banner.scss";
 
 const Banner = () => {
   const navigate = useNavigate();
-  const [mobileNumber, setMobileNumber] = useState('')
-
+  const [mobileNumber, setMobileNumber] = useState("");
+  const isAuthenticated = JSON.parse(
+    window.localStorage.getItem("isAuthenticated")
+  );
   // const [email, setEmail] = useState('')
   // const handleWatchNowClick = () => {
   //   navigate("/signup");
@@ -21,20 +23,20 @@ const Banner = () => {
 
   const initAuth = () => {
     if (mobileNumber.length < 10) {
-      TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail)
-      return
+      TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail);
+      return;
     }
 
-    window.localStorage.setItem('afri_mobile_number', mobileNumber)
-    navigate('/signup')
-  }
+    window.localStorage.setItem("afri_mobile_number", mobileNumber);
+    navigate("/signup");
+  };
 
-  const handleMobileNumberInput = e => {
-    const text = e.target.value
+  const handleMobileNumberInput = (e) => {
+    const text = e.target.value;
     const limit = 10;
-    if (isNaN(Number(text))) return
+    if (isNaN(Number(text))) return;
     setMobileNumber(text.slice(0, limit));
-  }
+  };
 
   useEffect(() => {
     const handleScroll = (event) => {
@@ -70,15 +72,25 @@ const Banner = () => {
       <div className="container">
         <div className="inside-banner">
           <div className="banner-text">
-            <h1>Get endless <span className="yellow-span">entertainment</span>, <span className="yellow-span">series</span>, <span className="yellow-span">live events</span>, TV Shows and the <span className="yellow-span">movies</span> you love.</h1>
-            <p>Sign Up To Enjoy Must-See TV</p>
-            <div className="input-wrapper">
-              <input placeholder="eg. 0541234567"
-                value={mobileNumber}
-                onChange={handleMobileNumberInput}
-              />
-              <button onClick={initAuth}>SIGN UP</button>
-            </div>
+            <h1>
+              Get endless <span className="yellow-span">entertainment</span>,{" "}
+              <span className="yellow-span">series</span>,{" "}
+              <span className="yellow-span">live events</span>, TV Shows and the{" "}
+              <span className="yellow-span">movies</span> you love.
+            </h1>
+            {!isAuthenticated && (
+              <>
+                <p>Sign Up To Enjoy Must-See TV</p>
+                <div className="input-wrapper">
+                  <input
+                    placeholder="eg. 0541234567"
+                    value={mobileNumber}
+                    onChange={handleMobileNumberInput}
+                  />
+                  <button onClick={initAuth}>SIGN UP</button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

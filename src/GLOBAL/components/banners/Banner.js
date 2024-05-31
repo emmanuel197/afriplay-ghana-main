@@ -5,6 +5,8 @@ import Subscribe from '../buttons/Subscribe'
 
 const BannerSlider = (props) => {
     const { title, description, image } = props
+    
+    const isAuthenticated = JSON.parse(window.localStorage.getItem('isAuthenticated'))
     return <div className='landing-banner-content'>
         <div className='landing-content-wrapper'>
             <div>
@@ -35,6 +37,7 @@ const Banner = () => {
         autoplay: true,
         autoplaySpeed: 3000,
     };
+    
     return (
         <>
             <Slider {...settings} className='landing-banner'>

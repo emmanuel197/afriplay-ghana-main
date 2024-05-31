@@ -32,12 +32,20 @@ const ERROR_MESSAGES = {
         invalidMobileNumber: 'Invalid Mobile Number',
         invalidEmail: 'Invalid Mobile Number',
         invalidPassword: 'Your password should be a minimum of 7 characters',
-        passwordMismatch: 'Passwords do not match'
+        passwordMismatch: 'Passwords do not match',
+        invalidLogin: 'Invalid login credentials',
+        invalidAccount: 'Invalid user account. Try again or contact support'
     },
     VERIFICATION: {
         invalidNetwork: 'Please continue with a valid network',
     },
+    SUBSCRIPTION: {
+        subscriptionFailed: 'Subscription was unsuccessful',
+        subscriptionCancel: 'Failed to cancel subscription',
+    
+    },
     errorOccured: 'An error occured. Try again',
+
 }
 
 export { COOKIES, LOG_MESSAGES, TOAST, EMAIL_REGEXP, ERROR_MESSAGES, USER_INFO_COOKIE, LOCALSTORAGE, USER_OPERATOR_INFO }

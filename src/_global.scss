@@ -1,6 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap');
 
+:root {
+  --size: 5;
+  --navbar-width: 256px;
+  --navbar-width-min: 55px;
+  @property --nose {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+  }
+
+  @property --tail {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+  }
+}
 body {
   overflow-x: hidden;
 }
@@ -11,7 +28,7 @@ html,
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -23,6 +40,8 @@ html,
 $primary_color: #1a052b;
 $secondary_color: #39234b;
 $tertiary_color: #fff;
+$tertopas_color: rgba(255, 255, 255, .1);
+$tertopaszero_color: rgba(255, 255, 255, 0);
 $kg_color: #C4BD47;
 $account_gray: #b5aeae;
 $account_edit_color: #219728;
@@ -35,6 +54,7 @@ $headings_font_size: 2rem;
 $gray: gray;
 $account_desc_font: 1.2rem;
 $device_info_font: 0.7rem;
+$size: 5;
 // mobile
 $m_banner_text: 2rem;
 $m_normal_font: 1rem;

@@ -16,6 +16,8 @@ const Landing = () => {
   // this will help in setting the device info for login post API
   // I will do this for the landing and signup - signin
   // and it ll load when the user visits page or refreshes page with useEffect beneath this
+  const isAuthenticated = JSON.parse(window.localStorage.getItem('isAuthenticated'))
+  
   useEffect(() => {
     const initSendLogs = async () => {
       await sendLog({
@@ -33,7 +35,7 @@ const Landing = () => {
     <>
       <main style={{ background: ' #1a052b' }}>
         <Header links={1} signup={5} />
-        <Banner />
+        <Banner isAuthenticated={isAuthenticated}/>
         <Devices />
         <DataFriendly />
         <Faq />

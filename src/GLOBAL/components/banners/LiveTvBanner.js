@@ -18,7 +18,7 @@ const LiveTVBanner = () => {
 
         initFetchBannerContent()
     }, [])
-
+    console.log(bannerContent)
     return (
         <section>
             <div className="hero">
@@ -29,7 +29,7 @@ const LiveTVBanner = () => {
                             <h1>{bannerContent.title}</h1>
                             <p className="hero-content-description">{bannerContent.description}</p>
                             <br />
-                            <Button page={`/watch/live/${bannerContent.content_id}`} label='WATCH LIVE' />
+                            <Button page={`/watch/live/${bannerContent.uid}`} selectedMovie={bannerContent.content_id} label='WATCH LIVE' />
                         </div>
                     </div>
 

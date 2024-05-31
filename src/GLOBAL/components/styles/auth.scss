@@ -57,7 +57,7 @@
         }
         input {
             width: 25vw;
-            min-width: 150px;
+            min-width: 200px;
             padding: 10px;
             border-radius: 9999px;
             border: 1px solid #D8D8D8;
@@ -68,14 +68,25 @@
         .margin-bottom {
             margin-bottom: 0.75rem;
         }
-
-        a {
-            color: #c4bd47;
+        .sign-in-link, .sign-up-link, .forgot-password-link {
             font-size: 0.875rem;
             text-decoration: none;
+        }
+
+        .sign-up-link, .sign-in-link {
+            color: #c4bd47;
             transition: .2s linear;
         }
 
+        .password-reset-container {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .forgot-password-link {
+            color: #1a052b;
+        }
         
     }
 }

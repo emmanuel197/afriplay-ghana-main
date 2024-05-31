@@ -93,9 +93,9 @@ const clearStorage = async () => {
 export const initGetPurchases = (dispatch) => {
     // const cookies = new Cookies()
     // const user_info = cookies.get('user_info')
-    // const { operator_uid } = user_info.data.data
+    const { operator_uid } = user_info.data.data
 
-    const operator_uid = 'glotv'
+    // const operator_uid = 'glotv'
     const subscriber_uid = 'g08156676289'
 
     var config = {
@@ -134,8 +134,9 @@ export const fetchUserDevices = async () => {
 }
 
 export const initGetMessages = (dispatch) => {
-    const operator_uid = 'glotv'
-    const subscriber_uid = 'g08156676289'
+    const selectedOperator = window.localStorage.getItem("afri_selected_operator")
+    const operator_uid = JSON.parse(selectedOperator).operator_uid
+    const subscriber_uid = window.localStorage.getItem("afri_username")
 
     var config = {
         method: 'get',
@@ -153,7 +154,9 @@ export const initGetMessages = (dispatch) => {
 }
 
 export const initGetFAQs = (dispatch) => {
-    const operator_uid = 'glotv'
+    const selectedOperator = window.localStorage.getItem("afri_selected_operator")
+    const operator_uid = JSON.parse(selectedOperator).operator_uid
+    
 
     var config = {
         method: 'get',
@@ -198,7 +201,7 @@ export const updateProfile = (firstName, lastName) => {
 export const getProfile = async () => {
     let username = window.localStorage.getItem('afri_username')
     let { operator_uid, access_token } = user_info.data.data
-
+    console.log(access_token)
     const response = await axios.get(`https://tvanywhereonline.com/cm/api/subscriber/?operator_uid=${operator_uid}&subscriber_uid=${username}&limit=30`,
         {
             headers: {

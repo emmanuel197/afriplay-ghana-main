@@ -19,6 +19,7 @@ const fetchMovieSlice = createSlice({
     packageMovies: {},
     seriesInfo: {},
     moviesByCategories: [],
+    selectedMovie: [],
     error: false,
     loading: false,
     // loadingCategories: false,
@@ -83,9 +84,11 @@ const fetchMovieSlice = createSlice({
     },
     fetchBannerTrailer: (state, action) => {
       state.dynamicBannerTrailer = action.payload
+
     },
     fetchPackageMoviesReducer: (state, action) => {
       state.packageMovies = action.payload
+
     },
     fetchMoviesByCategory: (state, action) => {
       switch (action.payload.category) {
@@ -178,6 +181,11 @@ const fetchMovieSlice = createSlice({
       // state.loading = false;
       // state.error = true;
     },
+    selectedMovieReducer: (state, action) => {
+      state.selectedMovie = action.payload;
+      localStorage.setItem('selectedMovie', JSON.stringify(action.payload));
+      // state.error = true;
+    },
   }
 });
 
@@ -206,4 +214,5 @@ export const {
   fetchAgeRatingsReducer,
   fetchChannelCategoriesReducer,
   fetchAllSeriesReducer,
+  selectedMovieReducer,
 } = fetchMovieSlice.actions;

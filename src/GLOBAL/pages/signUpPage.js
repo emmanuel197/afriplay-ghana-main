@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { setDeviceInCookies } from "../constants/setDeviceInCookies"
 import { verifyUserData } from "../redux/auth"
 import { Link } from "react-router-dom"
+import Spinner from "../components/Spinner"
 import checkUserAllowed from "../../utils/checkUserAllowed"
 import Button from "../components/buttons/Button"
 import Footer from "../components/Footer"
@@ -12,12 +13,12 @@ import '../components/styles/auth.scss'
 
 const SignUpPage = () => {
   const navigate = useNavigate()
-  const { loading } = useSelector((state) => state.auth)
+  const { isLoading } = useSelector((state) => state.auth)
   const [email, setEmail] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
   const [password, setPassword] = useState(''); //new field for password
   const [rePassword, setRePassword] = useState(''); //confirmation of new password
-   
+
   // const [useMobileNumber, setuseMobileNumber] = useState(true)
   // const [hasSelectedNetworks, setHasSelectedNetworks] = useState(false)
 
@@ -66,6 +67,7 @@ const SignUpPage = () => {
       <Header links={1} signup={5} />
       <main>
         <wc-toast></wc-toast>
+        {isLoading && <Spinner />}
         <div className="auth">
           <div className="auth-wrapper">
             <div className="auth-container">
@@ -104,11 +106,11 @@ const SignUpPage = () => {
                 <div className="margin-bottom">
                   <small >
                     Already have an account? {" "}
-                    <Link to='/signin'>Sign in</Link>
+                    <Link className="sign-up-link" to='/signin'>Sign in</Link>
                   </small>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', userSelect: 'none' }}>
-                  <Button action={_initVerifyUserData} isDisabled={loading} label='Continue' />
+                  <Button action={_initVerifyUserData} isDisabled={isLoading} label='Continue' />
                 </div>
               </div>
             </div>
