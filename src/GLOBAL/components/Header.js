@@ -120,7 +120,7 @@ const Header = (prop) => {
                     >
                       ACCESS PACKS
                       <img
-                        style={{ width: "20px", height: "20%" }}
+                        style={{ width: "20px", height: "20%", filter: "invert(60%)" }}
                         src="/assets/svg/caret-down.svg"
                         alt="chevron icon"
                       />
