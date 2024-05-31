@@ -17,7 +17,7 @@ const BuyMovieButton = ({ _currency = 'USD', price }) => {
     const initPurchase = () => {
         handleFlutterPayment({
             callback: (response) => {
-                console.log(response);
+                // console.log(response);
                 closePaymentModal() // this will close the modal programmatically
             },
             onClose: () => { },
