@@ -10,7 +10,7 @@ const checkUserAllowed = async () => {
     try {
         const res = await axios.get('https://tvanywhereonline.com/cm/api/auth/', {
             headers: {
-                'Password': 'tva12345#',
+                'Password': process.env.REACT_APP_API_PASSWORD,
                 'Username': 'tva'
             }
         })

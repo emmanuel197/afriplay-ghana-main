@@ -50,8 +50,8 @@ export const fetchOneSeries = async (seriesId, dispatch) => {
         }
       }
     );
-    console.log(`seriesId: ${seriesId}`)
-    console.log('response_:', JSON.stringify(req.data.data, null, 2));
+    // console.log(`seriesId: ${seriesId}`)
+    // console.log('response_:', JSON.stringify(req.data.data, null, 2));
     dispatch(fetchOneSeriesReducer(req.data.data))
 
   } catch (e) {
@@ -218,7 +218,7 @@ export const fetchTrailer = async (id) => {
     // dispatch(fetchBannerTrailer(trailer.data.data.url))
 
     console.warn('TRAILER URL: ', id, window.location.pathname, trailer.data.data.url)
-    console.log(trailer.data.data.url)
+    // console.log(trailer.data.data.url)
 
     return trailer.data.data.url
   }
@@ -370,14 +370,14 @@ export const fetchMovie = async (dispatch) => {
       //   dispatch(fetchMovies_error());
       //   return;
       // }
-      console.log(`categories ${JSON.stringify(categories)}`)
+      // console.log(`categories ${JSON.stringify(categories)}`)
       let _packageNameToId = {};
 
       categories.data.data.map((item) => {
         return (_packageNameToId[item.uid] = item.id);
       })
 
-      console.log('_packageNameToId', _packageNameToId)
+      // console.log('_packageNameToId', _packageNameToId)
 
       let passInQuery = categories.data.data.map((item) => {
         return item.id;

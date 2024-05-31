@@ -275,7 +275,7 @@ const fetchUserAccount  = async (isPhoneNumber, mobileNumber, email, navigate) =
       subscriber_uid: subscriber_uid
     }
     });
-    console.log(`user account: ${fetchUserAccountRes.data.data}`)
+    // console.log(`user account: ${fetchUserAccountRes.data.data}`)
     if (fetchUserAccountRes.data.status === "ok") {
       if (fetchUserAccountRes.data.data.length === 0) {
         TOAST.error(`${ERROR_MESSAGES.AUTH.invalidAccount}`)

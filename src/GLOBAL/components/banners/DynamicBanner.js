@@ -141,7 +141,7 @@ const DynamicBanner = ({ showSlides = true }) => {
         window.addEventListener("scroll", handleScroll)
         return () => { window.removeEventListener("scroll", handleScroll) }
     }, [])
-    console.log(movieDetails.description)
+    // console.log(movieDetails.description)
     
     return (
         <section>

@@ -12,7 +12,7 @@ export const purchasePackage = async (product_id, subscriber_uid) => {
 
         // Request headers
         const headers = {
-            'Password': 'tva1234',
+            'Password': process.env.REACT_APP_API_PASSWORD,
             'Content-Type': 'application/json'
         };
 
@@ -20,7 +20,7 @@ export const purchasePackage = async (product_id, subscriber_uid) => {
         const body = {
             subscriber_uid: subscriber_uid,
             subscription_type: 'one-off',
-            bill: true,
+            bill: false,
             product_id: product_id,
             medium: 'web'
         };
@@ -50,7 +50,7 @@ export const fetchPurchaseHistory = async (dispatch, active) => {
 
         // Request headers
         const headers = {
-            'Password': 'tva1234',
+            'Password': process.env.REACT_APP_API_PASSWORD,
             'Content-Type': 'application/json'
         };
 
@@ -82,7 +82,7 @@ export const cancelSubscription = async (product_id) => {
 
         // Request headers
         const headers = {
-            'Password': 'tva1234',
+            'Password': process.env.REACT_APP_API_PASSWORD,
             'Content-Type': 'application/json'
         };
         
