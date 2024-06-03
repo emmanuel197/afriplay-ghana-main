@@ -12,6 +12,7 @@ import { fetchPurchaseHistory } from "../redux/subscriptionApis";
 import ReactPlayer from "react-player";
 import "../components/styles/WatchMovie.scss";
 
+
 const Watch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,7 +48,6 @@ const Watch = () => {
   };
 
   const initSendPlayLogs = async (x) => {
-    //* check if playtime is 60seconds (value is a multiple of 60)
     let remainder = x % 60;
     if (remainder === 0) sendPlayLogs(id, type, x);
   };
@@ -62,33 +62,26 @@ const Watch = () => {
     _secondsInt.replace(",", "");
     sendPlayLogs(id, type, _secondsInt);
     if (nextEpisodeId) setShowNextPopup(true);
-    // alert('movie ended')
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch purchase history
         await fetchPurchaseHistory(dispatch, 'Active');
-  
-        // Now premiumSub will have the correct value
+
         if (premiumSub) {
-          // Fetch video
           fetchMovieVideo(dispatch, id, type);
-          
         } else {
-          // console.log(typeof(JSON.parse(id)))
-          // Fetch trailer
-          const validId = !isNaN(+id) && id
+          const validId = !isNaN(+id) && id;
           const trailerData = await fetchTrailer(validId || selectedMovie || JSON.parse(localStorage.getItem('selectedMovie')));
-          // const trailerData = await fetchTrailer(type === "series" || "live" ? id : selectedMovie.id || JSON.parse(localStorage.getItem('selectedMovie')).id);
           setTrailer(trailerData);
+          
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     fetchData();
   }, [dispatch, id, type, premiumSub, selectedMovie]);
 
@@ -105,20 +98,12 @@ const Watch = () => {
     initFetchNextEpisodeInfo();
   }, [location.search]);
 
-  // useEffect(() => {
-  //   const initGetLengthWatched = async () => {
-  //     const _lengthWatched = await getLengthWatched(id, 'movie')
-  //     const lengthWatchedInFraction = (_lengthWatched / 100).toFixed(100) / 10
-  //     seek(lengthWatchedInFraction)
-  //   }
-  //   initGetLengthWatched()
-  // }, [id])
+  useEffect(() => {
+    if (location.state && location.state.trailer) {
+      setTrailer(location.state.trailer);
+    }
+  }, [location.state]);
 
-  // const seek = (_fraction) => {
-  //   _ref.current.seekTo(_fraction, 'fraction')
-  // }
-
-  // if(loading)return <Loader />
   return (
     <div className="watch-movie">
       <button onClick={() => navigate(-1)} className="sign-up">
@@ -127,7 +112,7 @@ const Watch = () => {
       <div className="watch-video">
         <ReactPlayer
           ref={_ref}
-          url={premiumSub ? video : trailer}
+          url={location.state?.trailer || (premiumSub ? video : trailer)}
           width="100vw"
           height="90vh"
           muted={false}

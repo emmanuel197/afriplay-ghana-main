@@ -1,50 +1,56 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AiTwotoneStar } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { AiFillCalendar } from "react-icons/ai";
 import { BsFillClockFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { fetchMovieDetails, fetchWatchlist, removeWatchlist, updateWatchlist } from "../../redux/fetchMoviesApi";
+import { fetchMovieDetails, fetchWatchlist, removeWatchlist, updateWatchlist, fetchTrailer } from "../../redux/fetchMoviesApi";
 import numToTime from "../../../utils/convertDate";
 import shareMovie from "../../../utils/share";
 import Loader from "../Loader";
 import "../styles/MovieDetails.scss";
 
+
 const MovieDetailsBanner = () => {
   const dispatch = useDispatch();
   let { id } = useParams();
-  const [watchlisted, setWatchlisted] = useState(true)
+  const navigate = useNavigate(); // Add this line
+  const [watchlisted, setWatchlisted] = useState(true);
   const { movieDetails, loading, watchlist } = useSelector((state) => state.fetchMovies);
 
-  // console.warn('movieDetails', movieDetails)
+  // Add this function
+  const handleWatchTrailer = async () => {
+    const trailerData = await fetchTrailer(movieDetails.id);
+    navigate(`/watch/movie/${movieDetails.uid}`, { state: { trailer: trailerData } });
+  };
 
   const toggleAddToWatchlist = (_action) => {
-    setWatchlisted(!watchlisted)
-    if (_action === 'add') updateWatchlist(movieDetails.id, 'movie', 0)
-    if (_action === 'remove') removeWatchlist(movieDetails.id, 'movie')
-  }
+    setWatchlisted(!watchlisted);
+    if (_action === 'add') updateWatchlist(movieDetails.id, 'movie', 0);
+    if (_action === 'remove') removeWatchlist(movieDetails.id, 'movie');
+  };
 
   useEffect(() => {
     const checkIsWatchlisted = () => {
-      let _ids = []
+      let _ids = [];
       for (let i = 0; i < watchlist.length; i++) {
         const element = watchlist[i];
-        _ids.push(element.movie_id)
+        _ids.push(element.movie_id);
       }
-      if (_ids.includes(movieDetails.id)) setWatchlisted(true)
-      else setWatchlisted(false)
-    }
-    checkIsWatchlisted()
-  }, [movieDetails.id, watchlist])
+      if (_ids.includes(movieDetails.id)) setWatchlisted(true);
+      else setWatchlisted(false);
+    };
+    checkIsWatchlisted();
+  }, [movieDetails.id, watchlist]);
 
   useEffect(() => {
-    fetchMovieDetails(dispatch, id)
-    fetchWatchlist(dispatch)
-  }, [dispatch, id])
+    fetchMovieDetails(dispatch, id);
+    fetchWatchlist(dispatch);
+  }, [dispatch, id]);
 
-  if (loading) return <Loader />
+  if (loading) return <Loader />;
 
   return (
     <div className="details-movie">
@@ -74,13 +80,9 @@ const MovieDetailsBanner = () => {
               </p>
               <p className="age restrictions">
                 <BsFillClockFill /> {numToTime(movieDetails)}
-                {/* <BsFillClockFill /> 1hr : 20mins */}
               </p>
             </div>
             <div className="watch-trailer-share">
-              {/* <BuyMovie _currency='USD' /> */}
-              {/* <BuyMovie _currency='NGN' /> */}
-              {/* <Link to={`/pay-per-view/${movieDetails.id}`} className="watch">BUY MOVIE</Link> */}
               <Link to={`/watch/movie/${movieDetails.uid}`} className="watch">WATCH MOVIE </Link>
               {!watchlisted ? <div onClick={() => toggleAddToWatchlist('add')} className="others">
                 ADD TO WATCHLIST
@@ -88,9 +90,9 @@ const MovieDetailsBanner = () => {
                 <div onClick={() => toggleAddToWatchlist('remove')} className="others">
                   REMOVE FROM WATCHLIST
                 </div>}
-              <Link to="" className="others">
+              <div onClick={handleWatchTrailer} className="others">
                 TRAILER
-              </Link>
+              </div>
               <div onClick={() => shareMovie(movieDetails)} className="others">
                 SHARE
               </div>
@@ -106,5 +108,4 @@ const MovieDetailsBanner = () => {
 };
 
 export default MovieDetailsBanner;
-
 // 4445 6910 0505 6735
