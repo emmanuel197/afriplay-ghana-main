@@ -72,6 +72,7 @@ const MovieCard = ({ movie, type }) => {
     );
 
     if (location === '/livetv' && type === 'livetv' && EPGInfo) {
+        // console.log(channelInfo.image_stores[0].id && channelInfo.image_stores[0].id)
         return (
             <div className="movie-card livetv-movie-card">
                 <Link to={`/watch/live/${channelInfo.uid}`}>
@@ -79,7 +80,7 @@ const MovieCard = ({ movie, type }) => {
                         <div className="poster-div">
                             {channelInfo.image_stores ? (
                                 <LazyLoadImage
-                                    src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${channelInfo.image_stores[0].id}?accessKey=WkVjNWNscFhORDBLCg==`}
+                                    src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${channelInfo.image_stores[0]?.id}?accessKey=WkVjNWNscFhORDBLCg==`}
                                     alt={movie.alt}
                                     width="100%"
                                     placeholder={<div className="poster-img-placeholder livetv-poster-img-placeholder"></div>}

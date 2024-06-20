@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { fetchGenreName, fetchGenres, fetchOneSeries, fetchSimilarMovies } from "../redux/fetchMoviesApi"
 import Button from "../components/buttons/Button"
-import OutlineButton from "../components/buttons/OutlineButton"
+// import OutlineButton from "../components/buttons/OutlineButton"
 import VerticalSliderCard from "../components/cards/VerticalSliderCard"
 import Header from "../components/Header"
 import AllMovies from "../components/home/sliders/ReelSlider"
@@ -73,7 +73,7 @@ const SeriesDetails = () => {
                             <small>{seriesInfo.user_rating}</small>
                         </div>
                         <div className="buttons">
-                            {activeSeasonEpisodes.length > 0 ? <Button label='PLAY' page={`/watch/series/${activeSeasonEpisodes[activeSeasonEpisodes.length - 1].id}`} /> : <></>}
+                            {activeSeasonEpisodes.length > 0 ? <Button  page={`/watch/series/${activeSeasonEpisodes[activeSeasonEpisodes.length - 1].id}`} label='PLAY'/> : <></>}
                             {/* <OutlineButton label='TRAILER' page='/' /> */}
                         </div>
                         <br />

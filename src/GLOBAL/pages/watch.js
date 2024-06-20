@@ -1,4 +1,4 @@
-import { createRef, useEffect, useState } from "react";
+import { useState, useEffect, createRef } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +11,9 @@ import {
 import { fetchPurchaseHistory } from "../redux/subscriptionApis";
 import ReactPlayer from "react-player";
 import "../components/styles/WatchMovie.scss";
-
+import ConnectionError from "../components/connectionError";
+import UnsubscribedUser from "../components/unsubscribedUser";
+import Spinner from "../components/Spinner";
 
 const Watch = () => {
   const navigate = useNavigate();
@@ -28,6 +30,9 @@ const Watch = () => {
   const [nextEpisodeInfo, setNextEpisodeInfo] = useState({});
   const [isLiveTv, setIsLiveTv] = useState(true);
   const [trailer, setTrailer] = useState("");
+  const [error, setError] = useState(null); // State to track errors
+  const [loading, setLoading] = useState(true); // State to track loading
+  const [retryTime, setRetryTime] = useState(0); // State to track retry time
 
   useEffect(() => {
     const route = location.pathname;
@@ -75,7 +80,6 @@ const Watch = () => {
           const validId = !isNaN(+id) && id;
           const trailerData = await fetchTrailer(validId || selectedMovie || JSON.parse(localStorage.getItem('selectedMovie')));
           setTrailer(trailerData);
-          
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -104,30 +108,64 @@ const Watch = () => {
     }
   }, [location.state]);
 
+  const handleStart = () => {
+    setLoading(false); // Video started, so stop showing the loading spinner
+    setRetryTime(0); // Reset retry time
+  };
+
+  const handleError = (error) => {
+    console.error('Error playing video:', error);
+    if (retryTime < 5000) { // Retry up to 10 seconds
+      setRetryTime(prevTime => prevTime + 1000); // Increment retry time
+      setLoading(true);
+      setError(null); // Clear any existing error
+      
+    } else {
+      setError('An error occurred while trying to play the video. Please try again later.');
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="watch-movie">
       <button onClick={() => navigate(-1)} className="sign-up">
         Back
       </button>
+
       <div className="watch-video">
-        <ReactPlayer
-          ref={_ref}
-          url={location.state?.trailer || (premiumSub ? video : trailer)}
-          width="100vw"
-          height="90vh"
-          muted={false}
-          autoPlay={true}
-          playing={true}
-          volume={1}
-          controls={isLiveTv ? false : true}
-          onProgress={setProgressInMs}
-          onPlay={initUpdateWatchlist}
-          onBufferEnd={initUpdateWatchlist}
-          onEnded={onMovieEnd}
-          onPause={initUpdateWatchlist}
-          onSeek={initUpdateWatchlist}
-          onStart={initUpdateWatchlist}
-        />
+        {loading && !error && (
+          <div className="loading-spinner">
+            {/* You can use any loading spinner component or image */}
+            <Spinner/>
+          </div>
+        )}
+        {error ? (
+          <ConnectionError />
+        ) : (
+          (type === "live" && !premiumSub) ? (
+            <UnsubscribedUser />
+          ) : (
+            <ReactPlayer
+              ref={_ref}
+              url={location.state?.trailer || (premiumSub ? video : trailer)}
+              width="100vw"
+              height="90vh"
+              muted={false}
+              autoPlay={true}
+              playing={true}
+              volume={1}
+              controls={isLiveTv ? false : true}
+              onProgress={setProgressInMs}
+              onPlay={initUpdateWatchlist}
+              onBufferEnd={initUpdateWatchlist}
+              onEnded={onMovieEnd}
+              onPause={initUpdateWatchlist}
+              onSeek={initUpdateWatchlist}
+              onStart={handleStart}
+              onError={handleError} // Error handling callback
+            />
+          )
+        )}
 
         {showNextPopup && nextEpisodeInfo.title ? (
           <div className="next-popup-wrapper">
@@ -147,12 +185,11 @@ const Watch = () => {
               </span>
             </div>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
     </div>
   );
 };
 
 export default Watch;
+

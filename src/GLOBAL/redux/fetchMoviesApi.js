@@ -960,12 +960,14 @@ export const fetchMovieVideo = (dispatch, id, type) => {
 
   axios(config)
     .then(async (response) => {
-      sendPlayLogs(id, type, 0)
+      // sendPlayLogs(id, type, 0)
       dispatch(fetchMovieVideo_success(response.data.data));
+      console.log(`.then: ${JSON.stringify(response.data.data)}`)
     })
     .catch(e => {
-      console.error(e.message)
-      dispatch(fetchMovieVideo_success({ url: '' }));
+      // console.error(e.message)
+      // dispatch(fetchMovieVideo_success({ url: '' }));
+      // console.log(`.catch: ${e.message}`)
       // dispatch(fetchMovieVideo_error());
     });
 }

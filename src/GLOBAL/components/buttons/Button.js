@@ -3,7 +3,7 @@ import "../../components/styles/buttons.scss";
 import { selectedMovieReducer } from "../../redux/slice/moviesSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { playIcon } from "../../../utils/assets";
+import { playIcon, active } from "../../../utils/assets";
 
 const Button = ({ label, action, page, isDisabled = false, selectedMovie }) => {
   const dispatch = useDispatch();

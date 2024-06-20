@@ -201,7 +201,7 @@ export const updateProfile = (firstName, lastName) => {
 export const getProfile = async () => {
     let username = window.localStorage.getItem('afri_username')
     let { operator_uid, access_token } = user_info.data.data
-    console.log(access_token)
+    // console.log(access_token)
     const response = await axios.get(`https://tvanywhereonline.com/cm/api/subscriber/?operator_uid=${operator_uid}&subscriber_uid=${username}&limit=30`,
         {
             headers: {
