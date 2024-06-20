@@ -50,6 +50,7 @@ const Watch = () => {
     setLengthWatchedInMs(_lengthWatchedInMs);
     initSendPlayLogs(e.playedSeconds.toFixed(0));
     setSecondsPlayed(e.playedSeconds.toFixed(0));
+    setLoading(false)
   };
 
   const initSendPlayLogs = async (x) => {
