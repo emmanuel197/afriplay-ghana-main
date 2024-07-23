@@ -214,7 +214,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                               : `/watch/movie/${selectedMovie.uid}`
                           }
                           selectedMovie={selectedMovie.id}
-                          label="Watch"
+                          label="WATCH MOVIE"
                           className="landing-page-dynamic-btns"
                         />
                         <Button
