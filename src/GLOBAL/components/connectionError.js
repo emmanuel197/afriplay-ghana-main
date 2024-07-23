@@ -19,7 +19,6 @@ const ConnectionError = ({ onReload }) => {
       />
       <p className="error-text">Connection Error</p>
       <div className="error-button-wrapper"><Button action={() => redirect()} label="Tap to Reload" /></div>
-        
     </div>
   );
 };

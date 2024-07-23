@@ -11,7 +11,7 @@ const ReelSlider = ({ type, filteredMovies = [] }) => {
     const [premiereMovies, setPremiereMovies] = useState([])
     const [liveMovies, setLiveMovies] = useState([])
     const [loading, setLoading] = useState(true)
-
+    console.log(filteredMovies)
     useEffect(() => {
 
         const filterPremiereLive = async () => {
@@ -29,7 +29,7 @@ const ReelSlider = ({ type, filteredMovies = [] }) => {
                 if (_movie.type === 'series') movieInfo = await returnOneSeries(_movie.id)
                 else if (_movie.type === 'movie') movieInfo = await returnMovieDetails(_movie.id)
 
-                const movieType = movieInfo.metadata.movie_type
+                const movieType = movieInfo?.metadata.movie_type
 
                 if (movieType === 'live') _liveMovies.push(_movie)
                 else if (movieType === 'premiere') _premiereMovies.push(_movie)

@@ -10,7 +10,7 @@ const ReelGenreWrapper = ({ allMovies, movies, title }) => {
 
     processLog(`seriesOnly: ${seriesOnly}`)
     processLog(`moviesOnly: ${moviesOnly}`)
-
+    
     useEffect(() => {
         const filterVOD = () => {
             setLoading(true)
@@ -31,6 +31,7 @@ const ReelGenreWrapper = ({ allMovies, movies, title }) => {
             })
 
             setSeriesOnly(_series)
+            console.log(_movies)
             setMoviesOnly(_movies)
             setLoading(false)
         }
@@ -38,7 +39,7 @@ const ReelGenreWrapper = ({ allMovies, movies, title }) => {
         if (movies && movies.length > 0) filterVOD()
 
     }, [movies])
-
+    
     return (
         <SliderWrapper title={title}>
             <ReelSlider filteredMovies={window.location.pathname === '/series' ? seriesOnly : moviesOnly} />

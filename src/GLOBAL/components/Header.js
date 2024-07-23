@@ -116,7 +116,7 @@ const Header = (prop) => {
                   <div className="dropdown">
                     <button
                       onClick={() => setShowAccessDropdown(!showAccessDropdown)}
-                      className="dropdown-toggler"
+                      className="dropdown-toggler access-packs"
                     >
                       ACCESS PACKS
                       <img
@@ -206,6 +206,11 @@ const Header = (prop) => {
                     <Link to="/signin" className="sign-in">
                       <div>
                         <p>SIGN IN</p>
+                      </div>
+                    </Link>
+                    <Link to="/subscriptions" className="access-packs">
+                      <div>
+                        <p>ACCESS PACKS</p>
                       </div>
                     </Link>
                   </>

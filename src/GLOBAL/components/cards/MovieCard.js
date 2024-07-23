@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { fetchChannelInfo } from "../../redux/channels";
 import getEPGInfo from "../../../utils/getEPGInfo";
 import "../../components/styles/landing/slides.scss";
@@ -10,7 +10,7 @@ import ReactPlayer from 'react-player';
 import { fetchTrailer } from "../../redux/fetchMoviesApi";
 
 const MovieCard = ({ movie, type }) => {
-    const location = window.location.pathname;
+    const location = useLocation();
     const dispatch = useDispatch();
     const [channelInfo, setChannelInfo] = useState({});
     const [EPGInfo, setEPGInfo] = useState({ start: '00:00', end: '00:00', title: '' });
@@ -42,8 +42,8 @@ const MovieCard = ({ movie, type }) => {
     const MovieCardComponent = () => (
         <div 
             className="movie-card" 
-            onMouseEnter={() => setIsHovering(true)} 
-            onMouseLeave={() => setIsHovering(false)}
+            onMouseEnter={() => location.pathname !== "/" && setIsHovering(true)} 
+            onMouseLeave={() => location.pathname !== "/" && setIsHovering(false)}
         >
             <Link to={movie.type === 'series' ? `/series/${movie.id}` : `/movie/${movie.id}`}>
                 <div className="movie-box">

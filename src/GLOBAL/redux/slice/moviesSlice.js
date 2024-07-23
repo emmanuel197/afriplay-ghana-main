@@ -121,16 +121,18 @@ const fetchMovieSlice = createSlice({
     },
     fetchMovies_success: (state, action) => {
       // state.loading = true
-
-      state.movies = action.payload.movies.length > 0 ? action.payload.movies : []
+      console.log(action.payload.trending?.length)
+      const trending = action.payload.trending[0]["content"] || action.payload.trending
+      const recentlyadded =action.payload.recentlyadded[0]["content"] || action.payload.recentlyadded
+      state.movies = action.payload.movies?.length > 0 ? action.payload.movies : []
       // state.afriPremiereexclusive = action.payload.afriPremiereexclusive.length > 0 ? action.payload.afriPremiereexclusive : []
-      state.mostwatched = action.payload.mostwatched.length > 0 ? action.payload.mostwatched[0]["content"] : []
-      state.comingSoon = action.payload.comingSoon.length > 0 ? action.payload.comingSoon[0]["content"] : []
-      state.trending = action.payload.trending.length > 0 ? action.payload.trending[0]["content"] : []
-      state.afriplaytop10 = action.payload.afriplaytop10.length > 0 ? action.payload.afriplaytop10[0]["content"] : []
-      state.recentlyadded = action.payload.recentlyadded.length > 0 ? action.payload.recentlyadded[0]["content"] : []
-      state.afriPlaylive = action.payload.afriPlaylive.length > 0 ? action.payload.afriPlaylive[0]["content"] : []
-      state.afriPremiere = action.payload.afriPremiere.length > 0 ? action.payload.afriPremiere[0]["content"] : []
+      state.mostwatched = action.payload.mostwatched?.length > 0 ? action.payload.mostwatched[0]["content"] : []
+      state.comingSoon = action.payload.comingSoon?.length > 0 ? action.payload.comingSoon[0]["content"] : []
+      state.trending = action.payload.trending.length > 0 ? trending : []
+      state.afriplaytop10 = action.payload.afriplaytop10?.length > 0 ? action.payload.afriplaytop10[0]["content"] : []
+      state.recentlyadded = action.payload.recentlyadded.length > 0 ? recentlyadded : []
+      state.afriPlaylive = action.payload.afriPlaylive?.length > 0 ? action.payload.afriPlaylive[0]["content"] : []
+      state.afriPremiere = action.payload.afriPremiere?.length > 0 ? action.payload.afriPremiere[0]["content"] : []
 
       state.nameToId = action.payload.packageNameToId
       state.moviesByCategories = action.payload.moviesByCategories

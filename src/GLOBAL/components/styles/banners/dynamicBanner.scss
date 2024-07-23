@@ -69,6 +69,7 @@
             height: 100%;
             display: flex;
             align-items: center;
+            
             // justify-content: center;
             max-width: 1000px;
             // background: green;
@@ -78,7 +79,9 @@
                 padding: 20px;
                 // background: red;
                 max-width: 500px;
-
+                &.landing-content-padding {
+                    padding-left: 3rem;
+                }
                 h1 {
                     text-align: left;
                     // font-family: 'Open Sans';
@@ -110,11 +113,20 @@
                 .hero-buttons {
                     display: flex;
                     margin-top: 30px;
+                    &.landing-dynamic-banner {
+                        justify-content: flex-start;
+                        gap: 10px;
 
+                        .landing-page-dynamic-btns:not(:first-child) {
+                            background-color: #000000;
+                            color: $tertiary_color;
+                        }
+                    }
                     .outline-btn:nth-child(2) {
                         margin-left: 10px;
                     }
                 }
+                
             }
         }
 
@@ -278,5 +290,30 @@
 @media screen and (max-width: 768px) {
     .hero-slider-container {
         display: none;
+    }
+}
+
+.hero-app-links-wrapper {
+    display: flex;
+    padding-left: 3rem;
+    padding-bottom: 0.5rem;
+    justify-content: flex-start;
+    gap: 10px;
+    .hero-app-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        a {
+        text-decoration: none;
+        color: $tertiary_color;
+            font-size: 20px;
+            line-height: 20px;
+        }
+        .hero-app-link-img {
+            margin-right: 0.5rem;
+            height: 30px;
+            width: 30px;
+        }
+        
     }
 }

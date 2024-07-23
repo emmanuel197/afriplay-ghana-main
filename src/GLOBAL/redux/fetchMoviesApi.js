@@ -860,10 +860,11 @@ export const returnMovieOrSeriesDetails = async (id, type) => {
         }
       }
     );
-
+    console.log(movie.data.data)
     if (movie.data.status === "error") return;
 
     if (movie.data.status === "ok") return movie.data.data
+
 
   } catch (error) {
     console.log(error)
@@ -1188,3 +1189,57 @@ export const fetchBannerContent = async (type) => {
     console.error(`banner response`, e.message)
   }
 }
+
+export const fetchLandingBanners = async () => {
+  
+  const response = await axios.get(
+    `https://tvanywhereonline.com/cm/api/client/?operator_uid=afriplaymtnghana&mode=web`  
+  )
+
+  // console.log(response.data.data.landing_page)
+  const landingPageData = response.data.data.landing_page
+  const landingPageBanners = landingPageData.banners
+  const randomBanner = landingPageBanners[Math.round(Math.random() * landingPageBanners.length)]
+  return randomBanner 
+}
+
+export const fetchTrendingAndRecentlyAddedMovies = async (dispatch) => {
+  // dispatch(fetchMovies_begin());
+
+  try {
+    // Fetch packages and categories
+    const response = await axios.get(
+      `https://tvanywhereonline.com/cm/api/client/?operator_uid=afriplaymtnghana&mode=web`
+    );
+
+    if (response.data.status === "ok") {
+      const categories = response.data.data.landing_page.categories;
+      
+      const trendingCategory = categories.find(category => category.uid === "trending");
+      const recentlyAddedCategory = categories.find(category => category.uid === "recentlyadded");
+
+      if (trendingCategory && recentlyAddedCategory) {
+        // const trendingMovies = trendingCategory.content;
+        const trending = trendingCategory.content;
+        // const recentlyAddedMovies = recentlyAddedCategory.content;
+        const recentlyadded = recentlyAddedCategory.content;
+        console.log(trending)
+        dispatch(
+          fetchMovies_success({
+            // trendingMovies,
+            trending : trending || [],
+            recentlyadded: recentlyadded || []
+            // recentlyAddedMovies
+          })
+        );
+      } else {
+        dispatch(fetchMovies_error());
+      }
+    } else {
+      dispatch(fetchMovies_error());
+    }
+  } catch (error) {
+    dispatch(fetchMovies_error());
+    console.error(error);
+  }
+};
