@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { redirect } from "react-router-dom";
 
 const authSlice = createSlice({
   name: 'auth',
@@ -6,6 +7,7 @@ const authSlice = createSlice({
   initialState: {
     isAuthenticated: false,
     // token: null,
+    redirectTo: null,
     isValid: false,
     isLoading: false
   },
@@ -20,6 +22,10 @@ const authSlice = createSlice({
     isAuthenticatedReducer: (state, action) => {
       state.isAuthenticated = action.payload
       window.localStorage.setItem('isAuthenticated', JSON.stringify(action.payload));
+    },
+    redirectReducer: (state, action) => {
+      state.redirectTo = action.payload
+      window.localStorage.setItem('redirectTo', JSON.stringify(action.payload));
     }
   },
 
@@ -29,7 +35,8 @@ export default authSlice.reducer;
 export const { 
   isValidReducer,
   isLoadingReducer,
-  isAuthenticatedReducer
+  isAuthenticatedReducer,
+  redirectReducer
 } = authSlice.actions
 
 // const authSlice = createSlice({

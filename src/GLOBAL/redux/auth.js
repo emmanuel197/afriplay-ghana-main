@@ -250,7 +250,8 @@ export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password)
       await sendLog({ action: 'login' })
       store.dispatch(isAuthenticatedReducer(true))
       store.dispatch(isLoadingReducer(false))
-      window.location.href = '/home'
+      // window.location.href = '/home'
+      return true;
     }
  }
 

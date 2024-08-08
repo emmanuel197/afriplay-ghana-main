@@ -85,8 +85,8 @@
   }
 }
 
-#cancelBtn {
-  background-color: $kinder_color;
+.cancelBtn {
+  background-color: $kinder_color !important;
 
   &:hover {
     transition: all ease 1s;

@@ -14,7 +14,8 @@ const SubscriptionCard = (subscription) => {
     const dispatch = useDispatch()
     
     const _initPurchasePackage = () => {
-      dispatch(subscriptionModalReducer({ isOpen: true, productId: ID }))
+
+      dispatch(subscriptionModalReducer({ isOpen: true, productId: ID, productName: Name, productPrice: Price, currency: Currency }))
     }
     
     return (

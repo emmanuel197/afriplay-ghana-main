@@ -5,6 +5,8 @@ const fetchPackageSlice = createSlice({
     isLoading: false,
     modalOpen: false,
     productId: null,
+    productName: null,
+    productPrice: null,
     paymentInitiated: false,
     purchaseHistory: null,
     isChecked: false,
@@ -23,6 +25,18 @@ const fetchPackageSlice = createSlice({
           if (action.payload.hasOwnProperty('productId')) {
             // Check if subscriptionId property exists in payload
             state.productId = action.payload.productId;
+          }
+          if (action.payload.hasOwnProperty('productName')) {
+            // Check if subscriptionId property exists in payload
+            state.productName = action.payload.productName;
+          }
+          if (action.payload.hasOwnProperty('productPrice')) {
+            // Check if subscriptionId property exists in payload
+            state.productPrice = action.payload.productPrice;
+          }
+          if (action.payload.hasOwnProperty('currency')) {
+            // Check if subscriptionId property exists in payload
+            state.currency = action.payload.currency;
           }
     },
     paymentInitiatedReducer: (state, action) => {

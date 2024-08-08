@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllSeries,
@@ -58,6 +58,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
   const [genreName, setGenreName] = useState("");
   const [trailer, setTrailer] = useState("");
   const { recentlyadded, genres } = useSelector((state) => state.fetchMovies);
+  const movieDetailsFetched = useRef(false); // Track if movie details have been fetched
   const slides = useMemo(
     () => fetchDataForBannerSlider(recentlyadded),
     [recentlyadded]
@@ -131,48 +132,60 @@ const DynamicBanner = ({ showSlides = true, className }) => {
   // fetchLandingBanners()
   useEffect(() => {
     const initSetMovieDetails = async () => {
-      const _movie = await returnMovieOrSeriesDetails(
-        selectedMovie.id,
-        "movie"
-      );
+      if (selectedMovie && selectedMovie.id && !movieDetailsFetched.current) {
+        const _movie = await returnMovieOrSeriesDetails(
+          selectedMovie.id,
+          "movie"
+        );
 
-      setMovieDetails(
-        ["/movies", "/home"].includes(location.pathname)
-          ? _movie
-          : selectedMovie
-      );
+         setMovieDetails(
+          ["/movies", "/home"].includes(location.pathname)
+            ? _movie
+            : selectedMovie
+        );
 
-      setTrailer(
-        await fetchTrailer(
-          location.pathname === "/series"
-            ? selectedMovie.seasons[0].episodes[0].id
-            : selectedMovie.id
-        )
-      );
+        setTrailer(
+          await fetchTrailer(
+            location.pathname === "/series"
+              ? selectedMovie.seasons[0].episodes[0].id
+              : selectedMovie.id
+          )
+        );
+
+        movieDetailsFetched.current = true; // Mark as fetched
+      }
     };
-    const initFetchBannerContent = async () => {
-      const bannerContent = await fetchLandingBanners();
-      console.warn(bannerContent);
-      setBannerContent(bannerContent);
-    };
-    if (location.pathname === "/") initFetchBannerContent();
-    if (["/series", "/movies", "/home"].includes(location.pathname))
+
+    if (["/series", "/movies", "/home"].includes(location.pathname)) {
       initSetMovieDetails();
-  }, [location.pathname, selectedMovie.id]);
+    }
+  }, [location.pathname, selectedMovie]);
 
   useEffect(() => {
     const handleScroll = (event) => {
       if (window.scrollY < 350) setPlayTrailer(true);
       else setPlayTrailer(false);
     };
-
+    
+  
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  console.log(movieDetails);
-  console.log(selectedMovie.id);
+
+  useEffect(() => {
+    const initFetchBannerContent = async () => {
+      const bannerContent = await fetchLandingBanners();
+      console.warn(bannerContent);
+      setBannerContent(bannerContent); // Set the banner content once
+    };
+    
+    if (location.pathname === "/") initFetchBannerContent();
+  }, [location.pathname]);
+  // console.log(movieDetails);
+  // console.log(selectedMovie.id);
+  // console.log(bannerContent);
   return (
     <section>
       <div className="hero" onClick={() => setShowTitle(true)}>
@@ -182,12 +195,12 @@ const DynamicBanner = ({ showSlides = true, className }) => {
               <div className={`hero-content ${window.location.pathname === "/" && 'landing-content-padding'}`}>
                 <h1>
                   {location.pathname === "/"
-                    ? bannerContent.title
+                    ? bannerContent?.title
                     : movieDetails.title}
                 </h1>
                 <p className="lines-max-4">
                   {location.pathname === "/"
-                    ? bannerContent.description
+                    ? bannerContent?.description
                     : movieDetails.description}
                 </p>
                 {/* <div className="cast">
@@ -398,13 +411,13 @@ const DynamicBanner = ({ showSlides = true, className }) => {
           muted={isMuted}
           bannerImg={
             location.pathname === "/"
-              ? bannerContent.banner_image_url
+              ? bannerContent.banner_image_id
               : window.location.pathname === "/series" && selectedMovie.images
               ? selectedMovie.images.POSTER
               : selectedMovie.image_id
           }
           _trailer={
-            location.pathname === "/" ? bannerContent.video_url : trailer
+            location.pathname === "/" ? bannerContent?.video_url : trailer
           }
           _onPlayTrailer={isPlayingTrailer}
           _bannerContent={

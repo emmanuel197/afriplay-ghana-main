@@ -48,6 +48,7 @@ const fetchMovieSlice = createSlice({
 
     comingSoon: [],
     trending: [],
+    bingeworthy: [],
     afriplaytop10: [],
     afriPlaylive: [],
     afriPremiere: [],
@@ -121,13 +122,15 @@ const fetchMovieSlice = createSlice({
     },
     fetchMovies_success: (state, action) => {
       // state.loading = true
-      console.log(action.payload.trending?.length)
+      // console.log(action.payload.bingeworthy)
       const trending = action.payload.trending[0]["content"] || action.payload.trending
       const recentlyadded =action.payload.recentlyadded[0]["content"] || action.payload.recentlyadded
+      const bingeworthy = action.payload.bingeworthy && action.payload.bingeworthy[0]["content"] || action.payload.bingeworthy
       state.movies = action.payload.movies?.length > 0 ? action.payload.movies : []
       // state.afriPremiereexclusive = action.payload.afriPremiereexclusive.length > 0 ? action.payload.afriPremiereexclusive : []
       state.mostwatched = action.payload.mostwatched?.length > 0 ? action.payload.mostwatched[0]["content"] : []
       state.comingSoon = action.payload.comingSoon?.length > 0 ? action.payload.comingSoon[0]["content"] : []
+      state.bingeworthy = action.payload.bingeworthy?.length > 0 ? bingeworthy : []
       state.trending = action.payload.trending.length > 0 ? trending : []
       state.afriplaytop10 = action.payload.afriplaytop10?.length > 0 ? action.payload.afriplaytop10[0]["content"] : []
       state.recentlyadded = action.payload.recentlyadded.length > 0 ? recentlyadded : []

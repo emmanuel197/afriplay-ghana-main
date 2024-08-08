@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { setDeviceInCookies } from "../constants/setDeviceInCookies"
 import { LoginUnicast } from "../redux/auth"
 import { Link } from "react-router-dom"
@@ -13,8 +13,9 @@ import '../components/styles/auth.scss'
 
 const SignInPage = () => {
   const navigate = useNavigate()
-  const { isLoading } = useSelector((state) => state.auth)
-  // const { loading } = useSelector((state) => state.auth)
+  const location = useLocation();
+  const { isLoading, redirectTo } = useSelector((state) => state.auth)
+  
   const [email, setEmail] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
   const [password, setPassword] = useState(''); //new field for password
@@ -32,9 +33,22 @@ const SignInPage = () => {
   }, [navigate])
 
   //renamed func from _initVerifyMSISDN to _initVerifyUserData
-  const _initLoginUnicast = () => {
-    LoginUnicast(true, mobileNumber, email, password) //renamed func from verifyMSISDN to verifyUserData
-  }
+  // const _initLoginUnicast = () => {
+  //   LoginUnicast(true, mobileNumber, email, password) //renamed func from verifyMSISDN to verifyUserData
+  // }
+
+  // Renamed func from _initVerifyMSISDN to _initLoginUnicast
+  const _initLoginUnicast = async () => {
+    const success = await LoginUnicast(true, mobileNumber, email, password); // Renamed func from verifyMSISDN to verifyUserData
+    if (success) {
+      const redirectLink = redirectTo || '/home';
+      console.log(redirectTo) 
+      window.location.href = redirectLink;
+    }
+  };
+
+  console.log(redirectTo)
+  // console.log(location.state.redirectTo)
 
   const handleMobileNumberInput = e => {
     const text = e.target.value

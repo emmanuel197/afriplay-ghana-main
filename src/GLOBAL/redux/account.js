@@ -87,7 +87,7 @@ const clearStorage = async () => {
     cookies.remove('device_info')
     cookies.remove('device')
     cookies.remove('afri_msisdn')
-    window.location.href = '/signup'
+    window.location.href = '/'
 }
 
 export const initGetPurchases = (dispatch) => {

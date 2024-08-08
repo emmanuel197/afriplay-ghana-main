@@ -44,39 +44,51 @@
 
 .subscriptions-container {
   height: auto;
-  padding: 0 10vw;
+  padding: 0 5vw;
   display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  color:#fff;
+  flex-wrap: wrap;
+  // justify-items: center;
+  align-items: center;
+  justify-content: center !important;
+  gap: 30px;
+  // grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  color: #fff;
   margin-bottom: 40px;
-  @media only screen and (max-width: 200px) {
-    padding: 0 5vw;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1240px;
+
+  @media only screen and (max-width: 1000px) {
+    padding: 0 3vw;
   }
 
+  @media only screen and (max-width: 600px) {
+    padding: 0 2vw;
+  }
+  
+
   .subscription-card {
-    flex: 0 0 auto;
-    margin-right: 30px;
+    
     background-color: $kinder_color;
     border-radius: 10px;
-    width: 250px;
+    width: 270px;
     padding-bottom: 20px;
     height: 100%;
 
     @media only screen and (max-width: 300px) {
       width: 80vw;
-      margin-right: 20px;
+      // margin-right: 20px;
       // height: 100%;
     }
 
     @media only screen and (max-width: 200px) {
       width: 90vw;
-      margin-right: 5px;
+      // margin-right: 5px;
     }
     &:hover{
         transition: all 1s;
         background-color: #000;
-        outline: 1px solid #c4bd47;
+        border: 1px solid #c4bd47;
       
     }
     .plan-name {

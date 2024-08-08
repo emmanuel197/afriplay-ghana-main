@@ -50,6 +50,7 @@ const Landing = () => {
         <DynamicBanner showSlides={false} className="landing-dynamic-banner" />
         <Reel title='TRENDING' />
         <Reel title='RECENTLY ADDED' />
+        <Reel title='BINGE WORTHY' />
         {/* <Banner isAuthenticated={isAuthenticated}/> */}
         {/* <Devices /> */}
         {/* <DataFriendly /> */}

@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { returnMovieDetails } from "../../redux/fetchMoviesApi"
+import { useSelector } from "react-redux"
 // import "../../components/styles/landing/slides.scss"
 
 const WatchlistMovieCard = ({ movie }) => {
     const [movieDetails, setMovieDetails] = useState({})
-
+    const {isAuthenticated} = useSelector(state => state.auth)
+    // const isAuth = isAuthenticated || JSON.parse(window.localStorage.getItem("isAuthenticated")) ;
     useEffect(() => {
         const _getMovieDetails = async () => {
             const _movieDetails = await returnMovieDetails(movie.movie_id)
             setMovieDetails(_movieDetails)
         }
+        // isAuth && 
         _getMovieDetails()
     }, [movie.movie_id])
 

@@ -13,7 +13,7 @@ import { errorLog } from "../logger";
 import { COOKIES } from "../../utils/constants";
 
 const user_info = COOKIES.get("user_info");
-
+console.log(user_info)
 const Header = (prop) => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -116,14 +116,14 @@ const Header = (prop) => {
                   <div className="dropdown">
                     <button
                       onClick={() => setShowAccessDropdown(!showAccessDropdown)}
-                      className="dropdown-toggler access-packs"
+                      className="dropdown-toggler"
                     >
                       ACCESS PACKS
-                      <img
+                      {/* <img
                         style={{ width: "20px", height: "20%", filter: "invert(60%)" }}
                         src="/assets/svg/caret-down.svg"
                         alt="chevron icon"
-                      />
+                      /> */}
                     </button>
                     {showAccessDropdown && (
                       <ul

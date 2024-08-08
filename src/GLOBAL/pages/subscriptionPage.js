@@ -57,8 +57,8 @@ const scrollPrevious = () => {
           
          
         
-          <button className="pre-btn" onClick={scrollPrevious}><img src={arrowImg} alt="prev" style={{color: '#C4BD47'}}/></button>
-          <button className="nxt-btn" onClick={scrollNext}><img src={arrowImg} alt="next" style={{color: '#C4BD47'}}/></button>
+          {/* <button className="pre-btn" onClick={scrollPrevious}><img src={arrowImg} alt="prev" style={{color: '#C4BD47'}}/></button> */}
+          {/* <button className="nxt-btn" onClick={scrollNext}><img src={arrowImg} alt="next" style={{color: '#C4BD47'}}/></button> */}
           <div className="subscriptions-container" ref={subscriptionsContainerRef}>
           {subscriptions.map((subscription, index) => (
             <SubscriptionCard key={index} subscription={subscription}/>

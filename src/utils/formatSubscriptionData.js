@@ -2,9 +2,9 @@
 
 const SubscriptionsData = [
   {
-    ID: 1079,
+    ID: { "auto-renewal": 1079, "on-demand": 1081 },
     UID: "basic",
-    Name: "BASIC",
+    Name: "Daily Live",
     "Price Options": "daily",
     Validity: "1 day",
     "Rate Code": 9921710002,
@@ -12,55 +12,63 @@ const SubscriptionsData = [
     Price: 2.0,
     Currency: "GHS",
     DataBonus: "200 MB",
-    Details: ["Daily unlimited access", `Rentals
-      (TVOD)` , `200Mb data bonus`]
+    Details: [
+      "Daily unlimited access",
+      `Rentals
+      (TVOD)`,
+      `200Mb data bonus`
+    ]
   },
   {
-    ID: 1080,
+    ID: { "auto-renewal": 1080, "on-demand": 1082 },
     UID: "basicplus",
-    Name: "BASIC+",
+    Name: "Daily Cinema",
     "Price Options": "daily",
     Validity: "1 day",
     "Rate Code": 9921710003,
     "Plan ID": 1080,
-    Price: 2.0,
+    Price: 2.5,
     Currency: "GHS",
     DataBonus: "320 MB",
-    Details: [`Daily unlimited access`, `Rentals
-    (TVOD)` , `200Mb data bonus`]
+    Details: [
+      `Daily unlimited access`,
+      `Rentals
+    (TVOD)`,
+      `200Mb data bonus`
+    ]
   },
+  // {
+  //   ID: 1081,
+  //   UID: "basicod",
+  //   Name: "BASIC ON DEMAND",
+  //   "Price Options": "daily",
+  //   Validity: "1 day",
+  //   "Rate Code": 9921710008,
+  //   "Plan ID": 1081,
+  //   Price: 2.0,
+  //   Currency: "GHS",
+  //   DataBonus: "200 MB",
+  //   Details: ["Daily unlimited access", `Rentals
+  //     (TVOD)` , `200Mb data bonus`]
+  // },
+  // {
+  //   ID: 1082,
+  //   UID: "basicplusod",
+  //   Name: "BASIC+ ON DEMAND",
+  //   "Price Options": "daily",
+  //   Validity: "1 day",
+  //   "Rate Code": 9921710009,
+  //   "Plan ID": 1082,
+  //   Price: 2.00,
+  //   Currency: "GHS",
+  //   DataBonus: "320 MB",
+  //   Details: [`Daily unlimited access`, `Rentals
+  //   (TVOD)` , `200Mb data bonus`]
+  // },
   {
-    ID: 1081,
-    UID: "basicod",
-    Name: "BASIC ON DEMAND",
-    "Price Options": "daily",
-    Validity: "1 day",
-    "Rate Code": 9921710008,
-    "Plan ID": 1081,
-    Price: 2.0,
-    Currency: "GHS",
-    DataBonus: "200 MB",
-    Details: ["Daily unlimited access", `Rentals
-      (TVOD)` , `200Mb data bonus`]
-  },
-  {
-    ID: 1082,
-    UID: "basicplusod",
-    Name: "BASIC+ ON DEMAND",
-    "Price Options": "daily",
-    Validity: "1 day",
-    "Rate Code": 9921710009,
-    "Plan ID": 1082,
-    Price: 2.00,
-    Currency: "GHS",
-    DataBonus: "320 MB",
-    Details: [`Daily unlimited access`, `Rentals
-    (TVOD)` , `200Mb data bonus`]
-  },
-  {
-    ID: 1083,
+    ID: { "auto-renewal": 1083, "on-demand": 1084 },
     UID: "compact",
-    Name: "COMPACT",
+    Name: "Daily Max",
     "Price Options": "daily",
     Validity: "1 day",
     "Rate Code": 9921710004,
@@ -68,27 +76,31 @@ const SubscriptionsData = [
     Price: 5.0,
     Currency: "GHS",
     DataBonus: "600 MB",
-    Details: [`Daily unlimited access`, `Rentals
-    (TVOD)` , `600Mb data bonus`]
+    Details: [
+      `Daily unlimited access`,
+      `Rentals
+    (TVOD)`,
+      `600Mb data bonus`
+    ]
   },
-  {
-    ID: 1084,
-    UID: "compactod",
-    Name: "COMPACT ON DEMAND",
-    "Price Options": "daily",
-    Validity: "1 day",
-    "Rate Code": 9921710010,
-    "Plan ID": 1084,
-    Price: 5.0,
-    Currency: "GHS",
-    DataBonus: "600MB",
-    Details: [`Daily unlimited access`, `Rentals
-    (TVOD)` , `600Mb data bonus`]
-  },
+  // {
+  //   ID: 1084,
+  //   UID: "compactod",
+  //   Name: "COMPACT ON DEMAND",
+  //   "Price Options": "daily",
+  //   Validity: "1 day",
+  //   "Rate Code": 9921710010,
+  //   "Plan ID": 1084,
+  //   Price: 5.0,
+  //   Currency: "GHS",
+  //   DataBonus: "600MB",
+  //   Details: [`Daily unlimited access`, `Rentals
+  //   (TVOD)` , `600Mb data bonus`]
+  // },
   {
     ID: 1085,
     UID: "standard",
-    Name: "STANDARD",
+    Name: "3-day Binge",
     "Price Options": "daily",
     Validity: "3 days",
     "Rate Code": 9921710005,
@@ -96,13 +108,17 @@ const SubscriptionsData = [
     Price: 12.5,
     Currency: "GHS",
     DataBonus: "1.2 GB",
-    Details: [`3-Day unlimited access`, `Rentals
-    (TVOD)` , `1.2GB data bonus`]
+    Details: [
+      `3-Day unlimited access`,
+      `Rentals
+    (TVOD)`,
+      `1.2GB data bonus`
+    ]
   },
   {
     ID: 1086,
     UID: "pro",
-    Name: "PRO",
+    Name: "Weekly Wonder",
     "Price Options": "daily",
     Validity: "7 days",
     "Rate Code": 9921710006,
@@ -110,13 +126,17 @@ const SubscriptionsData = [
     Price: 25.0,
     Currency: "GHS",
     DataBonus: "3 GB",
-    Details: [`7-Day unlimited access`, `Rentals
-    (TVOD)` , `3GB data bonus`]
+    Details: [
+      `7-Day unlimited access`,
+      `Rentals
+    (TVOD)`,
+      `3GB data bonus`
+    ]
   },
   {
     ID: 1087,
     UID: "max",
-    Name: "MAX",
+    Name: "Monthly Magic",
     "Price Options": "daily",
     Validity: "30 days",
     "Rate Code": 9921710007,
@@ -124,8 +144,12 @@ const SubscriptionsData = [
     Price: 75.0,
     Currency: "GHS",
     DataBonus: "10 GB",
-    Details: [`30-Day unlimited access`, `Rentals
-    (TVOD)` , `10GB data bonus`]
+    Details: [
+      `30-Day unlimited access`,
+      `Rentals
+    (TVOD)`,
+      `10GB data bonus`
+    ]
   }
 ];
 

@@ -6,9 +6,12 @@ import WatchlistMovieCard from "../cards/WatchlistMovieCard"
 const Watchlist = ({ active }) => {
     const dispatch = useDispatch()
     const { watchlist } = useSelector(state => state.fetchMovies)
-
+    // const isAuthenticated = JSON.parse(window.localStorage.getItem("isAuthenticated"));
+    // const user_info = COOKIES.get("user_info");
     useEffect(() => {
-        fetchWatchlist(dispatch)
+        // isAuthenticated && 
+       fetchWatchlist(dispatch)
+        // console.log(isAuthenticated)
     }, [dispatch])
 
     if (active === 'watchlist') return (

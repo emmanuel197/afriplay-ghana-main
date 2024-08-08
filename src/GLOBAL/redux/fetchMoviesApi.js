@@ -1191,17 +1191,17 @@ export const fetchBannerContent = async (type) => {
 }
 
 export const fetchLandingBanners = async () => {
-  
   const response = await axios.get(
-    `https://tvanywhereonline.com/cm/api/client/?operator_uid=afriplaymtnghana&mode=web`  
-  )
+    `https://tvanywhereonline.com/cm/api/client/?operator_uid=afriplaymtnghana&mode=web`
+  );
 
-  // console.log(response.data.data.landing_page)
-  const landingPageData = response.data.data.landing_page
-  const landingPageBanners = landingPageData.banners
-  const randomBanner = landingPageBanners[Math.round(Math.random() * landingPageBanners.length)]
-  return randomBanner 
-}
+  const landingPageData = response.data.data.landing_page;
+  const landingPageBanners = landingPageData.banners;
+  const randomIndex = Math.floor(Math.random() * landingPageBanners.length);
+  const randomBanner = landingPageBanners[randomIndex];
+  
+  return randomBanner;
+};
 
 export const fetchTrendingAndRecentlyAddedMovies = async (dispatch) => {
   // dispatch(fetchMovies_begin());
@@ -1217,18 +1217,21 @@ export const fetchTrendingAndRecentlyAddedMovies = async (dispatch) => {
       
       const trendingCategory = categories.find(category => category.uid === "trending");
       const recentlyAddedCategory = categories.find(category => category.uid === "recentlyadded");
-
-      if (trendingCategory && recentlyAddedCategory) {
+      const bingeWorthyCategory = categories.find(category => category.uid === "Bingeworthy");
+      // console.log(bingeWorthyCategory)
+      if (trendingCategory && recentlyAddedCategory && bingeWorthyCategory) {
         // const trendingMovies = trendingCategory.content;
         const trending = trendingCategory.content;
         // const recentlyAddedMovies = recentlyAddedCategory.content;
         const recentlyadded = recentlyAddedCategory.content;
+        const bingeworthy = bingeWorthyCategory.content;
         console.log(trending)
         dispatch(
           fetchMovies_success({
             // trendingMovies,
             trending : trending || [],
-            recentlyadded: recentlyadded || []
+            recentlyadded: recentlyadded || [],
+            bingeworthy: bingeworthy || []
             // recentlyAddedMovies
           })
         );
