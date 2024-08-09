@@ -24,6 +24,7 @@ import "./_global.scss";
 import SubscriptionPage from "./GLOBAL/pages/subscriptionPage";
 import SubscriptionHistoryPage from "./GLOBAL/pages/subscriptionHistoryPage"
 import { useSelector } from "react-redux";
+import Policy from "./GLOBAL/components/policy";
 // import RedirectAuthenticated from "./GLOBAL/components/RedirectAuthenticated";
 
 function App() {
@@ -38,10 +39,12 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/policy" element={<Policy />} />
         {/* <Route path="/select-network" element={<SelectNetwork />} /> */}
         
         <Route path="/subscriptions" element={<ProtectedRoute><SubscriptionPage /></ProtectedRoute>} />
         <Route path="/subscription-history" element={<ProtectedRoute><SubscriptionHistoryPage /></ProtectedRoute>} />
+        
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/series/:id" element={<ProtectedRoute><SeriesDetails /></ProtectedRoute>} />
         <Route path="/movies" element={<ProtectedRoute><Movies /></ProtectedRoute>} />

@@ -13,10 +13,20 @@ const SignUp = ({ text }) => {
   const [useMobileNumber, setuseMobileNumber] = useState(true)
   const [password, setPassword] = useState('')
   const [hasSelectedNetworks, setHasSelectedNetworks] = useState(false)
-
+  const user_info = COOKIES.get("user_info");
   useEffect(() => {
+   
     setMobileNumber()
   }, [])
+
+  useEffect(() => {
+     // Check if user is authenticated
+     
+     
+       // Redirect to home if authenticated
+       user_info && navigate('/');
+     
+  }, [user_info])
 
   const _initVerifyMSISDN = () => {
     verifyMSISDN(true, mobileNumber, email, password, navigate)

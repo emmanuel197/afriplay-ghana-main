@@ -19,13 +19,32 @@ const MovieDetailsBanner = () => {
   const navigate = useNavigate(); // Add this line
   const [watchlisted, setWatchlisted] = useState(true);
   const { movieDetails, loading, watchlist } = useSelector((state) => state.fetchMovies);
-
+  const {premiumSub} = useSelector((state) => state.fetchPackages)
   // Add this function
-  const handleWatchTrailer = async () => {
-    const trailerData = await fetchTrailer(movieDetails.id);
-    navigate(`/watch/movie/${movieDetails.uid}`, { state: { trailer: trailerData } });
-  };
 
+  const navigateToMovie = async (includeTrailer = false) => {
+    const state = includeTrailer ? { trailer: await fetchTrailer(movieDetails.id) } : {};
+    navigate(`/watch/movie/${movieDetails.uid}`, { state });
+};
+
+const handleWatchTrailer = () => navigateToMovie(true);
+
+const handleWatchMovie = () => {
+    premiumSub ? navigateToMovie() : navigateToMovie(true);
+};
+  // const handleWatchTrailer = async () => {
+  //   const trailerData = await fetchTrailer(movieDetails.id);
+  //   navigate(`/watch/movie/${movieDetails.uid}`, { state: { trailer: trailerData } });
+  // };
+
+  // const handleWatchMovie = async () => {
+  //     if (premiumSub ) {
+  //       navigate(`/watch/movie/${movieDetails.uid}`)
+  //     } else {
+  //       const trailerData = await fetchTrailer(movieDetails.id);
+  //       navigate(`/watch/movie/${movieDetails.uid}`, { state: { trailer: trailerData } });
+  //     }
+  // }
   const toggleAddToWatchlist = (_action) => {
     setWatchlisted(!watchlisted);
     if (_action === 'add') updateWatchlist(movieDetails.id, 'movie', 0);
@@ -83,7 +102,7 @@ const MovieDetailsBanner = () => {
               </p>
             </div>
             <div className="watch-trailer-share">
-              <Link to={`/watch/movie/${movieDetails.uid}`} className="watch">WATCH MOVIE </Link>
+              <div onClick={handleWatchMovie} className="watch">WATCH MOVIE </div>
               {!watchlisted ? <div onClick={() => toggleAddToWatchlist('add')} className="others">
                 ADD TO WATCHLIST
               </div> :

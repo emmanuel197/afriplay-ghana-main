@@ -163,7 +163,7 @@ nav {
       color: $kg_color;
       border-radius: 5px;
       transition: 0.4s all;
-
+      padding: 0.5rem 1rem 0.5rem 1rem;
       &:hover {
         border-color: $tertiary_color;
         color: $tertiary_color;

@@ -16,13 +16,15 @@ import DynamicBanner from '../components/banners/DynamicBanner';
 import { fetchGenres, fetchMovie, fetchTrendingAndRecentlyAddedMovies } from "../redux/fetchMoviesApi";
 import { setActiveGenreTab } from "../redux/slice/genreTabSlice"
 import Reel from "../components/reels/Reel"
+import { COOKIES } from "../../utils/constants";
 const Landing = () => {
   // I am setting cookies that ll later check for user browser when user logs in
   // this will help in setting the device info for login post API
   // I will do this for the landing and signup - signin
   // and it ll load when the user visits page or refreshes page with useEffect beneath this
-  const isAuthenticated = JSON.parse(window.localStorage.getItem('isAuthenticated'))
+  // const isAuthenticated = JSON.parse(window.localStorage.getItem('isAuthenticated'))
   const dispatch = useDispatch()
+  const user_info = COOKIES.get('user_info')
   useEffect(() => {
 //     const _setActiveGenreTab = (_genreTab = 'ALL') => dispatch(setActiveGenreTab(_genreTab))
 //     _setActiveGenreTab('ALL')
@@ -42,7 +44,7 @@ const Landing = () => {
     setDeviceInCookies();
     initSendLogs()
   }, []);
-
+  console.log(user_info)
   return (
     <>
       <main style={{ background: ' #1a052b' }}>

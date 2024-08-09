@@ -10,7 +10,7 @@ import Button from "../components/buttons/Button"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import '../components/styles/auth.scss'
-
+import { COOKIES } from "../../utils/constants"
 const SignUpPage = () => {
   const navigate = useNavigate()
   const { isLoading } = useSelector((state) => state.auth)
@@ -18,10 +18,18 @@ const SignUpPage = () => {
   const [mobileNumber, setMobileNumber] = useState('')
   const [password, setPassword] = useState(''); //new field for password
   const [rePassword, setRePassword] = useState(''); //confirmation of new password
-
+  const user_info = COOKIES.get("user_info");
   // const [useMobileNumber, setuseMobileNumber] = useState(true)
   // const [hasSelectedNetworks, setHasSelectedNetworks] = useState(false)
 
+  useEffect(() => {
+    // Check if user is authenticated
+    
+    
+      // Redirect to home if authenticated
+      user_info && navigate('/');
+    
+ }, [user_info]) 
   useEffect(() => {
     if (!localStorage.getItem('afri_selected_operator')) {
       navigate('/signup')

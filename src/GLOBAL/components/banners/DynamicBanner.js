@@ -224,7 +224,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                           page={
                             window.location.pathname === "/series"
                               ? `/series/${selectedMovie.id}`
-                              : `/watch/movie/${selectedMovie.uid}`
+                              : `/movie/${selectedMovie.id}`
                           }
                           selectedMovie={selectedMovie.id}
                           label="WATCH MOVIE"

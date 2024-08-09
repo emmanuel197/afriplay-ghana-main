@@ -10,6 +10,7 @@ import Button from "../components/buttons/Button"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import '../components/styles/auth.scss'
+import { COOKIES } from "../../utils/constants"
 
 const SignInPage = () => {
   const navigate = useNavigate()
@@ -25,6 +26,13 @@ const SignInPage = () => {
   // const [hasSelectedNetworks, setHasSelectedNetworks] = useState(false)
 
   useEffect(() => {
+
+    // Check if user is authenticated
+    const user_info = COOKIES.get("user_info");
+    if (user_info) {
+      // Redirect to home if authenticated
+      navigate('/');
+    }
     if (!localStorage.getItem('afri_selected_operator')) {
       navigate('/signin')
     }

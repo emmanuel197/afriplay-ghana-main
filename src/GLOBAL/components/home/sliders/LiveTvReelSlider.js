@@ -32,7 +32,7 @@ const LiveTvReelSlider = () => {
 
         getAllChanelsIDs()
     }, [channelCategories])
-
+    // console.log(channelCategories)
     return (
         <div>
             {
@@ -45,7 +45,9 @@ const LiveTvReelSlider = () => {
                                         EPGs ? channel.channels.map((movieItem, index) => {
 
                                             const _movie = { ...movieItem }
+                                            
                                             const _epg = EPGs.filter(epg => {
+                                               
                                                 return movieItem.id === epg.id
                                             })
 

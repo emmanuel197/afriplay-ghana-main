@@ -915,6 +915,7 @@ export const sendPlayLogs = async (id, type, _duration = 0) => {
 
   if (type === 'live') {
     contentDetails = await fetchChannelInfo(id)
+    console.log(contentDetails)
     contentType = 'Movie'
   }
 

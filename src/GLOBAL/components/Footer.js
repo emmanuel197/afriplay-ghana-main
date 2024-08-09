@@ -17,30 +17,31 @@ const Footer = () => {
             </div>
           </div>
           <div className="links">
-            <ul className="col">
+            {/* <ul className="col">
               <b>AFRIPLAY</b>
               <ul>
                 <li><Link to='/afripremiere'>AFRIPREMIERE</Link></li>
                 <li><Link to='/afriplaylive'>AFRILIVE</Link></li>
               </ul>
-            </ul>
-            <ul className="col">
+            </ul> */}
+            {/* <ul className="col">
               <b>WATCH</b>
               <ul>
                 <li><Link to='/movies'>MOVIES</Link></li>
                 <li><Link to='/series'>SERIES</Link></li>
                 <li><Link to='/livetv'>LIVE TV</Link></li>
               </ul>
-            </ul>
+            </ul> */}
             <ul className="col">
               {/* <b>WATCH</b> */}
               <ul>
-                <li><Link to='/movies'>ABOUT</Link></li>
-                <li><Link to='/series'>COMMUNITY</Link></li>
-                <li><Link to='/livetv'>POLICY</Link></li>
-                <li><Link to='/livetv'>FEEDBACK</Link></li>
-                <li><Link to='/livetv'>TERMS</Link></li>
-                <li><Link to='/livetv'>FAQs</Link></li>
+              <li><Link to='/home'>Featured</Link></li>
+                <li><Link to='/movies'>Movies</Link></li>
+                {/* <li><Link to='/series'>COMMUNITY</Link></li> */}
+                <li><Link to='/livetv'>Live TV</Link></li>
+                {/* <li><Link to='/livetv'>FEEDBACK</Link></li> */}
+                
+                <li><Link to='/policy'>Our Policy</Link></li>
               </ul>
             </ul>
           </div>

@@ -11,7 +11,7 @@ import Drawer from "./Drawer";
 import "./styles/Header.scss";
 import { errorLog } from "../logger";
 import { COOKIES } from "../../utils/constants";
-
+import { useHandleNavigation } from "../components/navigationHelpers";
 const user_info = COOKIES.get("user_info");
 console.log(user_info)
 const Header = (prop) => {
@@ -25,7 +25,7 @@ const Header = (prop) => {
   const { profile } = useSelector((state) => state.account);
 
   const _toggleDrawer = (state) => dispatch(toggleDrawer(state));
-
+  const handleClick = useHandleNavigation(); // Reuse the navigation logic
   useEffect(() => {
     if (location.pathname === "/search") setShowSearch(true);
   }, [location]);
@@ -196,7 +196,7 @@ const Header = (prop) => {
               </div>
 
               <div className="sign-in-up">
-                {(prop.signup || prop.signin > 2) && !user_info ? (
+                {!user_info ? (
                   <>
                     <Link to="/signup" className="sign-up">
                       <div>
@@ -208,11 +208,11 @@ const Header = (prop) => {
                         <p>SIGN IN</p>
                       </div>
                     </Link>
-                    <Link to="/subscriptions" className="access-packs">
-                      <div>
-                        <p>ACCESS PACKS</p>
-                      </div>
-                    </Link>
+                    <div className="access-packs" onClick={() => handleClick('/subscriptions')}>
+                        <div>
+                            <p>ACCESS PACKS</p>
+                        </div>
+                    </div>
                   </>
                 ) : (
                   <div
