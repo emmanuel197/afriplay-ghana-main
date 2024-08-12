@@ -6,7 +6,7 @@ import '../../components/styles/landing/slides.scss'
 const Reel = ({ title }) => {
     const { recentlyadded, mostwatched, afriPlaylive, afriPremiere, comingSoon, bingeworthy, trending, afriplaytop10 } = useSelector((state) => state.fetchMovies);
     const { activeGenreTab } = useSelector(state => state.genreTab)
-    console.log(bingeworthy)
+    // console.log(bingeworthy)
     const _allMovies = {
         mostwatched,
         recentlyadded,

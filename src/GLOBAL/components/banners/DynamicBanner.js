@@ -67,14 +67,11 @@ const DynamicBanner = ({ showSlides = true, className }) => {
   const [isMuted, setIsMuted] = useState(true);
   const [showTitle, setShowTitle] = useState(true);
   const [bannerContent, setBannerContent] = useState([]);
+  console.log(selectedMovie.image_id)
   setTimeout(() => {
     setShowTitle(false);
   }, 5000);
 
-  // useEffect(() => {
-
-  //     initFetchBannerContent()
-  // }, [])
 
   useEffect(() => {
     const initGetAllSlides = async () => {
@@ -94,73 +91,48 @@ const DynamicBanner = ({ showSlides = true, className }) => {
       } else {
         if (slides[0]) {
           setAllSlides(slides);
-          setSelectedMovie(slides[0]);
+          setSelectedMovie(slides[0])
+          
         }
       }
     };
 
-    initGetAllSlides();
+    if (!movieDetailsFetched.current) initGetAllSlides();
   }, [location.pathname, slides]);
 
-  // useEffect(() => {
-  //     if (slides[0]) setSelectedMovie(slides[0])
-  // }, [slides])
+
 
   const _setSelectedMovie = (vod) => {
     setSelectedMovie(vod);
-    // _playTrailer()
+  
+    movieDetailsFetched.current = false;
     setPlayTrailer(true);
     setIsPlayingTrailer(true);
   };
 
-  // const _playTrailer = async () => {
-  //     setPlayTrailer(true)
-  //     setIsPlayingTrailer(true)
-  //     // setTrailer(await fetchTrailer(selectedMovie.id))
-  // }
+  
 
-  //! don't delete
-  // useEffect(() => {
-  //     let _
+useEffect(() => {
+  const initSetMovieDetails = async () => {
+    if (selectedMovie && selectedMovie.id) {
+      const _movie = await returnMovieOrSeriesDetails(selectedMovie.id, "movie");
 
-  //     if (location.pathname === '/series') {
-  //         _ = getGenreName(movieDetails.genres, genres)
-  //     } else _ = getGenreName(movieDetails.movie_genres, genres)
+      setMovieDetails(!(location.pathname === "/") ? _movie : selectedMovie);
 
-  //     setGenreName(_)
-  // }, [genres, location.pathname, movieDetails, selectedMovie.genres, selectedMovie.movie_genres])
-  // fetchLandingBanners()
-  useEffect(() => {
-    const initSetMovieDetails = async () => {
-      if (selectedMovie && selectedMovie.id && !movieDetailsFetched.current) {
-        const _movie = await returnMovieOrSeriesDetails(
-          selectedMovie.id,
-          "movie"
-        );
+      setTrailer(
+        await fetchTrailer(
+          selectedMovie.id
+        )
+      );
 
-         setMovieDetails(
-          ["/movies", "/home"].includes(location.pathname)
-            ? _movie
-            : selectedMovie
-        );
-
-        setTrailer(
-          await fetchTrailer(
-            location.pathname === "/series"
-              ? selectedMovie.seasons[0].episodes[0].id
-              : selectedMovie.id
-          )
-        );
-
-        movieDetailsFetched.current = true; // Mark as fetched
-      }
-    };
-
-    if (["/series", "/movies", "/home"].includes(location.pathname)) {
-      initSetMovieDetails();
+      movieDetailsFetched.current = true; // Mark as fetched
     }
-  }, [location.pathname, selectedMovie]);
+  };
 
+  if (!movieDetailsFetched.current) {
+    initSetMovieDetails();
+  }
+}, [location.pathname, selectedMovie]);
   useEffect(() => {
     const handleScroll = (event) => {
       if (window.scrollY < 350) setPlayTrailer(true);
@@ -183,12 +155,10 @@ const DynamicBanner = ({ showSlides = true, className }) => {
     
     if (location.pathname === "/") initFetchBannerContent();
   }, [location.pathname]);
-  // console.log(movieDetails);
-  // console.log(selectedMovie.id);
-  // console.log(bannerContent);
+
   return (
     <section>
-      <div className="hero" onClick={() => setShowTitle(true)}>
+      <div className={`hero ${className}`} onClick={() => setShowTitle(true)}>
         <div className="hero-container">
           <div className="hero-content-wrapper">
             {showTitle ? (
@@ -203,18 +173,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                     ? bannerContent?.description
                     : movieDetails.description}
                 </p>
-                {/* <div className="cast">
-                                {window.location.pathname !== '/series' ?
-                                    <div>
-                                        <b>CAST: </b>{movieDetails.cast}
-                                    </div>
-                                    : <></>}
-                            </div> */}
-                {/* <div className="genre-subtitles"> */}
-                {/* <b>Genre: </b>{genreName} */}
-                {/* <div style={{ margin: '10px' }} />
-                                <b>Subtitles: </b> English[CC] */}
-                {/* </div > */}
+              
 
                 {selectedMovie ? (
                   <div className={`hero-buttons ${className}`}>
@@ -432,3 +391,52 @@ const DynamicBanner = ({ showSlides = true, className }) => {
 };
 
 export default DynamicBanner;
+
+
+// const _playTrailer = async () => {
+  //     setPlayTrailer(true)
+  //     setIsPlayingTrailer(true)
+  //     // setTrailer(await fetchTrailer(selectedMovie.id))
+  // }
+
+  //! don't delete
+  // useEffect(() => {
+  //     let _
+
+  //     if (location.pathname === '/series') {
+  //         _ = getGenreName(movieDetails.genres, genres)
+  //     } else _ = getGenreName(movieDetails.movie_genres, genres)
+
+  //     setGenreName(_)
+  // }, [genres, location.pathname, movieDetails, selectedMovie.genres, selectedMovie.movie_genres])
+  // fetchLandingBanners()
+
+
+  
+  // useEffect(() => {
+
+  //     initFetchBannerContent()
+  // }, [])
+
+    {/* <div className="cast">
+                                {window.location.pathname !== '/series' ?
+                                    <div>
+                                        <b>CAST: </b>{movieDetails.cast}
+                                    </div>
+                                    : <></>}
+                            </div> */}
+                {/* <div className="genre-subtitles"> */}
+                {/* <b>Genre: </b>{genreName} */}
+                {/* <div style={{ margin: '10px' }} />
+                                <b>Subtitles: </b> English[CC] */}
+                {/* </div > */}
+
+                  // console.log(movieDetails);
+  // console.log(selectedMovie.id);
+  // console.log(bannerContent);
+    // useEffect(() => {
+  //     if (slides[0]) setSelectedMovie(slides[0])
+  // }, [slides])
+
+
+      // _playTrailer()

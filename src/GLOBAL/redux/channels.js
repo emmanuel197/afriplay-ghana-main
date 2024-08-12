@@ -59,7 +59,7 @@ export const fetchChannels = async (dispatch) => {
         if (response.data.status === "ok") dispatch(fetchChannelsReducer(response.data.data))
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }
 
@@ -80,14 +80,14 @@ export const fetchChannelCategories = async (dispatch) => {
             }
         )
 
-        console.warn('channel categories', response.data.data)
+        // console.warn('channel categories', response.data.data)
 
         if (response.data.status === "error") return;
 
         if (response.data.status === "ok") dispatch(fetchChannelCategoriesReducer(response.data.data))
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }
 
@@ -124,6 +124,6 @@ export const fetchChannelInfo = async (channelId) => {
         }
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }

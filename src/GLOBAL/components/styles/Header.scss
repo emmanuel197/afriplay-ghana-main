@@ -6,12 +6,14 @@ nav {
   justify-content: center;
   width: 100%;
 
+
   a {
     white-space: nowrap;
     color: #fff;
     font-weight: 500;
 
-    &:hover, .dropdown-toggler:hover {
+    &:hover,
+    .dropdown-toggler:hover {
       color: $kg_color;
       transition: all ease 1s;
     }
@@ -31,16 +33,23 @@ nav {
 }
 
 .header {
-  z-index: 100;
-  position: relative;
-  background-color: $primary_color;
-  padding: 1rem;
-  position: relative;
   
+  padding: 1rem;
+ 
+    position: sticky;
+    top: 0;
+    z-index: 100; // Ensure the header is above other content
+    background-color: $primary_color; // Ensure the background color is consistent with your design
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Optional: Add a subtle shadow for a floating effect
+
+
+  // position: relative;
+  // height: 600px;
+
 
   .logo img {
     width: 130px
-  
   }
 
   .header-left-content {
@@ -52,6 +61,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+
   }
 
   button,
@@ -148,7 +159,8 @@ nav {
     //   }
     // }
 
-    .sign-up, .sign-in {
+    .sign-up,
+    .sign-in {
       background-color: $kg_color;
       color: $primary_color;
       border-radius: 2px;
@@ -158,12 +170,14 @@ nav {
         background-color: $tertiary_color;
       }
     }
+
     .access-packs {
       border: 2px solid$kg_color ;
       color: $kg_color;
       border-radius: 5px;
       transition: 0.4s all;
       padding: 0.5rem 1rem 0.5rem 1rem;
+
       &:hover {
         border-color: $tertiary_color;
         color: $tertiary_color;
@@ -284,6 +298,7 @@ nav {
     }
   }
 }
+
 // @import "../../../_global.scss";
 
 // nav {

@@ -110,7 +110,7 @@ const Header = (prop) => {
                           : ""
                       }
                     >
-                      AFRILIVE
+                      LIVE DRAMA
                     </p>
                   </Link>
                   <div className="dropdown">

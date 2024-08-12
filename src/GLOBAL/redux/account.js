@@ -55,39 +55,57 @@ export const sendLog = async (data) => {
 
         const logResponse = await axios.post(logAPI(), requestData)
 
-        console.warn('log request data: ', requestData)
-        console.warn('log response: ', logResponse.data)
+        // console.warn('log request data: ', requestData)
+        // console.warn('log response: ', logResponse.data)
 
 
     } catch (e) {
-        console.warn('log error:', e.message)
+        // console.warn('log error:', e.message)
     }
 
 }
 
+// export const logout = async () => {
+
+//     //TODO: uncomment to logout from api
+//     const { access_token } = user_info.data.data;
+//     const response = await axios.post(
+//         `https://ott.tvanywhereafrica.com:28182/api/client/v1/global/logout`,
+//         {
+//             headers: {
+//                 Authorization: `Bearer ${access_token}`
+//             }
+//         }
+//     )
+//     console.log(response)
+//     await clearStorage()
+// }
+
 export const logout = async () => {
-
-    //TODO: uncomment to logout from api
-    // const { access_token } = user_info.data.data;
-    // await axios.post(
-    //     `https://ott.tvanywhereafrica.com:28182/api/client/v1/global/logout`,
-    //     {
-    //         headers: {
-    //             Authorization: `Bearer ${access_token}`
-    //         }
-    //     }
-    // )
-
-    await clearStorage()
-}
+    try {
+        const { access_token } = user_info?.data?.data || {};
+        if (access_token) {
+            await axios.post(
+                `https://ott.tvanywhereafrica.com:28182/api/client/v1/global/logout`,
+                {},
+                { headers: { Authorization: `Bearer ${access_token}` } }
+            );
+        }
+    } catch (error) {
+        console.error('Logout error:', error.message);
+    } finally {
+        clearStorage();
+    }
+};
 
 const clearStorage = async () => {
     window.localStorage.clear()
-    cookies.remove('user_info')
-    cookies.remove('device_info')
-    cookies.remove('device')
-    cookies.remove('afri_msisdn')
+    cookies.remove('user_info', { path: '/' }); // Ensure path matches the one used during setting
+    cookies.remove('device_info', { path: '/' });
+    cookies.remove('device', { path: '/' });
+    cookies.remove('afri_msisdn', { path: '/' });
     window.location.href = '/'
+    
 }
 
 export const initGetPurchases = (dispatch) => {
@@ -109,7 +127,7 @@ export const initGetPurchases = (dispatch) => {
             dispatch(getPurchases(response.data.data))
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
         });
 }
 
@@ -124,12 +142,12 @@ export const fetchUserDevices = async () => {
 
         const response = await axios.get(`https://tvanywhereonline.com/api/client/v1/${operator_uid}/users/${user_id}/devices`)
 
-        console.log("DEVICES ----", response.data.data)
+        // console.log("DEVICES ----", response.data.data)
 
         if (response.data.status === "ok") return response.data.data
 
     } catch (e) {
-        console.error('fetchUserDevices', e.message)
+        // console.error('fetchUserDevices', e.message)
     }
 }
 
@@ -149,7 +167,7 @@ export const initGetMessages = (dispatch) => {
             dispatch(getMessages(response.data.data))
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
         });
 }
 
@@ -169,7 +187,7 @@ export const initGetFAQs = (dispatch) => {
             dispatch(getFAQs(response.data.data))
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
         });
 }
 
@@ -191,17 +209,17 @@ export const updateProfile = (firstName, lastName) => {
 
     axios(config)
         .then(function (response) {
-            console.warn('response', response.data)
+            // console.warn('response', response.data)
         })
         .catch(function (error) {
-            console.log(error);
+            // console.log(error);
         });
 }
 
 export const getProfile = async () => {
     let username = window.localStorage.getItem('afri_username')
     let { operator_uid, access_token } = user_info?.data.data
-    // console.log(access_token)
+    console.log(access_token)
     const response = await axios.get(`https://tvanywhereonline.com/cm/api/subscriber/?operator_uid=${operator_uid}&subscriber_uid=${username}&limit=30`,
         {
             headers: {
@@ -270,30 +288,15 @@ export const getProfile = async () => {
 //         };
 
 //         const logResponse = await axios.post(logAPI(), requestData);
-//         console.warn('log request data: ', requestData);
-//         console.warn('log response: ', logResponse.data);
+        // console.warn('log request data: ', requestData);
+        // console.warn('log response: ', logResponse.data);
 
 //     } catch (e) {
-//         console.warn('log error:', e.message);
+        // console.warn('log error:', e.message);
 //     }
 // };
 
-// export const logout = async () => {
-//     try {
-//         const { access_token } = user_info?.data?.data || {};
-//         if (access_token) {
-//             await axios.post(
-//                 `https://ott.tvanywhereafrica.com:28182/api/client/v1/global/logout`,
-//                 {},
-//                 { headers: { Authorization: `Bearer ${access_token}` } }
-//             );
-//         }
-//     } catch (error) {
-//         console.error('Logout error:', error.message);
-//     } finally {
-//         clearStorage();
-//     }
-// };
+
 
 // const clearStorage = () => {
 //     window.localStorage.clear();
@@ -314,7 +317,7 @@ export const getProfile = async () => {
 //         );
 //         dispatch(getPurchases(response.data.data));
 //     } catch (error) {
-//         console.error('initGetPurchases error:', error.message);
+        // console.error('initGetPurchases error:', error.message);
 //     }
 // };
 
@@ -329,7 +332,7 @@ export const getProfile = async () => {
 //             return response.data.data;
 //         }
 //     } catch (e) {
-//         console.error('fetchUserDevices error:', e.message);
+        // console.error('fetchUserDevices error:', e.message);
 //     }
 // };
 
@@ -344,7 +347,7 @@ export const getProfile = async () => {
 //         );
 //         dispatch(getMessages(response.data.data));
 //     } catch (error) {
-//         console.error('initGetMessages error:', error.message);
+        // console.error('initGetMessages error:', error.message);
 //     }
 // };
 
@@ -358,7 +361,7 @@ export const getProfile = async () => {
 //         );
 //         dispatch(getFAQs(response.data.data));
 //     } catch (error) {
-//         console.error('initGetFAQs error:', error.message);
+        // console.error('initGetFAQs error:', error.message);
 //     }
 // };
 
@@ -372,9 +375,9 @@ export const getProfile = async () => {
 //             { first_name: firstName, last_name: lastName },
 //             { headers: { Authorization: `Bearer ${access_token}` } }
 //         );
-//         console.warn('Profile updated:', response.data);
+        // console.warn('Profile updated:', response.data);
 //     } catch (error) {
-//         console.error('updateProfile error:', error.message);
+        // console.error('updateProfile error:', error.message);
 //     }
 // };
 
@@ -389,6 +392,6 @@ export const getProfile = async () => {
 //         );
 //         return response.data.data[0];
 //     } catch (error) {
-//         console.error('getProfile error:', error.message);
+        // console.error('getProfile error:', error.message);
 //     }
 // };

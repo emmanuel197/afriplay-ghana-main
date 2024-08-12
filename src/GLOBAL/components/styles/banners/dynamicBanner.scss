@@ -365,7 +365,12 @@
     height: 100vh;
     margin-top: -70px;
     position: relative;
-
+    &.feature-dynamic-banner {
+        height: 70vh;
+    }
+    &.landing-dynamic-banner {
+        height: 80vh;
+    }
     .hero-gradient {
         background: linear-gradient(to left, #0000, #000000);
         height: 100vh;
@@ -727,3 +732,4 @@
         }
     }
 }
+

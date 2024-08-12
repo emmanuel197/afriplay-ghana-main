@@ -20,18 +20,18 @@ const ReelGenreWrapper = ({ allMovies, movies, title }) => {
 
             movies.forEach(vod => {
                 if (vod.type === 'series') {
-                    console.warn("found series", vod)
+                    // console.warn("found series", vod)
                     _series = [..._series, vod]
                     return
                 } if (vod.type === 'movie') {
-                    console.warn("found movie", vod)
+                    // console.warn("found movie", vod)
                     _movies = [..._movies, vod]
                     return
                 }
             })
 
             setSeriesOnly(_series)
-            console.log(_movies)
+            // console.log(_movies)
             setMoviesOnly(_movies)
             setLoading(false)
         }

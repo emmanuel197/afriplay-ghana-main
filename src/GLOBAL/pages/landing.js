@@ -24,7 +24,7 @@ const Landing = () => {
   // and it ll load when the user visits page or refreshes page with useEffect beneath this
   // const isAuthenticated = JSON.parse(window.localStorage.getItem('isAuthenticated'))
   const dispatch = useDispatch()
-  const user_info = COOKIES.get('user_info')
+  // const user_info = COOKIES.get('user_info')
   useEffect(() => {
 //     const _setActiveGenreTab = (_genreTab = 'ALL') => dispatch(setActiveGenreTab(_genreTab))
 //     _setActiveGenreTab('ALL')
@@ -44,7 +44,7 @@ const Landing = () => {
     setDeviceInCookies();
     initSendLogs()
   }, []);
-  console.log(user_info)
+  // console.log(user_info)
   return (
     <>
       <main style={{ background: ' #1a052b' }}>

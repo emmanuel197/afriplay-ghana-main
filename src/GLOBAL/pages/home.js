@@ -22,7 +22,7 @@ const Home = () => {
         <>
             <main style={{ background: ' #1a052b' }}>
                 <Header links={5} signup={1} />
-                <DynamicBanner showSlides={false} />
+                <DynamicBanner showSlides={false} className="feature-dynamic-banner"/>
                 <br /><br />
                 {/* <Reel title='MOST WATCHED' /> */}
                 <Reel title='TRENDING' />
