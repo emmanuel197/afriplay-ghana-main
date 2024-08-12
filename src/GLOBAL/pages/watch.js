@@ -134,12 +134,12 @@ const Watch = () => {
       </button>
 
       <div className="watch-video">
-        {loading && !error && (
+        {loading && !error && premiumSub && (
           <div className="loading-spinner">
             {/* You can use any loading spinner component or image */}
             <Spinner/>
           </div>
-        )}
+        ) }
         {error ? (
           <ConnectionError />
         ) : (
