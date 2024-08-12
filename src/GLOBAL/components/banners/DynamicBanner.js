@@ -635,11 +635,17 @@ const DynamicBanner = ({ showSlides = true, className }) => {
             <div className="hero-app-links-wrapper">
               <div className="hero-app-link">
                 <img className="hero-app-link-img" src={androidImg} />
-                <Link>Google Play</Link>
+                {/* <Link to="">Google Play</Link> */}
+                <a href="https://play.google.com/store/apps/details?id=com.tvanywhereafrica.afriplay" target="_blank" rel="noopener noreferrer">
+  Google Play
+</a>
               </div>
               <div className="hero-app-link">
                 <img className="hero-app-link-img" src={appleImg} />
-                <Link>App Store</Link>
+                
+                <a href="https://apps.apple.com/app/afriplay/id1659472397" target="_blank" rel="noopener noreferrer">
+                App Store
+</a>
               </div>
             </div>
           )}
