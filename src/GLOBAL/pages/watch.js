@@ -144,7 +144,7 @@ const Watch = () => {
         {error ? (
           <ConnectionError />
         ) : (
-          (type === "live" && !premiumSub) ? (
+          (!premiumSub) ? (
             <UnsubscribedUser />
           ) : (
             <ReactPlayer
