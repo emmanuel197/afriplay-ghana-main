@@ -57,7 +57,7 @@ const Drawer = () => {
                             <Link to='/signup'>
                                 <button className='btn-filled'>Sign Up</button>
                             </Link>
-                            <Link to='/signup'>
+                            <Link to='/signin'>
                                 <button className='btn-ghost'>Sign In</button>
                             </Link>
                         </div>
