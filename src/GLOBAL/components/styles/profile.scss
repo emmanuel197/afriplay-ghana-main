@@ -83,6 +83,12 @@ body {
         padding: 10px 25px;
         margin: 20px auto;
         margin-bottom: 0;
+        cursor: pointer;
+        transition: 0.4s all;
+        &:hover {
+            transition: 0.4s all;
+            background: #1A052B;
+        }
     }
 
     .flex {

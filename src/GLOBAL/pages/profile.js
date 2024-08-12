@@ -80,7 +80,7 @@ const Payment = ({ active }) => {
     useEffect(() => {
         const initFetchUserDevices = async () => {
             const response = await fetchUserDevices()
-            console.warn('devices', response)
+            // console.warn('devices', response)
         }
         initFetchUserDevices()
     }, [])

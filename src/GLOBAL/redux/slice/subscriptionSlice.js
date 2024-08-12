@@ -11,7 +11,7 @@ const fetchPackageSlice = createSlice({
     purchaseHistory: null,
     isChecked: false,
     activeSubscription: false,
-    premiumSub: false
+    premiumSub: JSON.parse(window.localStorage.getItem('premiumSub')) || false // Initialize from localStorage
   },
   reducers: {
     fetchPackageReducer: (state, action) => {
@@ -57,7 +57,7 @@ const fetchPackageSlice = createSlice({
     },
     premiumSubReducer: (state, action) => {
       state.premiumSub = action.payload
-
+      window.localStorage.setItem('premiumSub', JSON.stringify(action.payload));
     }
 
   }

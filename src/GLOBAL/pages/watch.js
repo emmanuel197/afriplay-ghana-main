@@ -126,7 +126,7 @@ const Watch = () => {
       setLoading(false);
     }
   };
-
+  
   return (
     <div className="watch-movie">
       <button onClick={() => navigate(-1)} className="sign-up">
@@ -136,6 +136,7 @@ const Watch = () => {
       <div className="watch-video">
         {loading && !error && premiumSub && (
           <div className="loading-spinner">
+       
             {/* You can use any loading spinner component or image */}
             <Spinner/>
           </div>

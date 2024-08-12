@@ -25,9 +25,12 @@ function SubscriptionModal() {
       }?`;
 
   const _initPurchasePackage = () => {
-    activeSubscription
-      ? cancelSubscription(productId)
-      : purchasePackage(productId, subscriber_uid);
+    if (activeSubscription) {
+      cancelSubscription(productId);
+      window.localStorage.removeItem('premiumSub'); // Clear from localStorage
+    } else {
+      purchasePackage(productId, subscriber_uid);
+    }
   };
 
   const handleOptionSelect = (option) => {
@@ -37,9 +40,15 @@ function SubscriptionModal() {
 
   const confirmSelection = () => {
     setIsConfirmed(true);
-    activeSubscription
-      ? cancelSubscription(productId[selectedOption])
-      : purchasePackage(productId[selectedOption], subscriber_uid);
+    if (activeSubscription) {
+      cancelSubscription(productId[selectedOption])
+      window.localStorage.removeItem('premiumSub'); // Clear from localStorage
+    } else {
+      purchasePackage(productId[selectedOption], subscriber_uid);
+    }
+    // activeSubscription
+    //   ? cancelSubscription(productId[selectedOption])
+    //   : purchasePackage(productId[selectedOption], subscriber_uid);
   };
 
   const _homeRedirect = () => {
