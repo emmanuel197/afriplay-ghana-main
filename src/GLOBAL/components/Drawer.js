@@ -35,7 +35,7 @@ const Drawer = () => {
                             <li><Link to='/series'>Series</Link></li>
                             <li><Link to='/livetv'>Live TV</Link></li>
                             <li><Link to='/afripremiere'>AfriPremiere</Link></li>
-                            <li><Link to='/afriplaylive'>Afrilive</Link></li>
+                            <li><Link to='/afriplaylive'>Live Drama</Link></li>
                             <li>
                                 <button onClick={toggleDropdown} className='dropdown-toggler' style={{background: 'transparent', color: 'white'}}>
                                     Access Packs
