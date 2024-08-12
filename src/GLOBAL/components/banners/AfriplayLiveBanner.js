@@ -5,7 +5,7 @@ import Slider from "react-slick"
 import dynamicBannerSliderSettings from '../../../utils/sliderConfig/dynamicBannerSliderSettings'
 import '../../components/styles/banners/dynamicBanner.scss'
 
-const AfriplayLiveBanner = () => {
+const AfriplayLiveBanner = ({className}) => {
     const [bannerContent, setBannerContent] = useState({})
     const { afriPlaylive } = useSelector((state) => state.fetchMovies);
 
@@ -20,7 +20,7 @@ const AfriplayLiveBanner = () => {
 
     return (
         <section>
-            <div className="hero">
+            <div className={`hero ${className}`}>
                 <div className="hero-container">
                     <div className="hero-content-wrapper">
                         <div className="hero-content">

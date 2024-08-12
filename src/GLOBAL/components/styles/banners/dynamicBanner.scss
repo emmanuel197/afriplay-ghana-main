@@ -363,13 +363,13 @@
 
 .hero {
     height: 100vh;
-    margin-top: -70px;
+    margin-top: -10px;
     position: relative;
     &.feature-dynamic-banner {
-        height: 70vh;
+        height: 65vh;
     }
     &.landing-dynamic-banner {
-        height: 80vh;
+        height: 75vh;
     }
     .hero-gradient {
         background: linear-gradient(to left, #0000, #000000);

@@ -20,7 +20,7 @@ const AfriplayLive = () => {
     return (
         <>
             <Header links={5} />
-            <AfriplayLiveBanner />
+            <AfriplayLiveBanner className="feature-dynamic-banner"/>
             <br />
             <br />
             <Reel title='TRENDING' />

@@ -6,7 +6,7 @@ import dynamicBannerSliderSettings from "../../../utils/sliderConfig/dynamicBann
 import Slider from "react-slick"
 import SliderItem from "./SliderItem"
 
-const LiveTVBanner = () => {
+const LiveTVBanner = ({className}) => {
     const [bannerContent, setBannerContent] = useState({})
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const LiveTVBanner = () => {
     console.log(bannerContent)
     return (
         <section>
-            <div className="hero">
+            <div className={`hero ${className}`}>
                 <div className="hero-container">
                     <div className="hero-content-wrapper">
                         <div className="hero-content">
