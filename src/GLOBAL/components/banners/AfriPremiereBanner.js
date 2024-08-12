@@ -79,7 +79,7 @@ const AfriPremiereBanner = () => {
             initSetAge()
         }, 1500);
     }, [ageRatings, bannerContentInfo])
-
+    console.log(bannerContent)
     return (
         <section>
             <div className="hero">
