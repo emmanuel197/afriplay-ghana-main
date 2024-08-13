@@ -108,8 +108,8 @@ const AfriPremiereBanner = () => {
                                                 <div className="mute-icon">
                                                     {
                                                         isMuted
-                                                            ? <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/speaker.svg" alt="speacker icon" />
-                                                            : <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/muted.svg" alt="mute icon" />
+                                                        ?<img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/muted.svg" alt="mute icon" />
+                                                        :   <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/speaker.svg" alt="speacker icon" />
                                                     }
                                                 </div>
                                             </div>

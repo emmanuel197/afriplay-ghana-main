@@ -40,7 +40,7 @@ const BuyMovieButton = ({ _currency = 'USD', price }) => {
         <div onClick={() => setShowModal(true)} className="price-btn">
             <p>{_currency}{price}</p>
             <div>
-                <img src='/assets/svg/shopping-bag.svg' alt='shopping bag' />
+                <img src='/assets/svg/shopping-bag.svg' alt='shopping bag' title='shopping bag'/>
             </div>
         </div>
     </>

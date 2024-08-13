@@ -61,7 +61,7 @@ const Header = (prop) => {
                         location.pathname === "/home" ? "active-link" : ""
                       }
                     >
-                      FEATURED
+                      featured
                     </p>
                   </Link>
                   <Link to="/movies">
@@ -70,7 +70,7 @@ const Header = (prop) => {
                         location.pathname === "/movies" ? "active-link" : ""
                       }
                     >
-                      MOVIES
+                      movies
                     </p>
                   </Link>
                   <Link to="/series">
@@ -79,7 +79,7 @@ const Header = (prop) => {
                         location.pathname === "/series" ? "active-link" : ""
                       }
                     >
-                      SERIES
+                      series
                     </p>
                   </Link>
                   <Link to="/livetv">
@@ -88,7 +88,7 @@ const Header = (prop) => {
                         location.pathname === "/livetv" ? "active-link" : ""
                       }
                     >
-                      LIVE TV
+                      live TV
                     </p>
                   </Link>
                   <Link to="/afripremiere">
@@ -99,7 +99,7 @@ const Header = (prop) => {
                           : ""
                       }
                     >
-                      AFRIPREMIERE
+                      afripremiere
                     </p>
                   </Link>
                   <Link to="/afriplaylive">
@@ -110,7 +110,7 @@ const Header = (prop) => {
                           : ""
                       }
                     >
-                      LIVE DRAMA
+                      live drama
                     </p>
                   </Link>
                   <div className="dropdown">
@@ -118,7 +118,7 @@ const Header = (prop) => {
                       onClick={() => setShowAccessDropdown(!showAccessDropdown)}
                       className="dropdown-toggler"
                     >
-                      ACCESS PACKS
+                      access packs
                       {/* <img
                         style={{ width: "20px", height: "20%", filter: "invert(60%)" }}
                         src="/assets/svg/caret-down.svg"

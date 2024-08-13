@@ -10,7 +10,7 @@ import { store } from "../../GLOBAL/redux/store";
 
 //renamed func from _verifyMSISDN to verifyUserData
 const _verifyMSISDN = (mobileNumber, password, rePassword) => {
-  console.warn('verifying MSISDN') // renamed from MSISDN to UserData
+  // console.warn('verifying MSISDN') // renamed from MSISDN to UserData
   
   let storedMSISDN = COOKIES.get('afri_msisdn')
 
@@ -104,7 +104,7 @@ export const verifyUserData = async (isPhoneNumber, mobileNumber, email, passwor
      * route to home
      */
 
-    console.warn('msisdn verification failed, generating OTP')
+    // console.warn('msisdn verification failed, generating OTP')
   
     await generateOTP(isPhoneNumber, mobileNumber, email)
     navigate('/otp-verification', { state: { password } })
@@ -118,14 +118,14 @@ export const verifyUserData = async (isPhoneNumber, mobileNumber, email, passwor
 
 export const generateOTP = async (isPhoneNumber, mobileNumber, email) => {
 
-  console.warn('mobileNumber', mobileNumber)
+  // console.warn('mobileNumber', mobileNumber)
 
   try {
     let res = await axios.post(generateOTPAPI(), {
       mobile_number: mobileNumber
     })
 
-    console.warn('generate OTP', res.data)
+    // console.warn('generate OTP', res.data)
   }
 
   catch (e) {
@@ -153,16 +153,16 @@ export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
   const OTP = await validateOTP(mobileNumber, OTPCode);
 
   if (OTP.status === 'error') {
-    console.warn('OTP response error >>', OTP.data)
+    // console.warn('OTP response error >>', OTP.data)
     TOAST.error(OTP.data.message)
     return
   }
 
-  console.warn('OTP response pass >>', OTP.data)
+  // console.warn('OTP response pass >>', OTP.data)
 
   if (OTP.status === "ok") {
 
-    console.warn('signing up...', mobileNumber, username)
+    // console.warn('signing up...', mobileNumber, username)
     store.dispatch(isLoadingReducer(true))
     const signupResponse = await axios.post(signUpAPI(), {
       first_name: "Afri",
@@ -173,7 +173,7 @@ export const verifyOTP = async (isPhoneNumber, OTPCode, password) => {
       username: username,
     })
 
-    console.warn('signupResponse >>', signupResponse.data)
+    // console.warn('signupResponse >>', signupResponse.data)
 
     if (signupResponse.data.message === "subscriber already exist") {
       LoginUnicast(true, mobileNumber, email, password)
@@ -229,7 +229,7 @@ export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password)
   const selectedOperator = JSON.parse(window.localStorage.getItem('afri_selected_operator'))
   const formattedOperator = username + `@${selectedOperator.operator_uid}`
   
-  console.warn('device', deviceInfoCookie)
+  // console.warn('device', deviceInfoCookie)
   
   try {
     const loginResponse = await axios.post(loginAPI, {
@@ -241,10 +241,10 @@ export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password)
       device_os: "Windows"
     })
     
-    console.warn('login uniqcast response >>', loginResponse.data)
+    // console.warn('login uniqcast response >>', loginResponse.data)
  
     if (loginResponse.data.status === "ok") {
-      console.warn('uniqcast login pass >>', loginResponse.data)
+      // console.warn('uniqcast login pass >>', loginResponse.data)
       COOKIES.set("user_info", loginResponse)
 
       await sendLog({ action: 'login' })
@@ -258,7 +258,7 @@ export const LoginUnicast = async (isPhoneNumber, mobileNumber, email, password)
    catch (e) {
     store.dispatch(isLoadingReducer(false))
     TOAST.error(ERROR_MESSAGES.AUTH.invalidLogin)
-    console.warn('login uniqcast error >>', e.message)
+    // console.warn('login uniqcast error >>', e.message)
   }
 }
 
@@ -287,7 +287,7 @@ const fetchUserAccount  = async (isPhoneNumber, mobileNumber, email, navigate) =
       }
     }
 } catch (e) {
-    console.warn('fetch user account error >>', e.message)
+    // console.warn('fetch user account error >>', e.message)
   }
   
 }
@@ -306,12 +306,12 @@ export const verifyResetOTP = async (mobileNumber, OTPCode, navigate) => {
   const OTP = await validateOTP(mobileNumber, OTPCode);
 
   if (OTP.status === 'error') {
-    console.warn('OTP response error >>', OTP.data)
+    // console.warn('OTP response error >>', OTP.data)
     TOAST.error(OTP.data.message)
     return
   }
 
-  console.warn('OTP response pass >>', OTP.data)
+  // console.warn('OTP response pass >>', OTP.data)
 
   if (OTP.status === "ok") {
     store.dispatch(isValidReducer(true))
@@ -342,7 +342,7 @@ export const resetPassword = async (isPhoneNumber, mobileNumber, email, password
     }
 
   } catch (e) {
-    console.warn('fetch user account error >>', e.message)
+    // console.warn('fetch user account error >>', e.message)
   }
 
 }

@@ -9,7 +9,7 @@ const Faq = () => {
     {
       question: "WHAT IS AFRIPLAY?",
       answer:
-        "Afriplay is a video streaming entertainment service offering unlimited access to TV shows, movies, live TV channels, and more. Stream and watch on a wide range of devices, just the way you would like to.No commitments, no hassles, and an all- pass to enjoyable satisfying content. Enjoy unlimited access using any of the six(6) available plans: Afriplay Basic, Basic +, Compact, Standard, Pro, Max.",
+        "Afriplay is a video streaming entertainment service offering unlimited access to TV shows, movies, live TV channels, and more. Stream and watch on a wide range of devices, just the way you would like to.No commitments, no hassles, and an all- pass to enjoyable satisfying content. Enjoy unlimited access using any of the six(6) available plans: Afriplay Daily Live, Daily Cinema, Daily Max, 3-day Binge, Weekly Wonder, Monthly Magic.",
       open: true
     },
     {
@@ -83,37 +83,37 @@ const Faq = () => {
               </div>
               <div className="faq-answer">
                 <div>
-                  <b>Afriplay BASIC</b>
+                  <b>Daily Live</b>
                   <p>One-day access to enjoy selected live Channels</p>
                 </div>
                 <br />
 
                 <div>
-                  <b>Afriplay BASIC+</b>
+                  <b>Daily Cinema</b>
                   <p>One-day access to enjoy selected movies, TV shows and live Channels</p>
                 </div>
                 <br />
 
                 <div>
-                  <b>Afriplay COMPACT</b>
+                  <b>Daily Max</b>
                   <p>One (1)-day access to enjoy selected movies, TV shows and premium live Channels</p>
                 </div>
                 <br />
 
                 <div>
-                  <b>Afriplay STANDARD</b>
+                  <b>3-day Binge</b>
                   <p>Three (3)-day access to enjoy premium movies, TV shows and live Channels</p>
                 </div>
                 <br />
 
                 <div>
-                  <b>Afriplay PRO</b>
+                  <b>Weekly Wonder</b>
                   <p>Seven (7)-day access to enjoy premium movies, TV shows and live Channels</p>
                 </div>
                 <br />
 
                 <div>
-                  <b>Afriplay MAX</b>
+                  <b>Monthly Magic</b>
                   <p>Thirty (30)-day access to enjoy premium movies, TV shows and live Channels</p>
                 </div>
                 <br />

@@ -10,7 +10,7 @@ import SliderWrapper from "../SliderWrapper"
 const TopTvAndMovies = () => {
     const dispatch = useDispatch()
     const { afriplaytop10 } = useSelector(state => state.fetchMovies)
-    console.warn('afriplaytop10', afriplaytop10)
+    // console.warn('afriplaytop10', afriplaytop10)
 
     useEffect(() => {
         fetchMovie(dispatch)
