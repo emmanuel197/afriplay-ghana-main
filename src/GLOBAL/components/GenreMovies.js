@@ -20,8 +20,8 @@ const GenreMovies = () => {
 
     useEffect(() => {
         const getCategoryId = () => {
-            let _activeGenreId = genres.filter(genre => genre.uid === activeGenreTab.toLowerCase())
-            if (_activeGenreId.length > 0)
+            let _activeGenreId = genres?.filter(genre => genre.uid === activeGenreTab.toLowerCase())
+            if (_activeGenreId?.length > 0)
                 setActiveGenreId(_activeGenreId[0].id)
             else setActiveGenreId(0)
         }

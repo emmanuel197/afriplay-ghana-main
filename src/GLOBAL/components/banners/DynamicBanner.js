@@ -216,7 +216,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                     image_id={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${
                       location.pathname === "/series" ? movie.images.POSTER : movie?.image_id
                     }?accessKey=WkVjNWNscFhORDBLCg==`}
-                    isSelected={selectedMovie.id === movie?.id}
+                    isSelected={selectedMovie?.id === movie?.id}
                     key={movie?.id}
                   />
                 ))}

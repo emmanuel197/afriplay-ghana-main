@@ -50,8 +50,8 @@ export const fetchOneSeries = async (seriesId, dispatch) => {
         }
       }
     );
-    console.log(`seriesId: ${seriesId}`)
-    console.log('response_:', JSON.stringify(req.data.data, null, 2));
+    // console.log(`seriesId: ${seriesId}`);
+    // console.log("response_:", JSON.stringify(req.data.data, null, 2));
     dispatch(fetchOneSeriesReducer(req.data.data));
   } catch (e) {
     // console.error(e.message);
@@ -83,10 +83,10 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
   try {
     const { access_token, operator_uid, user_id } = user_info.data.data;
     const packageIds = [];
-    const _categoriesArray = [];
+    const _categoriesArray = []
     const activeGenreId = getGenreId(activeGenre);
 
-    interceptResponse();
+    interceptResponse()
 
     const packages = await axios.get(
       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/packages?device_class=desktop`,
@@ -101,8 +101,8 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
       return packageIds.push(item.id);
     });
 
-    const packagesString = packageIds.join(",");
-
+    const packagesString = packageIds.join(',')
+    
     const categories = await axios.get(
       `https://ott.tvanywhereafrica.com:28182/api/client/v3/${operator_uid}/categories/vod?packages=${packagesString}`,
       {
@@ -111,17 +111,17 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
         }
       }
     );
-
-    const _categories = categories.data.data;
-
-    dispatch(setGenreCategories(_categories));
+    console.log(categories)
+    const _categories = categories.data.data
+    console.log(_categories)
+    dispatch(setGenreCategories(_categories))
 
     for (let i = 0; i < _categories.length; i++) {
       const element = _categories[i];
-      _categoriesArray.push(element.id);
+      _categoriesArray.push(element.id)
     }
 
-    const categoriesString = _categoriesArray.toString();
+    const categoriesString = _categoriesArray.toString()
 
     const movies = await axios.get(
       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${packagesString}&categories=${categoriesString}&genres=${activeGenreId}`,
@@ -131,7 +131,7 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
         }
       }
     );
-
+    console.log(movies)
     // switch (activeGenre) {
     // case 'DRAMA':
     //   dispatch(fetchMoviesByCategory({
@@ -169,26 +169,137 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
     //   break;
     // }
 
-    console.log(movies.data.data)
+    // console.log(movies.data.data)
 
     if (activeGenre === "ALL") {
-      dispatch(
-        fetchMoviesByCategory({
-          category: "ALL",
-          movies: []
-        })
-      );
-    } else
-      dispatch(
-        fetchMoviesByCategory({
-          movies: movies.data.data,
-          category: activeGenre
-        })
-      );
-  } catch (e) {
-    // console.log(e.message);
+      dispatch(fetchMoviesByCategory({
+        category: 'ALL',
+        movies: [],
+      }))
+    } else dispatch(fetchMoviesByCategory({
+      movies: movies.data.data,
+      category: activeGenre
+    }))
   }
-};
+
+  catch (e) {
+    console.log(e.message)
+  }
+}
+
+// export const fetchMovieByGenre = async (activeGenre, dispatch) => {
+//   try {
+//     const { access_token, operator_uid, user_id } = user_info.data.data;
+
+//     const packageIds = [];
+//     const _categoriesArray = [];
+//     const activeGenreId = getGenreId(activeGenre);
+//     console.log(activeGenreId)
+//     interceptResponse();
+
+//     const packages = await axios.get(
+//       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/packages?device_class=desktop`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${access_token}`
+//         }
+//       }
+//     );
+   
+
+//     [...packages.data.data].forEach((item) => {
+//       return packageIds.push(item.id);
+//     });
+
+//     const packagesString = packageIds.join(",");
+
+//     const categories = await axios.get(
+//       `https://ott.tvanywhereafrica.com:28182/api/client/v3/${operator_uid}/categories/vod?packages=${packagesString}`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${access_token}`
+//         }
+//       }
+//     );
+
+//     const _categories = categories.data.data;
+//     console.log(_categories)
+//     dispatch(setGenreCategories(_categories));
+
+//     for (let i = 0; i < _categories.length; i++) {
+//       const element = _categories[i];
+//       _categoriesArray.push(element.id);
+//     }
+
+//     const categoriesString = _categoriesArray.toString();
+//     console.log(categoriesString)
+//     const movies = await axios.get(
+//       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${packagesString}&categories=${categoriesString}&genres=${activeGenreId}`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${access_token}`
+//         }
+//       }
+//     );
+//     console.log(movies)
+//     switch (activeGenre) {
+//     case 'DRAMA':
+//       dispatch(fetchMoviesByCategory({
+//         movies: movies.data.data,
+//         category: activeGenre
+//       }))
+//       return;
+
+//     case 'ACTION':
+//       dispatch(fetchMoviesByCategory({
+//         movies: movies.data.data,
+//         category: activeGenre
+//       }))
+//       return;
+
+//     case 'COMEDY':
+//       dispatch(fetchMoviesByCategory({
+//         movies: movies.data.data,
+//         category: activeGenre
+//       }))
+//       return;
+
+//     case 'FAMILY':
+//       dispatch(fetchMoviesByCategory({
+//         movies: movies.data.data,
+//         category: activeGenre
+//       }))
+//       return;
+
+//     default:
+//       dispatch(fetchMoviesByCategory({
+//         category: 'ALL',
+//         movies: [],
+//       }))
+//       break;
+//     }
+
+//   // if (activeGenre === "ALL") {
+//   //     dispatch(
+//   //       fetchMoviesByCategory({
+//   //         category: "ALL",
+//   //         movies: []
+//   //       })
+//   //     );
+//   //   } else {
+//   //     console.log(activeGenre)
+//   //     dispatch(
+//   //       fetchMoviesByCategory({
+//   //         movies: movies.data.data,
+//   //         category: activeGenre
+//   //       })
+//   //     );
+//   //   }
+      
+//   } catch (e) {
+//     console.log(e.message);
+//   }
+// };
 
 export const fetchTrailer = async (id) => {
   // console.warn("fetch trailer", id);
@@ -201,7 +312,7 @@ export const fetchTrailer = async (id) => {
     interceptResponse();
 
     let url;
-    console.log(window.location.pathname)
+    // console.log(window.location.pathname);
     // if (window.location.pathname.includes('/series') || window.location.pathname.includes('/live')) url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/trailers/episodes/${id}`
     if (window.location.pathname.includes("/series"))
       url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/vod/trailers/episodes/${id}`;
@@ -269,7 +380,7 @@ export const fetchAllSeries = async (dispatch) => {
         }
       }
     );
-    console.log(`response: ${response.data}`)
+    console.log(`response: ${response.data}`);
 
     const response_ = await axios.get(
       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/series?series_id=${convertArrayToString(
@@ -282,7 +393,7 @@ export const fetchAllSeries = async (dispatch) => {
       }
     );
 
-    console.log('response_:', JSON.stringify(response_.data.data, null, 2));
+    console.log("response_:", JSON.stringify(response_.data.data, null, 2));
 
     // dispatch(fetchAllSeriesReducer(response_.data.data))
 
@@ -444,13 +555,114 @@ export const fetchAllMovies = async () => {
 //     // console.log(error);
 //   }
 // };
+// export const fetchMovie = async (dispatch) => {
+//   try {
+//     const { access_token, operator_uid, user_id } = user_info.data.data;
+
+//     interceptResponse();
+
+//     // Fetch packages
+//     const packages = await axios.get(
+//       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/packages?device_class=desktop`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${access_token}`
+//         }
+//       }
+//     );
+
+//     if (packages.data.status === "ok") {
+//       const packageIds = packages.data.data.map((item) => item.id);
+//       const packagesString = packageIds.join(",");
+
+//       // Fetch categories
+//       const categories = await axios.get(
+//         `https://ott.tvanywhereafrica.com:28182/api/client/v3/${operator_uid}/categories/vod?packages=${packagesString}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${access_token}`
+//           }
+//         }
+//       );
+//       console.log(categories)
+//       if (categories.data.status === "ok") {
+//         const categoryMap = new Map();
+
+//         categories.data.data.forEach((item) => {
+//           categoryMap.set(item.uid, item.id);
+//         });
+
+//         const categoryIds = [...categoryMap.values()].join(",");
+
+//         // Fetch movies
+//         const movies = await axios.get(
+//           `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${packagesString}&categories=${categoryIds}`,
+//           {
+//             headers: {
+//               Authorization: `Bearer ${access_token}`
+//             }
+//           }
+//         );
+
+//         const categorizedMovies = {
+//           mostwatched: [],
+//           recentlyadded: [],
+//           comingSoon: [],
+//           trending: [],
+//           afriplaytop10: [],
+//           afriPlaylive: [],
+//           afriPremiere: []
+//         };
+
+//         movies.data.data.forEach((movie) => {
+//           switch (movie.id) {
+//             case categoryMap.get("recentlyadded"):
+//               categorizedMovies.recentlyadded.push(movie);
+//               break;
+//             case categoryMap.get("mostwatched"):
+//               categorizedMovies.mostwatched.push(movie);
+//               break;
+//             case categoryMap.get("comingsoon"):
+//               categorizedMovies.comingSoon.push(movie);
+//               break;
+//             case categoryMap.get("trending"):
+//               categorizedMovies.trending.push(movie);
+//               break;
+//             case categoryMap.get("afriplaytop10"):
+//               categorizedMovies.afriplaytop10.push(movie);
+//               break;
+//             case categoryMap.get("afriPlaylive"):
+//               categorizedMovies.afriPlaylive.push(movie);
+//               break;
+//             case categoryMap.get("AfriPremiere"):
+//               categorizedMovies.afriPremiere.push(movie);
+//               break;
+//             default:
+//               break;
+//           }
+//         });
+
+//         dispatch(
+//           fetchMovies_success({
+//             movies: movies.data.data,
+//             packageNameToId: Object.fromEntries(categoryMap),
+//             moviesByCategories: categorizedMovies,
+//             ...categorizedMovies
+//           })
+//         );
+//       }
+//     }
+//   } catch (error) {
+//     // Handle errors appropriately
+//   }
+// };
+
 export const fetchMovie = async (dispatch) => {
   try {
     const { access_token, operator_uid, user_id } = user_info.data.data;
 
     interceptResponse();
 
-    // Fetch packages
     const packages = await axios.get(
       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/packages?device_class=desktop`,
       {
@@ -464,7 +676,6 @@ export const fetchMovie = async (dispatch) => {
       const packageIds = packages.data.data.map((item) => item.id);
       const packagesString = packageIds.join(",");
 
-      // Fetch categories
       const categories = await axios.get(
         `https://ott.tvanywhereafrica.com:28182/api/client/v3/${operator_uid}/categories/vod?packages=${packagesString}`,
         {
@@ -483,7 +694,6 @@ export const fetchMovie = async (dispatch) => {
 
         const categoryIds = [...categoryMap.values()].join(",");
 
-        // Fetch movies
         const movies = await axios.get(
           `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/categories/vod/content?packages=${packagesString}&categories=${categoryIds}`,
           {
@@ -500,37 +710,36 @@ export const fetchMovie = async (dispatch) => {
           trending: [],
           afriplaytop10: [],
           afriPlaylive: [],
-          afriPremiere: []
+          afriPremiere: [],
+          mtnrecommends: [],
+          doubledrama: [],
+          topepicmovies: [],
+          exciting: [],
+          hiddengems: [],
+          viewersfavourites: [],
+          randompicks: [],
+          bingeworthy: [],
+          nostalgia: [],
+          romcom: [],
+          omg: [],
+          suggestedmoviesforyou: [],
+          readysetpopcorn: [],
+          watchagain: []
         };
 
         movies.data.data.forEach((movie) => {
-          switch (movie.id) {
-            case categoryMap.get("recentlyadded"):
-              categorizedMovies.recentlyadded.push(movie);
-              break;
-            case categoryMap.get("mostwatched"):
-              categorizedMovies.mostwatched.push(movie);
-              break;
-            case categoryMap.get("comingsoon"):
-              categorizedMovies.comingSoon.push(movie);
-              break;
-            case categoryMap.get("trending"):
-              categorizedMovies.trending.push(movie);
-              break;
-            case categoryMap.get("afriplaytop10"):
-              categorizedMovies.afriplaytop10.push(movie);
-              break;
-            case categoryMap.get("afriPlaylive"):
-              categorizedMovies.afriPlaylive.push(movie);
-              break;
-            case categoryMap.get("AfriPremiere"):
-              categorizedMovies.afriPremiere.push(movie);
-              break;
-            default:
-              break;
+          const categoryUid = [...categoryMap.entries()].find(
+            ([, id]) => id === movie.id
+          )?.[0];
+
+          if (categoryUid) {
+            const key = categoryUid.toLowerCase();
+            if (categorizedMovies[key]) {
+              categorizedMovies[key].push(movie);
+            }
           }
         });
-
+        console.log(categorizedMovies);
         dispatch(
           fetchMovies_success({
             movies: movies.data.data,
@@ -646,7 +855,7 @@ export const fetchCategory = async (dispatch, id) => {
   //   return;
   // }
 
-      // console.log('packages -<',packages)
+  // console.log('packages -<',packages)
 
   //     // 2. call categories after packages is success
   //     if (packages.data.status === "ok") {
@@ -657,8 +866,8 @@ export const fetchCategory = async (dispatch, id) => {
   //       });
   //       const packagesString = packageIds.join(',')
 
-        // console.log('packagesString -<', packagesString)
-        // console.log('packageIds -<',packageIds)
+  // console.log('packagesString -<', packagesString)
+  // console.log('packageIds -<',packageIds)
 
   //       // fetch categories
   //       const categories = await axios.get(
@@ -670,7 +879,7 @@ export const fetchCategory = async (dispatch, id) => {
   //         }
   //       );
 
-        // console.log('categories ->', categories.data.data)
+  // console.log('categories ->', categories.data.data)
 
   //       if (categories.data.status === "error") {
   //         // dispatch fail
@@ -695,7 +904,7 @@ export const fetchCategory = async (dispatch, id) => {
   //         return item.id;
   //       });
 
-        // console.log('_packageNameToId -<', _packageNameToId)
+  // console.log('_packageNameToId -<', _packageNameToId)
 
   //       // 3. if categories in successfull call movies
   //       if (categories.data.status === "ok") {
@@ -727,7 +936,7 @@ export const fetchCategory = async (dispatch, id) => {
   //   } catch (error) {
   //     // dispatch fail
   //     dispatch(fetchCategory_error());
-      // console.log(error);
+  // console.log(error);
   //   }
   // };
 };
@@ -1054,7 +1263,7 @@ export const fetchMovieVideo = (dispatch, id, type) => {
       // console.log(`.then: ${JSON.stringify(response.data.data)}`);
     })
     .catch((e) => {
-      console.error(e.message)
+      console.error(e.message);
       // dispatch(fetchMovieVideo_success({ url: '' }));
       // console.log(`.catch: ${e.message}`)
       // dispatch(fetchMovieVideo_error());
@@ -1264,7 +1473,7 @@ export const fetchBannerContent = async (type) => {
       else randomBanner = liveTvBanners[0];
     }
 
-    console.warn('randomBanner >>', randomBanner)
+    console.warn("randomBanner >>", randomBanner);
 
     if (randomBanner) return randomBanner;
   } catch (e) {
@@ -1306,21 +1515,17 @@ export const fetchTrendingAndRecentlyAddedMovies = async (dispatch) => {
       const bingeWorthyCategory = categories.find(
         (category) => category.uid === "Bingeworthy"
       );
-      // console.log(bingeWorthyCategory)
+
       if (trendingCategory && recentlyAddedCategory && bingeWorthyCategory) {
-        // const trendingMovies = trendingCategory.content;
         const trending = trendingCategory.content;
-        // const recentlyAddedMovies = recentlyAddedCategory.content;
         const recentlyadded = recentlyAddedCategory.content;
         const bingeworthy = bingeWorthyCategory.content;
-        // console.log(trending);
+
         dispatch(
           fetchMovies_success({
-            // trendingMovies,
             trending: trending || [],
             recentlyadded: recentlyadded || [],
             bingeworthy: bingeworthy || []
-            // recentlyAddedMovies
           })
         );
       } else {

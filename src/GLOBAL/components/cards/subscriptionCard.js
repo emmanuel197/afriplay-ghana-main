@@ -52,7 +52,7 @@ const SubscriptionCard = (subscription) => {
         <div className='button-wrapper'>
         <Button action={() => {_initPurchasePackage()}} label='Subscribe'/>
         </div>
-        <div
+        {/* <div
           className="icons-container-wrapper"
         >
           <div className="icons-container">
@@ -70,7 +70,7 @@ const SubscriptionCard = (subscription) => {
               alt="Apple"
             />
           </div>
-        </div>
+        </div> */}
       </div>
 
     

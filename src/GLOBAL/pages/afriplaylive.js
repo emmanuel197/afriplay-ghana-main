@@ -23,9 +23,9 @@ const AfriplayLive = () => {
             <AfriplayLiveBanner className="feature-dynamic-banner"/>
             <br />
             <br />
-            <Reel title='TRENDING' />
+            {/* <Reel title='TRENDING' />
             <Reel title='RECENTLY ADDED' />
-            <Reel title='COMING SOON' />
+            <Reel title='COMING SOON' /> */}
             <Footer />
         </>
     )

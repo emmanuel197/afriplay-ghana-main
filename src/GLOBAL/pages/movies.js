@@ -26,9 +26,24 @@ const Movies = () => {
                 <DynamicBanner />
                 <GenreTabs />
                 <GenreMovies />
-                <Reel title='TRENDING' />
-                <Reel title='RECENTLY ADDED' />
-                <Reel title='COMING SOON' />
+                <Reel title='MTN RECOMMENDS'/>
+                <Reel title='DOUBLE DRAMA'/>
+                <Reel title='TOP EPIC MOVIES'/>
+                <Reel title='EXCITING'/>
+                <Reel title='HIDDEN GEMS'/>
+                <Reel title='VIEWERS FAVOURITES'/>
+                <Reel title='RANDOM PICKS'/>
+                <Reel title='TRENDING ON AFRIPLAY' />
+                <Reel title='CURRENT/LATEST ON AFRIPLAY' />
+                <Reel title='BINGE WORTHY' />
+                <Reel title='NOSTALGIA' />
+                <Reel title='ROMCOM' />
+                <Reel title='OMG' />
+                <Reel title='SUGGESTED MOVIES FOR YOU' />
+                <Reel title='READY SET POPCORN' />
+                {/* <Reel title='COMING SOON' /> */}
+                <Reel title='WATCH AGAIN'/>
+
                 <Footer />
 
                 {/* <Reel title='PAY PER VIEW' /> */}

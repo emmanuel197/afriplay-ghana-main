@@ -2,6 +2,10 @@ export const genreTabs = [
     'ALL',
     'DRAMA',
     'ACTION',
+    'ROMANCE',
+    'CRIME',
     'COMEDY',
-    'FAMILY',
+    'ADVENTURE',
+    'ANIMATION',
+  
 ]

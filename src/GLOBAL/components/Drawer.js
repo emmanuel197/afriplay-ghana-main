@@ -30,9 +30,9 @@ const Drawer = () => {
 
                     {user_info ? (
                         <ul>
-                            <li><Link to='/home'>Featured</Link></li>
+                            {/* <li><Link to='/home'>Featured</Link></li> */}
                             <li><Link to='/movies'>Movies</Link></li>
-                            <li><Link to='/series'>Series</Link></li>
+                            {/* e */}
                             <li><Link to='/livetv'>Live TV</Link></li>
                             <li><Link to='/afripremiere'>AfriPremiere</Link></li>
                             <li><Link to='/afriplaylive'>Live Drama</Link></li>
@@ -52,7 +52,7 @@ const Drawer = () => {
                         </ul>
                     ) : <></>}
 
-                    {!user_info ? (
+                    {/* {!user_info ? (
                         <div className='drawer-content'>
                             <Link to='/signup'>
                                 <button className='btn-filled'>Sign Up</button>
@@ -61,7 +61,7 @@ const Drawer = () => {
                                 <button className='btn-ghost'>Sign In</button>
                             </Link>
                         </div>
-                    ) : <></>}
+                    ) : <></>} */}
                 </div>
             </section>
         </>

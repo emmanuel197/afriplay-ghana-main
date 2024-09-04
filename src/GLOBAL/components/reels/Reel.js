@@ -4,26 +4,57 @@ import HomeBannerSlider from "../HomeBannerSlider";
 import '../../components/styles/landing/slides.scss'
 
 const Reel = ({ title }) => {
-    const { recentlyadded, mostwatched, afriPlaylive, afriPremiere, comingSoon, bingeworthy, trending, afriplaytop10 } = useSelector((state) => state.fetchMovies);
+    const { recentlyadded, mostwatched, afriPlaylive, afriPremiere, comingSoon, bingeworthy, nostalgia, romcom, omg, readysetpopcorn, mtnrecommends, doubledrama, hiddengems, watchagain, topepicmovies, exciting, trending, viewersfavourites, randompicks, suggestedmoviesforyou, afriplaytop10 } = useSelector((state) => state.fetchMovies);
     const { activeGenreTab } = useSelector(state => state.genreTab)
     // console.log(bingeworthy)
     const _allMovies = {
         mostwatched,
         recentlyadded,
         comingSoon,
+        bingeworthy,
+        nostalgia,
+        romcom,
+        omg,
+        readysetpopcorn,
+        suggestedmoviesforyou,
+        mtnrecommends,
+        doubledrama,
+        hiddengems,
+        watchagain,
+        topepicmovies,
+        exciting,
+        viewersfavourites,
+        randompicks,
         trending,
         afriplaytop10,
         afriPlaylive,
         afriPremiere,
     }
+    console.log(bingeworthy)
 
     if (activeGenreTab === 'ALL') {
         if (title === 'AFRIPREMIERE') return <HomeBannerSlider title='AFRIPREMIERE' />
         if (title === 'AFRIPLAY LIVE') return <HomeBannerSlider title='AFRIPLAY LIVE' />
         if (title === 'RECENTLY ADDED' && recentlyadded?.length > 0) return <ReelGenreWrapper title='RECENTLY ADDED' allMovies={_allMovies} movies={recentlyadded} />
         if (title === 'COMING SOON' && comingSoon?.length > 0) return <ReelGenreWrapper title='COMING SOON' allMovies={_allMovies} movies={comingSoon} />
+        
         if (title === 'BINGE WORTHY' && bingeworthy?.length > 0) return <ReelGenreWrapper title='BINGE WORTHY' allMovies={_allMovies} movies={bingeworthy} />
+        if (title === 'NOSTALGIA' && nostalgia?.length > 0) return <ReelGenreWrapper title='NOSTALGIA' allMovies={_allMovies} movies={nostalgia} />
+        if (title === 'ROMCOM' && romcom?.length > 0) return <ReelGenreWrapper title='ROMCOM' allMovies={_allMovies} movies={romcom} />
+        if (title === 'OMG' && romcom?.length > 0) return <ReelGenreWrapper title='OMG' allMovies={_allMovies} movies={omg} />
+        if (title === 'READY SET POPCORN' && romcom?.length > 0) return <ReelGenreWrapper title='READY SET POPCORN' allMovies={_allMovies} movies={omg} />
         if (title === 'TRENDING' && trending?.length > 0) return <ReelGenreWrapper title='TRENDING' allMovies={_allMovies} movies={trending} />
+        if (title === 'MTN RECOMMENDS' && mtnrecommends?.length > 0) return <ReelGenreWrapper title='MTN RECOMMENDS' allMovies={_allMovies} movies={mtnrecommends} />
+        if (title === 'DOUBLE DRAMA' && doubledrama?.length > 0) return <ReelGenreWrapper title='DOUBLE DRAMA' allMovies={_allMovies} movies={doubledrama} />
+        if (title === 'HIDDEN GEMS' && hiddengems?.length > 0) return <ReelGenreWrapper title='HIDDEN GEMS' allMovies={_allMovies} movies={hiddengems} />
+        if (title === 'WATCH AGAIN' && watchagain?.length > 0) return <ReelGenreWrapper title='WATCH AGAIN' allMovies={_allMovies} movies={watchagain} />
+        if (title === 'TOP EPIC MOVIES' && topepicmovies?.length > 0) return <ReelGenreWrapper title='TOP EPIC MOVIES' allMovies={_allMovies} movies={topepicmovies} />
+        if (title === 'EXCITING' && exciting?.length > 0) return <ReelGenreWrapper title='EXCITING' allMovies={_allMovies} movies={exciting} />
+        if (title === 'VIEWERS FAVOURITES' && viewersfavourites?.length > 0) return <ReelGenreWrapper title='VIEWERS FAVOURITES' allMovies={_allMovies} movies={viewersfavourites} />
+        if (title === 'RANDOM PICKS' && randompicks?.length > 0) return <ReelGenreWrapper title='RANDOM PICKS' allMovies={_allMovies} movies={randompicks} />
+        if (title === 'SUGGESTED MOVIES FOR YOU' && suggestedmoviesforyou?.length > 0) return <ReelGenreWrapper title='SUGGESTED MOVIES FOR YOU' allMovies={_allMovies} movies={suggestedmoviesforyou} />
+        
+        
         // if (title === 'MOST WATCHED' && mostwatched.length > 0) return <ReelGenreWrapper title='MOST WATCHED' allMovies={_allMovies} movies={mostwatched} />
     }
 
@@ -31,3 +62,97 @@ const Reel = ({ title }) => {
 }
 
 export default Reel
+// import { useSelector } from 'react-redux';
+// import ReelGenreWrapper from './ReelGenreWrapper';
+// import HomeBannerSlider from "../HomeBannerSlider";
+// import '../../components/styles/landing/slides.scss';
+
+// const Reel = ({ title }) => {
+//     const {
+//         recentlyadded,
+//         mostwatched,
+//         afriPlaylive,
+//         afriPremiere,
+//         comingSoon,
+//         bingeworthy,
+//         trending,
+//         afriplaytop10,
+//         mtnrecommends,
+//         doubledrama,
+//         topepicmovies,
+//         exciting,
+//         hiddengems,
+//         viewersfavourites,
+//         randompicks,
+//         nostalgia,
+//         romcom,
+//         omg,
+//         suggestedmoviesforyou,
+//         readysetpopcorn,
+//         watchagain
+//     } = useSelector((state) => state.fetchMovie); // Assuming the slice name is fetchMovie
+
+//     const { activeGenreTab } = useSelector(state => state.genreTab);
+
+//     const allMovies = {
+//         recentlyadded,
+//         mostwatched,
+//         afriPlaylive,
+//         afriPremiere,
+//         comingSoon,
+//         bingeworthy,
+//         trending,
+//         afriplaytop10,
+//         mtnrecommends,
+//         doubledrama,
+//         topepicmovies,
+//         exciting,
+//         hiddengems,
+//         viewersfavourites,
+//         randompicks,
+//         nostalgia,
+//         romcom,
+//         omg,
+//         suggestedmoviesforyou,
+//         readysetpopcorn,
+//         watchagain
+//     };
+
+//     const categoryTitleMap = {
+//         'RECENTLY ADDED': recentlyadded,
+//         'COMING SOON': comingSoon,
+//         'BINGE WORTHY': bingeworthy,
+//         'TRENDING': trending,
+//         'AFRIPLAY TOP 10': afriplaytop10,
+//         'AFRIPLAY LIVE': afriPlaylive,
+//         'AFRIPREMIERE': afriPremiere,
+//         'MTN RECOMMENDS': mtnrecommends,
+//         'DOUBLE DRAMA': doubledrama,
+//         'TOP EPIC MOVIES': topepicmovies,
+//         'EXCITING': exciting,
+//         'HIDDEN GEMS': hiddengems,
+//         'VIEWERS FAVOURITES': viewersfavourites,
+//         'RANDOM PICKS': randompicks,
+//         'NOSTALGIA': nostalgia,
+//         'ROM-COM': romcom,
+//         'OMG!': omg,
+//         'SUGGESTED MOVIES FOR YOU': suggestedmoviesforyou,
+//         'READY. SET. POPCORN': readysetpopcorn,
+//         'WATCH AGAIN': watchagain,
+//         'MOST WATCHED': mostwatched
+//     };
+
+//     // Handle the "ALL" tab
+//     if (activeGenreTab === 'ALL') {
+//         if (categoryTitleMap[title] && categoryTitleMap[title].length > 0) {
+//             if (title === 'AFRIPREMIERE' || title === 'AFRIPLAY LIVE') {
+//                 return <HomeBannerSlider title={title} />;
+//             }
+//             return <ReelGenreWrapper title={title} allMovies={allMovies} movies={categoryTitleMap[title]} />;
+//         }
+//     }
+
+//     return <></>;
+// };
+
+// export default Reel;

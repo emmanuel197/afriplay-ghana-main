@@ -7,6 +7,11 @@ footer {
   font-size: 13px;
   position: relative;
   z-index: 9;
+
+  @media only screen and (max-width: 500px) {
+    padding: 1rem 15px ;
+  }
+  
   .col {
     line-height: 35px;
     margin: 0 80px;
@@ -31,6 +36,11 @@ footer {
     justify-content: space-between;
     margin-bottom: 50px;
     flex-wrap: wrap;
+    align-items: center;
+
+    @media only screen and (max-width: 500px) {
+      margin-bottom: 10px;
+    }
   }
 
   .date-footer {
@@ -38,6 +48,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    
 
     ul {
       display: flex;

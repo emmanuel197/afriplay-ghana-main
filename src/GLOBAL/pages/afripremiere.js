@@ -22,9 +22,9 @@ const AfriPremiere = () => {
             <AfriPremiereBanner />
             <br />
             <br />
-            <Reel title='MOST WATCHED' />
+            {/* <Reel title='MOST WATCHED' />
             <Reel title='RECENTLY ADDED' />
-            <Reel title='COMING SOON' />
+            <Reel title='COMING SOON' /> */}
             <Footer />
         </>
     )

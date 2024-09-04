@@ -15,7 +15,7 @@ const LiveTV = () => {
     return (
         <>
             <Header links={5} />
-            <LiveTVBanner className="feature-dynamic-banner"/>
+            {/* <LiveTVBanner className="feature-dynamic-banner"/> */}
             <br />
             <br />
             <LiveTvReelSlider />

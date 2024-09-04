@@ -55,7 +55,7 @@ const Header = (prop) => {
               <Logo />
               {prop.links > 2 && (
                 <nav className="links">
-                  <Link to="/home">
+                  {/* <Link to="/home">
                     <p
                       className={
                         location.pathname === "/home" ? "active-link" : ""
@@ -63,8 +63,8 @@ const Header = (prop) => {
                     >
                       featured
                     </p>
-                  </Link>
-                  <Link to="/movies">
+                  </Link> */}
+                  <Link to="/movies" className="nav-link">
                     <p
                       className={
                         location.pathname === "/movies" ? "active-link" : ""
@@ -73,7 +73,7 @@ const Header = (prop) => {
                       movies
                     </p>
                   </Link>
-                  <Link to="/series">
+                  {/* <Link to="/series">
                     <p
                       className={
                         location.pathname === "/series" ? "active-link" : ""
@@ -81,8 +81,8 @@ const Header = (prop) => {
                     >
                       series
                     </p>
-                  </Link>
-                  <Link to="/livetv">
+                  </Link> */}
+                  <Link className="nav-link" to="/livetv">
                     <p
                       className={
                         location.pathname === "/livetv" ? "active-link" : ""
@@ -91,7 +91,7 @@ const Header = (prop) => {
                       live TV
                     </p>
                   </Link>
-                  <Link to="/afripremiere">
+                  <Link className="nav-link" to="/afripremiere">
                     <p
                       className={
                         location.pathname === "/afripremiere"
@@ -102,7 +102,7 @@ const Header = (prop) => {
                       afripremiere
                     </p>
                   </Link>
-                  <Link to="/afriplaylive">
+                  <Link className="nav-link" to="/afriplaylive">
                     <p
                       className={
                         location.pathname === "/afriplaylive"
@@ -279,8 +279,8 @@ const Logo = () => {
   }, []);
 
   return (
-    <div className="logo">
-      <Link to={homeLink}>
+    <div id="logo">
+      <Link style={{height: "auto", display: "block"}} to={homeLink}>
         <img src={logoTextSrc} alt="afriplay-logo" />
       </Link>
     </div>
