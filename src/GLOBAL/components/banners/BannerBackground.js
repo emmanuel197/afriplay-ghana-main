@@ -1,81 +1,13 @@
-// import { useEffect, useState } from "react";
-// import ReactPlayer from "react-player";
-
-// const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerContent }) => {
-//     const [onPlayTrailer, setOnPlayTrailer] = useState(_onPlayTrailer);
-//     const [isPlaying, setIsPlaying] = useState(true); 
-//     const [isPlayerReady, setIsPlayerReady] = useState(false);
-
-//     // Handle scroll locally, only affecting the BannerBackground
-//     useEffect(() => {
-//         const handleScroll = () => {
-//             if (window.scrollY < 350) setIsPlaying(true);
-//             else setIsPlaying(false);
-//         };
-
-//         window.addEventListener("scroll", handleScroll);
-//         return () => { window.removeEventListener("scroll", handleScroll); };
-//     }, []);
-
-//     const bannerImgRender = () => (
-//         <div className="hero-player-container">
-//             <img
-//                 src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${bannerImg}?accessKey=WkVjNWNscFhORDBLCg==`}
-//                 alt={_bannerContent?.title}
-//                 className="dynamic-landing-banner"
-//                 width="100%"
-//                 height="100%"
-//             />
-//         </div>
-//     );
-
-//     // Only the BannerBackground handles its internal player state.
-//     if (onPlayTrailer) {
-//         return (
-//             <div className='hero-player-container'>
-//                 {!isPlayerReady && bannerImgRender()}
-//                 <ReactPlayer
-//                     height='100%'
-//                     width='100%'
-//                     className='react-player'
-//                     url={_trailer}
-//                     playing={isPlaying}
-//                     muted={muted}
-//                     autoPlay={true}
-//                     controls={false}
-//                     onReady={() => setIsPlayerReady(true)}
-//                     onEnded={() => {
-//                         setIsPlayerReady(false);
-//                         setOnPlayTrailer(false);
-//                     }}
-//                 />
-//             </div>
-//         );
-//     } else if (bannerImg) {
-//         return bannerImgRender();
-//     }
-//     return null;
-// };
-
-// export default BannerBackground;
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-
-// Utility function to detect mobile devices
-const isMobile = () => /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent);
 
 const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerContent }) => {
     const [onPlayTrailer, setOnPlayTrailer] = useState(_onPlayTrailer);
     const [isPlaying, setIsPlaying] = useState(true); 
     const [isPlayerReady, setIsPlayerReady] = useState(false);
-    const [isMuted, setIsMuted] = useState(muted);
 
+    // Handle scroll locally, only affecting the BannerBackground
     useEffect(() => {
-        // Ensure the video is muted on mobile devices for auto-play to work
-        if (isMobile()) {
-            setIsMuted(true); // Force mute on mobile
-        }
-
         const handleScroll = () => {
             if (window.scrollY < 350) setIsPlaying(true);
             else setIsPlaying(false);
@@ -97,6 +29,7 @@ const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerC
         </div>
     );
 
+    // Only the BannerBackground handles its internal player state.
     if (onPlayTrailer) {
         return (
             <div className='hero-player-container'>
@@ -107,10 +40,9 @@ const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerC
                     className='react-player'
                     url={_trailer}
                     playing={isPlaying}
-                    muted={isMuted} // Ensure muted is true on mobile
+                    muted={muted}
                     autoPlay={true}
                     controls={false}
-                    playsinline={true} // Ensure video plays inline on mobile
                     onReady={() => setIsPlayerReady(true)}
                     onEnded={() => {
                         setIsPlayerReady(false);
