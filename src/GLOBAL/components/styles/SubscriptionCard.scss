@@ -66,7 +66,14 @@
     padding: 0 2vw;
   }
   
-
+  .terms-of-use {
+    display: flex;
+    justify-content: center;
+    background-color: $kg_color;
+    color: black;
+    width: 80%;
+    border-radius: 10px;
+  }
   .subscription-card {
     
     background-color: $kinder_color;
@@ -155,10 +162,13 @@
         margin-left: auto;
         margin-right: auto;
         display: flex;
-
+        
+        
         .check-mark {
           color:#c4bd47;
+          margin-top: 0.3rem;
           margin-right: 0.5rem;
+          align-self: flex-start;
         }
       }
 

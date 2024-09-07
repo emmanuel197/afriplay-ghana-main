@@ -280,7 +280,7 @@ const Logo = () => {
 
   return (
     <div id="logo">
-      <Link style={{height: "auto", display: "block"}} to={homeLink}>
+      <Link to={homeLink}>
         <img src={logoTextSrc} alt="afriplay-logo" />
       </Link>
     </div>

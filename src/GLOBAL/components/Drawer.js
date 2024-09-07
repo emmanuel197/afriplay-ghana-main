@@ -52,7 +52,7 @@ const Drawer = () => {
                         </ul>
                     ) : <></>}
 
-                    {/* {!user_info ? (
+                    {!user_info ? (
                         <div className='drawer-content'>
                             <Link to='/signup'>
                                 <button className='btn-filled'>Sign Up</button>
@@ -61,7 +61,7 @@ const Drawer = () => {
                                 <button className='btn-ghost'>Sign In</button>
                             </Link>
                         </div>
-                    ) : <></>} */}
+                    ) : <></>}
                 </div>
             </section>
         </>

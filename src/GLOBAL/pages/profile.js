@@ -5,7 +5,7 @@ import Watchlist from "../components/profileTabs/Watchlist";
 import { fetchUserDevices, getProfile, updateProfile } from "../redux/account";
 import "../components/styles/profile.scss"
 import Devices from "../components/profileTabs/Devices";
-
+import FAQs from "../components/profileTabs/Faqs";
 const Profile = () => {
     const [activeTab, setActiveTab] = useState("watchlist");
     const setActiveTabName = (str) => setActiveTab(str);
@@ -44,6 +44,10 @@ const Profile = () => {
                                 <img src='/assets/profile/support.svg' alt='support_image' />
                                 <p>Support</p>
                             </li>
+                            <li className={activeTab === "faqs" ? "active-tab tab" : "tab"} onClick={() => setActiveTabName("faqs")}>
+                                <img src='/assets/profile/support.svg' alt='support_image' />
+                                <p>FAQs</p>
+                            </li>
                         </ul>
                     </div>
 
@@ -54,6 +58,7 @@ const Profile = () => {
                         <Payment active={activeTab} />
                         <ProfileCard active={activeTab} />
                         <Support active={activeTab} />
+                        <FAQs active={activeTab}/>
                     </div>
                 </main>
                 <Footer />
@@ -139,5 +144,12 @@ const Support = ({ active }) => {
     )
     return <></>
 }
+
+// const FAQs = ({ active }) => {
+//     if (active === 'faqs') return (
+//         <>FAQs</>
+//     )
+//     return <></>
+// }
 
 export default Profile

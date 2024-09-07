@@ -15,8 +15,12 @@ const Movies = () => {
     useEffect(() => {
         const _setActiveGenreTab = (_genreTab = 'ALL') => dispatch(setActiveGenreTab(_genreTab))
         _setActiveGenreTab('ALL')
-        fetchMovie(dispatch)
+        
         fetchGenres(dispatch)
+    }, [dispatch])
+
+    useEffect(() => {
+        fetchMovie(dispatch)
     }, [dispatch])
 
     return (

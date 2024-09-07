@@ -1,0 +1,18 @@
+@import '../../../global.scss';
+.faqs {
+    color: black;
+    .faqs-header {
+        color: $kinder_color;
+    }
+    .faq-section {
+        display: flex;
+        flex-direction: column;
+        // &:not(:first-child) {
+        margin-top: 1rem;
+        // }
+        .faq-section-body-text {
+            margin-bottom: 1rem;
+        }
+    }
+    
+}

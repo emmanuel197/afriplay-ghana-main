@@ -13,9 +13,9 @@ const SubscriptionsData = [
     Currency: "GHS",
     DataBonus: "200 MB",
     Details: [
-      "Daily unlimited access",
-      `Rentals
-      (TVOD)`,
+      "Selected Live TV Channels only",
+      // `Rentals
+      // (TVOD)`,
       `200Mb data bonus`
     ]
   },
@@ -31,10 +31,10 @@ const SubscriptionsData = [
     Currency: "GHS",
     DataBonus: "320 MB",
     Details: [
-      `Daily unlimited access`,
-      `Rentals
-    (TVOD)`,
-      `200Mb data bonus`
+      `Selected Movies & Shows Only`,
+    //   `Rentals
+    // (TVOD)`,
+      `320Mb data bonus`
     ]
   },
   // {
@@ -77,9 +77,9 @@ const SubscriptionsData = [
     Currency: "GHS",
     DataBonus: "600 MB",
     Details: [
-      `Daily unlimited access`,
-      `Rentals
-    (TVOD)`,
+      `Unlimited access to Live TV, Movies & Shows`,
+    //   `Rentals
+    // (TVOD)`,
       `600Mb data bonus`
     ]
   },
@@ -100,7 +100,7 @@ const SubscriptionsData = [
   {
     ID: 1085,
     UID: "standard",
-    Name: "3-day Binge",
+    Name: "3-day Treat",
     "Price Options": "daily",
     Validity: "3 days",
     "Rate Code": 9921710005,
@@ -110,8 +110,8 @@ const SubscriptionsData = [
     DataBonus: "1.2 GB",
     Details: [
       `3-Day unlimited access`,
-      `Rentals
-    (TVOD)`,
+    //   `Rentals
+    // (TVOD)`,
       `1.2GB data bonus`
     ]
   },
@@ -128,8 +128,8 @@ const SubscriptionsData = [
     DataBonus: "3 GB",
     Details: [
       `7-Day unlimited access`,
-      `Rentals
-    (TVOD)`,
+    //   `Rentals
+    // (TVOD)`,
       `3GB data bonus`
     ]
   },
@@ -146,8 +146,8 @@ const SubscriptionsData = [
     DataBonus: "10 GB",
     Details: [
       `30-Day unlimited access`,
-      `Rentals
-    (TVOD)`,
+    //   `Rentals
+    // (TVOD)`,
       `10GB data bonus`
     ]
   }
