@@ -61,29 +61,46 @@
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
-// Utility function to detect mobile devices
-const isMobile = () => /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent);
+// Utility function to detect iOS devices
+const isIOS = () => /iPhone|iPad|iPod/i.test(window.navigator.userAgent);
 
 const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerContent }) => {
     const [onPlayTrailer, setOnPlayTrailer] = useState(_onPlayTrailer);
-    const [isPlaying, setIsPlaying] = useState(true); 
+    const [isPlaying, setIsPlaying] = useState(true);
     const [isPlayerReady, setIsPlayerReady] = useState(false);
     const [isMuted, setIsMuted] = useState(muted);
+    const [interactionTriggered, setInteractionTriggered] = useState(false); // Track user interaction
 
     useEffect(() => {
-        // Ensure the video is muted on mobile devices for auto-play to work
-        if (isMobile()) {
-            setIsMuted(true); // Force mute on mobile
+        if (isIOS()) {
+            setIsMuted(true); // Ensure muted is true on iOS to allow auto-play
         }
 
         const handleScroll = () => {
             if (window.scrollY < 350) setIsPlaying(true);
             else setIsPlaying(false);
+
+            // On iOS, we wait for some user interaction to trigger play
+            if (isIOS() && !interactionTriggered) {
+                setInteractionTriggered(true); // Mark interaction as happened
+                setIsPlaying(true); // Trigger video play after scroll
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
-        return () => { window.removeEventListener("scroll", handleScroll); };
-    }, []);
+        document.addEventListener("touchstart", () => {
+            // Handle touch events to trigger video play
+            if (isIOS() && !interactionTriggered) {
+                setInteractionTriggered(true);
+                setIsPlaying(true);
+            }
+        });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            document.removeEventListener("touchstart", () => {});
+        };
+    }, [interactionTriggered]);
 
     const bannerImgRender = () => (
         <div className="hero-player-container">
@@ -107,10 +124,10 @@ const BannerBackground = ({ muted, bannerImg, _trailer, _onPlayTrailer, _bannerC
                     className='react-player'
                     url={_trailer}
                     playing={isPlaying}
-                    muted={isMuted} // Ensure muted is true on mobile
+                    muted={isMuted} // Ensure muted is true on mobile/iOS
                     autoPlay={true}
                     controls={false}
-                    playsinline={true} // Ensure video plays inline on mobile
+                    playsinline={true} // Ensure video plays inline on iOS
                     onReady={() => setIsPlayerReady(true)}
                     onEnded={() => {
                         setIsPlayerReady(false);
