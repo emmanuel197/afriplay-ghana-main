@@ -547,8 +547,8 @@ const MovieCard = ({ movie, type }) => {
             const trailerUrl = await fetchTrailer(movie.id);
             setTrailer(trailerUrl);
         };
-        fetchMovieTrailer();
-    }, [movie.id]);
+        isHovering && fetchMovieTrailer();
+    }, [movie.id, isHovering]);
 
     const MovieCardComponent = () => (
         <div 
@@ -581,7 +581,7 @@ const MovieCard = ({ movie, type }) => {
             </Link> */}
             <div className="movie-box" onClick={() => handleClick(movie.type === 'series' ? `/series/${movie.id}` : `/movie/${movie.id}`)}>
                <div className="poster-div">
-                    {isHovering && trailer ? (
+                     {isHovering && trailer ? (
                         <ReactPlayer
                             url={trailer}
                             playing
@@ -590,14 +590,14 @@ const MovieCard = ({ movie, type }) => {
                             height="100%"
                             className="trailer-player"
                         />
-                    ) : (
-                        <LazyLoadImage
+                    ) : ( 
+                                                <LazyLoadImage
                             src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie.image_id}?accessKey=WkVjNWNscFhORDBLCg==`}
                             alt={movie.alt}
                             width="100%"
                             placeholder={<div className="poster-img-placeholder"></div>}
                         />
-                    )}
+                     )} 
                 </div>
             </div>
         </div>

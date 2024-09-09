@@ -48,7 +48,7 @@ const SubscriptionPage = () => {
                   <SubscriptionCard key={index} subscription={subscription} />
                 ))}
                 <p className="terms-of-use">Afriplay Terms of Use apply for all bundles</p>
-              </div>
+              </div>  
             </>
           )}
         </div>
