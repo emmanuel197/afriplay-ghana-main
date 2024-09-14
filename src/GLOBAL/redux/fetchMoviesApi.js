@@ -29,7 +29,8 @@ import {
   fetchWatchlistReducer,
   fetchGenresReducer,
   fetchAgeRatingsReducer,
-  fetchAllSeriesReducer
+  fetchAllSeriesReducer,
+  fetchMovies_fromCache
 } from "./slice/moviesSlice";
 import { storeDataInIndexedDB, getDataFromIndexedDB } from '../../utils/indexedDB'
 // get user info from cookies
@@ -754,17 +755,22 @@ export const fetchAllMovies = async () => {
 //     // Handle errors appropriately
 //   }
 // };
-// redux/fetchMoviesApi.js
-
-
 export const fetchMovie = async (dispatch) => {
   try {
+    // Try to get cached data from IndexedDB first
     const cachedData = await getDataFromIndexedDB('moviesDB', 'movieCategories');
-    
+
     if (cachedData) {
-      // Dispatch cached data from IndexedDB to Redux
-      dispatch(fetchMovies_success(cachedData));
-      return;
+      // Dispatch cached data to Redux immediately
+      dispatch(fetchMovies_fromCache({
+        movies: cachedData.movies,
+        packageNameToId: cachedData.packageNameToId,
+        moviesByCategories: cachedData.moviesByCategories,
+        trending: cachedData.trending,
+        recentlyadded: cachedData.recentlyadded,
+        bingeworthy: cachedData.bingeworthy,
+      }));
+      return; // Exit early if data is found in cache
     }
 
     // If no cached data, proceed with API request
@@ -808,7 +814,7 @@ export const fetchMovie = async (dispatch) => {
             },
           }
         );
-
+        console.log(movies)
         const categorizedMovies = {
           mostwatched: [],
           recentlyadded: [],
@@ -846,7 +852,7 @@ export const fetchMovie = async (dispatch) => {
           }
         });
 
-        // Store fetched data in IndexedDB for persistence
+        // Store fetched data in IndexedDB for future use
         await storeDataInIndexedDB('moviesDB', 'movieCategories', {
           movies: movies.data.data,
           packageNameToId: Object.fromEntries(categoryMap),
@@ -854,21 +860,25 @@ export const fetchMovie = async (dispatch) => {
           ...categorizedMovies,
         });
 
-        // Dispatch data to Redux for in-memory caching
+        // Dispatch the fetched data to Redux
         dispatch(
           fetchMovies_success({
             movies: movies.data.data,
             packageNameToId: Object.fromEntries(categoryMap),
             moviesByCategories: categorizedMovies,
-            ...categorizedMovies,
+            trending: categorizedMovies.trending,
+            recentlyadded: categorizedMovies.recentlyadded,
+            bingeworthy: categorizedMovies.bingeworthy,
           })
         );
       }
     }
   } catch (error) {
+    dispatch(fetchMovies_error());
     console.error('Error fetching movies:', error);
   }
 };
+
 
 export const fetchCategory = async (dispatch, id) => {
   dispatch(fetchCategory_begin());
@@ -1541,7 +1551,7 @@ export const fetchBannerContent = async (type) => {
         }
       }
     );
-
+    console.log(response.data.data)
     response.data.data.filter((item) => {
       if (item.vod_type === "MOVIE") movieBanners.push(item);
       if (item.vod_type === "SERIES") seriesBanners.push(item);
@@ -1574,6 +1584,7 @@ export const fetchBannerContent = async (type) => {
       let _ = movieBanners[Math.round(Math.random() * movieBanners.length)];
       if (_) randomBanner = _;
       else randomBanner = movieBanners[0];
+      console.log(randomBanner)
     }
 
     if (currentRoute === "/series") {

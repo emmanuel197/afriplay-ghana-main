@@ -38,6 +38,7 @@ const AfriPremiereBanner = () => {
     const [trailer, setTrailer] = useState('')
     const [isMuted, setIsMuted] = useState(true)
     const { afriPremiere, ageRatings, genres } = useSelector((state) => state.fetchMovies)
+    console.log(afriPremiere)
     const [showTitle, setShowTitle] = useState(true)
 
     setTimeout(() => {

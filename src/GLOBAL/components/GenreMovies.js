@@ -12,7 +12,8 @@ const GenreMovies = () => {
     const [moviesOnly, setMoviesOnly] = useState([])
     const [seriesOnly, setSeriesOnly] = useState([])
     const [genreMovies, setGenreMovies] = useState([])
-
+    console.log(moviesOnly)
+    console.log(activeGenreId)
     useEffect(() => {
         // console.log("activeGenreTab", activeGenreTab)
         fetchMovieByGenre(activeGenreTab, dispatch)
