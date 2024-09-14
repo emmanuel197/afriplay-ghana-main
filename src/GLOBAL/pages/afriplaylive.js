@@ -7,12 +7,12 @@ import AfriplayLiveBanner from "../components/banners/AfriplayLiveBanner"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Reel from "../components/reels/Reel"
-
+import GenreMovies from "../components/GenreMovies";
 const AfriplayLive = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        const _setActiveGenreTab = (_genreTab = 'ALL') => dispatch(setActiveGenreTab(_genreTab))
-        _setActiveGenreTab('ALL')
+        const _setActiveGenreTab = (_genreTab = 'UPCOMING') => dispatch(setActiveGenreTab(_genreTab))
+        _setActiveGenreTab('UPCOMING')
         fetchMovie(dispatch)
         fetchGenres(dispatch)
         fetchAgeRatings(dispatch)
@@ -21,11 +21,12 @@ const AfriplayLive = () => {
         <>
             <Header links={5} />
             <AfriplayLiveBanner className="feature-dynamic-banner"/>
+            <GenreMovies/>
             <br />
             <br />
-            {/* <Reel title='TRENDING' />
+            {/* {/* <Reel title='TRENDING' /> */}
             <Reel title='RECENTLY ADDED' />
-            <Reel title='COMING SOON' /> */}
+            <Reel title='COMING SOON' /> 
             <Footer />
         </>
     )

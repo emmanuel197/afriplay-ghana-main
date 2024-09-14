@@ -18,6 +18,8 @@ const MovieCard = ({ movie, type }) => {
     const [isHovering, setIsHovering] = useState(false);
     const [trailer, setTrailer] = useState('');
     const handleClick = useHandleNavigation(movie);
+    const movie_image =  location === "/afriplaylive" ? movie?.image_store_id : movie?.image_id
+    console.log(movie)
     useEffect(() => {
         const initFetchChannelInfo = async () => {
             setChannelInfo(await fetchChannelInfo(movie.id));
@@ -60,7 +62,7 @@ const MovieCard = ({ movie, type }) => {
                         />
                     ) : ( 
                                                 <LazyLoadImage
-                            src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie.image_id}?accessKey=WkVjNWNscFhORDBLCg==`}
+                            src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie_image}?accessKey=WkVjNWNscFhORDBLCg==`}
                             alt={movie.alt}
                             width="100%"
                             placeholder={<div className="poster-img-placeholder"></div>}
@@ -104,10 +106,11 @@ const MovieCard = ({ movie, type }) => {
         return (
             <div className="movie-card">
                 <Link to={location === '/series' ? `/series/${movie.id}` : `/movie/${movie.id}`}>
-                    <div className="movie-box">
+                    <div className="movi.0
+                    e-box">
                         <div className="poster-div">
                             <LazyLoadImage
-                                src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${location === '/series' ? movie.images.POSTER : movie.image_store_id}?accessKey=WkVjNWNscFhORDBLCg==`}
+                                src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${location.includes(['series', 'afriplaylive']) ? movie.images.POSTER : movie.image_store_id}?accessKey=WkVjNWNscFhORDBLCg==`}
                                 alt={movie.alt}
                                 width="100%"
                                 placeholder={<div className="poster-img-placeholder"></div>}

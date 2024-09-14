@@ -100,7 +100,7 @@ const ReelSlider = ({ type, filteredMovies = [] }) => {
     const [premiereMovies, setPremiereMovies] = useState([]);
     const [liveMovies, setLiveMovies] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    console.log(filteredMovies)
     useEffect(() => {
         const filterPremiereLive = async () => {
             setLoading(true);
