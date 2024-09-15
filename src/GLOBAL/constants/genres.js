@@ -7,7 +7,7 @@ export const genreTabs = [
     'COMEDY',
     'ADVENTURE',
     'ANIMATION',
-    'UPCOMING',
+ 
     
   
 ]
