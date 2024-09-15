@@ -7,8 +7,8 @@ import {
 } from "../redux/fetchMoviesApi";
 import MovieCard from "./cards/MovieCard";
 import "../components/styles/grid.scss";
-import SliderWrapper from "./SliderWrapper";
-import ReelSlider from "./home/sliders/ReelSlider";
+import Reel from "./reels/Reel";
+
 const GenreMovies = () => {
   const dispatch = useDispatch();
   const { genres, movies } = useSelector((state) => state.fetchMovies);
@@ -104,11 +104,12 @@ const GenreMovies = () => {
     initFetchMovies();
   }, [activeGenreId, moviesOnly, seriesOnly]);
 
-  if (activeGenreTab === "UPCOMING")
+  if (window.location.pathname === "/afriplaylive")
     return (
-      <SliderWrapper title={activeGenreTab}>
-        <ReelSlider filteredMovies={filteredMovies} />
-      </SliderWrapper>
+      <>
+      <Reel title="UPCOMING" movies={filteredMovies}/>
+      {/* <Reel title="RECENTLY ADDED"/> */}
+      </>
     );
   if (activeGenreTab !== "ALL")
     return (

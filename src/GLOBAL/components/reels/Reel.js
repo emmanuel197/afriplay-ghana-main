@@ -3,7 +3,7 @@ import ReelGenreWrapper from './ReelGenreWrapper';
 import HomeBannerSlider from "../HomeBannerSlider";
 import '../../components/styles/landing/slides.scss'
 
-const Reel = ({ title }) => {
+const Reel = ({ title, movies }) => {
     const { recentlyadded, mostwatched, afriPlaylive, afriPremiere, comingSoon, bingeworthy, nostalgia, romcom, omg, readysetpopcorn, mtnrecommends, doubledrama, hiddengems, watchagain, topepicmovies, exciting, trending, viewersfavourites, randompicks, suggestedmoviesforyou, afriplaytop10 } = useSelector((state) => state.fetchMovies);
     const { activeGenreTab } = useSelector(state => state.genreTab)
     // console.log(bingeworthy)
@@ -30,11 +30,12 @@ const Reel = ({ title }) => {
         afriPlaylive,
         afriPremiere,
     }
-    console.log(bingeworthy)
-
+    console.log(movies)
+    console.log(trending)
     if (activeGenreTab === 'ALL') {
         if (title === 'AFRIPREMIERE') return <HomeBannerSlider title='AFRIPREMIERE' />
-        if (title === 'AFRIPLAY LIVE') return <HomeBannerSlider title='AFRIPLAY LIVE' />
+        if (title === 'AFRIPLAY LIVE') return <ReelGenreWrapper title='AFRIPLAY LIVE'  movies={movies} />
+        if (title === 'UPCOMING') return <ReelGenreWrapper title='UPCOMING'  movies={movies} />
         if (title === 'RECENTLY ADDED' && recentlyadded?.length > 0) return <ReelGenreWrapper title='RECENTLY ADDED' allMovies={_allMovies} movies={recentlyadded} />
         if (title === 'COMING SOON' && comingSoon?.length > 0) return <ReelGenreWrapper title='COMING SOON' allMovies={_allMovies} movies={comingSoon} />
         
@@ -53,7 +54,8 @@ const Reel = ({ title }) => {
         if (title === 'VIEWERS FAVOURITES' && viewersfavourites?.length > 0) return <ReelGenreWrapper title='VIEWERS FAVOURITES' allMovies={_allMovies} movies={viewersfavourites} />
         if (title === 'RANDOM PICKS' && randompicks?.length > 0) return <ReelGenreWrapper title='RANDOM PICKS' allMovies={_allMovies} movies={randompicks} />
         if (title === 'SUGGESTED MOVIES FOR YOU' && suggestedmoviesforyou?.length > 0) return <ReelGenreWrapper title='SUGGESTED MOVIES FOR YOU' allMovies={_allMovies} movies={suggestedmoviesforyou} />
-        
+        // if (title === 'COMING SOON' && suggestedmoviesforyou?.length > 0) return <ReelGenreWrapper title='COMING SOON' allMovies={_allMovies} movies={suggestedmoviesforyou} />
+
         
         // if (title === 'MOST WATCHED' && mostwatched.length > 0) return <ReelGenreWrapper title='MOST WATCHED' allMovies={_allMovies} movies={mostwatched} />
     }

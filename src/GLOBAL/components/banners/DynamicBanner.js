@@ -57,6 +57,12 @@ const DynamicBanner = ({ showSlides = true, className }) => {
   const [bannerContent, setBannerContent] = useState([]);
   const [playTrailer, setPlayTrailer] = useState(true);
   const [isPlayingTrailer, setIsPlayingTrailer] = useState(true);
+  const poster = selectedMovie?.images?.POSTER;
+  const imageId = selectedMovie?.image_id;
+  const bannerImg = location.pathname === "/"
+    ? bannerContent?.banner_image_id
+    : (poster || imageId);
+  
   useEffect(() => {
     if (!movieDetailsFetched.current) {
       const initGetAllSlides = async () => {
@@ -227,7 +233,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
 
         <BannerBackground
           muted={isMuted}
-          bannerImg={location.pathname === "/" ? bannerContent.banner_image_id : selectedMovie.images?.POSTER || selectedMovie.image_id}
+          bannerImg={bannerImg}
           _trailer={location.pathname === "/" ? bannerContent?.video_url : trailer}
           _onPlayTrailer={isPlayingTrailer}
           _bannerContent={location.pathname === "/" ? bannerContent : selectedMovie}

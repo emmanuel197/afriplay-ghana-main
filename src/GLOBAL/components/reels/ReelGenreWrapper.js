@@ -58,7 +58,7 @@ import SliderWrapper from "../SliderWrapper";
 const ReelGenreWrapper = ({ allMovies, movies, title }) => {
     const [moviesOnly, setMoviesOnly] = useState([]);
     const [seriesOnly, setSeriesOnly] = useState([]);
-
+    console.log(movies)
     processLog(`seriesOnly: ${seriesOnly}`);
     processLog(`moviesOnly: ${moviesOnly}`);
     
@@ -72,6 +72,8 @@ const ReelGenreWrapper = ({ allMovies, movies, title }) => {
                     _series.push(vod);
                 } else if (vod.type === 'movie') {
                     _movies.push(vod);
+                } else if (vod.metadata?.movie_type === "live"){
+                    _movies.push(vod)
                 }
             });
 

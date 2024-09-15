@@ -1,4 +1,3 @@
-
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { setActiveGenreTab } from "../redux/slice/genreTabSlice"
@@ -11,8 +10,8 @@ import GenreMovies from "../components/GenreMovies";
 const AfriplayLive = () => {
     const dispatch = useDispatch()
     useEffect(() => {
-        const _setActiveGenreTab = (_genreTab = 'UPCOMING') => dispatch(setActiveGenreTab(_genreTab))
-        _setActiveGenreTab('UPCOMING')
+        const _setActiveGenreTab = (_genreTab = 'ALL') => dispatch(setActiveGenreTab(_genreTab))
+        _setActiveGenreTab('ALL')
         fetchMovie(dispatch)
         fetchGenres(dispatch)
         fetchAgeRatings(dispatch)
@@ -24,9 +23,9 @@ const AfriplayLive = () => {
             <GenreMovies/>
             <br />
             <br />
-            {/* {/* <Reel title='TRENDING' /> */}
-            <Reel title='RECENTLY ADDED' />
-            <Reel title='COMING SOON' /> 
+           <Reel title='TRENDING' />
+            {/* <Reel title='RECENTLY ADDED' /> */}
+            {/* <Reel title='AFRIPLAY LIVE' />  */}
             <Footer />
         </>
     )

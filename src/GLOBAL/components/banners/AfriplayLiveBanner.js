@@ -8,7 +8,7 @@ import '../../components/styles/banners/dynamicBanner.scss'
 const AfriplayLiveBanner = ({className}) => {
     const [bannerContent, setBannerContent] = useState({})
     const { afriPlaylive } = useSelector((state) => state.fetchMovies);
-
+    const bannerPreviewImg = bannerContent.preview_image_id
     useEffect(() => {
         const initFetchBannerContent = async () => {
             const bannerContent = await fetchBannerContent()
@@ -49,9 +49,9 @@ const AfriplayLiveBanner = ({className}) => {
                     </div>
                 </div>
                 {
-                    bannerContent.preview_image_id ?
+                    bannerPreviewImg ?
                         <div className='hero-player-container'>
-                            <img src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${bannerContent.preview_image_id}?accessKey=WkVjNWNscFhORDBLCg==`} alt={bannerContent.title} className='dynamic-landing-banner' />
+                            <img src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${bannerPreviewImg}?accessKey=WkVjNWNscFhORDBLCg==`} alt={bannerContent.title} className='dynamic-landing-banner' />
                         </div>
                         : <></>
                 }
