@@ -194,18 +194,18 @@ const Header = (prop) => {
                   </div>
                 ) : null}
               </div>
-
+              {/* className={`sign-in-up ${!user_info && "not-user-info"}`}  */}
               <div className="sign-in-up">
                 {!user_info ? (
                   <>
                     <Link to="/signup" className="sign-up">
                       <div>
-                        <p>SIGN UP</p>
+                        <p className="sign-up-text">SIGN UP</p>
                       </div>
                     </Link>
                     <Link to="/signin" className="sign-in">
                       <div>
-                        <p>SIGN IN</p>
+                        <p className="sign-in-text">SIGN IN</p>
                       </div>
                     </Link>
                     <div className="access-packs" onClick={() => handleClick('/subscriptions')}>
@@ -230,7 +230,7 @@ const Header = (prop) => {
                 )}
               </div>
               {!showSearch ? (
-                <div className="menu-btn" onClick={() => _toggleDrawer(true)}>
+                <div className={`menu-btn ${user_info && "not-user-info"}`} onClick={() => _toggleDrawer(true)}>
                   <svg
                     clipRule="evenodd"
                     fillRule="evenodd"

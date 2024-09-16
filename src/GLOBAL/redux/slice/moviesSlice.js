@@ -8,6 +8,7 @@ const fetchMovieSlice = createSlice({
     action: [],
     family: [],
     // romance: [],
+    upcoming: [],
     dramaCategory: [],
     actionCategory: [],
     comedyCategory: [],

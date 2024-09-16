@@ -132,12 +132,19 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 1rem;
-
+    @media screen and (max-width: 490px) {
+      gap: 0.5rem;
+    }
     div {
       display: flex;
 
       p {
         margin-top: 3px;
+        font-size: 1em;
+        text-wrap: nowrap;
+        @media screen and (max-width: 768px) {
+          font-size: 0.8em;
+        }
       }
     }
 
@@ -159,25 +166,45 @@ nav {
     // }
 
     .sign-up,
-    .sign-in {
-      background-color: $kg_color;
-      color: $primary_color;
-      border-radius: 2px;
-      transition: 0.4s all;
-      text-decoration: none;
-      padding: 0.5rem 1rem 0.5rem 1rem;
-      &:hover {
-        background-color: $tertiary_color;
-      }
-    }
+.sign-in {
+  background-color: $kg_color;
+  color: $primary_color;
+  border-radius: 2px;
+  transition: 0.4s all;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  display: flex;
+  justify-content: center;
+  /* Add min and max width for responsiveness */
+
+  width: 100%; /* Ensures button width scales according to container */
+  @media screen and (max-width: 768px) {
+    padding: 0.5em 0.5em !important;
+  }
+
+  @media screen and (max-width: 490px) {
+    padding: 0.3em 0.3em !important;
+  }
+  &:hover {
+    background-color: $tertiary_color;
+  }
+
+  
+}
 
     .access-packs {
-      border: 2px solid$kg_color ;
+      border: 2px solid $kg_color ;
       color: $kg_color;
       border-radius: 5px;
       transition: 0.4s all;
       padding: 0.5rem 1rem 0.5rem 1rem;
+      @media screen and (max-width: 768px) {
+        padding: 0.5em 0.5em !important;
+      }
 
+      @media screen and (max-width: 490px) {
+        padding: 0.3em 0.3em !important;
+      }
       &:hover {
         border-color: $tertiary_color;
         color: $tertiary_color;
@@ -265,7 +292,7 @@ nav {
     display: none;
   }
 
-  .menu-btn {
+  .menu-btn.not-user-info {
     display: block;
     margin-left: 20px;
   }
@@ -276,17 +303,23 @@ nav {
 
   :root {
 
-    .sign-in-up {
+    .sign-in-up.not-user-info {
       display: none;
       background: red;
+      .sign-in {
+        .sign-in-text {
+          font-size: 0.5em;
+        }
+      }
     }
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 490px) {
   .header {
     #logo img {
       width: 100px
+      
     }
   }
 }
