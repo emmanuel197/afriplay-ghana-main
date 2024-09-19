@@ -257,7 +257,7 @@ const AfriPremiereBanner = () => {
                                         type='afripremiere'
                                         onClicked={() => navigate(movie.type === 'series' ? `/series/${movie.id}` : `/movie/${movie.id}`)}
                                         title={movie.title}
-                                        genre_id={movie.movie_genres}
+                                        genre_id={movie.genres}
                                         allGenres={genres}
                                         image_id={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie?.image_store_id}?accessKey=WkVjNWNscFhORDBLCg==`}
                                         isSelected={false}
