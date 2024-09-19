@@ -151,7 +151,7 @@
 // export default AfriPremiereBanner
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllMovies } from '../../redux/fetchMoviesApi';
+import { fetchAllMovies, fetchGenres } from '../../redux/fetchMoviesApi';
 import { useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import SliderItem from './SliderItem';
@@ -185,6 +185,7 @@ const AfriPremiereBanner = () => {
         const initFetchMovies = async () => {
             try {
                 const fetchedMovies = await fetchAllMovies(); // Fetch all movies
+                fetchGenres(dispatch)
                 const filtered = fetchedMovies.filter(
                     (movie) => movie?.metadata?.movie_type === "premiere"
                 );
@@ -197,7 +198,7 @@ const AfriPremiereBanner = () => {
 
         initFetchMovies();
     }, [dispatch]);
-    console.log(bannerContent)
+    
     // useEffect(() => {
     //     const initSetAge = () => {
     //         if (bannerContent)
@@ -256,8 +257,8 @@ const AfriPremiereBanner = () => {
                                     <SliderItem
                                         type='afripremiere'
                                         onClicked={() => navigate(movie.type === 'series' ? `/series/${movie.id}` : `/movie/${movie.id}`)}
-                                        title={movie.title}
-                                        genre_id={movie.genres}
+                                        title={movie?.title}
+                                        genre_id={movie?.genres}
                                         allGenres={genres}
                                         image_id={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie?.image_store_id}?accessKey=WkVjNWNscFhORDBLCg==`}
                                         isSelected={false}

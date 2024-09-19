@@ -17,7 +17,7 @@ import getRandomIndexes from "../../../utils/getRandomIndexes";
 import "../../components/styles/banners/dynamicBanner.scss";
 import BannerBackground from "./BannerBackground";
 import { androidImg, appleImg } from "../../../utils/assets";
-
+import shareMovie from "../../../utils/share"
 /* **
  * display a recently added series in banner.picks a series from the recently added category
  */
@@ -108,7 +108,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setPlayTrailer(window.scrollY < 350);
+      setPlayTrailer(true);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -152,14 +152,14 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                           className="landing-page-dynamic-btns"
                         />
                         <Button
-                          page={location.pathname === "/series" ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`}
-                          selectedMovie={selectedMovie.id}
+                          page={location.pathname === "/series" ? `/series/${selectedMovie.id}` : `/watch/movie/${bannerContent.uid}`}
+                          selectedMovie={bannerContent.uid}
                           label="TRAILER"
                           className="landing-page-dynamic-btns"
                         />
                         <Button
-                          page={location.pathname === "/series" ? `/series/${selectedMovie.id}` : `/watch/movie/${selectedMovie.uid}`}
-                          selectedMovie={selectedMovie.id}
+                          action={shareMovie(bannerContent)}
+                          // selectedMovie={selectedMovie.id}
                           label="SHARE"
                           className="landing-page-dynamic-btns"
                         />

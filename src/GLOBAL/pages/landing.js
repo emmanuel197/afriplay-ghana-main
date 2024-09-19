@@ -16,6 +16,7 @@ import DynamicBanner from '../components/banners/DynamicBanner';
 import { fetchGenres, fetchMovie, fetchTrendingAndRecentlyAddedMovies } from "../redux/fetchMoviesApi";
 import { setActiveGenreTab } from "../redux/slice/genreTabSlice"
 import Reel from "../components/reels/Reel"
+
 import { COOKIES } from "../../utils/constants";
 const Landing = () => {
   // I am setting cookies that ll later check for user browser when user logs in

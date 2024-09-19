@@ -114,7 +114,7 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
     );
     console.log(categories)
     const _categories = categories.data.data
-    console.log(_categories)
+
     dispatch(setGenreCategories(_categories))
 
     for (let i = 0; i < _categories.length; i++) {

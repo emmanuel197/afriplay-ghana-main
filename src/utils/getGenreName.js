@@ -4,7 +4,7 @@ const getGenreName = (genreInfo, genres) => {
 
     let genreName = ''
 
-    genres.filter(genre => {
+    genres?.filter(genre => {
         if (genreInfo[0]) {
             if (genreInfo[0] === genre.id) genreName = genre.name
         }
