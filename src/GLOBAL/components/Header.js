@@ -195,7 +195,7 @@ const Header = (prop) => {
                 ) : null}
               </div>
               {/* className={`sign-in-up ${!user_info && "not-user-info"}`}  */}
-              <div className="sign-in-up">
+              <div className={`sign-in-up ${user_info && "not-user-info"}`}>
                 {!user_info ? (
                   <>
                     <Link to="/signup" className="sign-up">

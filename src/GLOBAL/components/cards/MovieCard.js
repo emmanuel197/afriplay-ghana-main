@@ -51,8 +51,8 @@ const MovieCard = ({ movie, type }) => {
   const MovieCardComponent = () => (
     <div
       className="movie-card"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+      // onMouseEnter={() => setIsHovering(true)}
+      // onMouseLeave={() => setIsHovering(false)}
     >
       <div
         className="movie-box"
@@ -65,7 +65,7 @@ const MovieCard = ({ movie, type }) => {
         }
       >
         <div className="poster-div">
-          {isHovering && trailer ? (
+          {/* {isHovering && trailer ? (
             <ReactPlayer
               url={trailer}
               playing
@@ -74,7 +74,7 @@ const MovieCard = ({ movie, type }) => {
               height="100%"
               className="trailer-player"
             />
-          ) : (
+          ) : ( */}
             <LazyLoadImage
   src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie_image}?accessKey=WkVjNWNscFhORDBLCg==`}
   alt={movie.alt}
@@ -88,7 +88,7 @@ const MovieCard = ({ movie, type }) => {
   }}
 />
 
-          )}
+          {/* )} */}
         </div>
       </div>
     </div>

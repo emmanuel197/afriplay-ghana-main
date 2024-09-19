@@ -101,7 +101,8 @@ nav {
     }
 
     .search-icon {
-      margin-right: 20px;
+      margin-top: 5px;
+      margin-right: 10px !important;
     }
   }
 
@@ -142,8 +143,14 @@ nav {
         margin-top: 3px;
         font-size: 1em;
         text-wrap: nowrap;
+        white-space: nowrap;
+        
         @media screen and (max-width: 768px) {
           font-size: 0.8em;
+        }
+
+        @media screen and (max-width: 490px) {
+          font-size: 0.6em;
         }
       }
     }
@@ -175,16 +182,18 @@ nav {
   padding: 0.5em 1em;
   display: flex;
   justify-content: center;
+ 
   /* Add min and max width for responsiveness */
 
   width: 100%; /* Ensures button width scales according to container */
   @media screen and (max-width: 768px) {
-    padding: 0.5em 0.5em !important;
+    padding: 0.4em 0.5em !important;
   }
-
   @media screen and (max-width: 490px) {
-    padding: 0.3em 0.3em !important;
+    font-weight: 700;
   }
+  
+
   &:hover {
     background-color: $tertiary_color;
   }
@@ -193,6 +202,8 @@ nav {
 }
 
     .access-packs {
+      display: flex;
+      justify-content: center;
       border: 2px solid $kg_color ;
       color: $kg_color;
       border-radius: 5px;
@@ -204,6 +215,7 @@ nav {
 
       @media screen and (max-width: 490px) {
         padding: 0.3em 0.3em !important;
+        font-weight: 700;
       }
       &:hover {
         border-color: $tertiary_color;
