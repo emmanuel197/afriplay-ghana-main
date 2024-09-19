@@ -151,7 +151,7 @@
 // export default AfriPremiereBanner
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllMovies, fetchGenres } from '../../redux/fetchMoviesApi';
+import { fetchAgeRatings, fetchAllMovies, fetchGenres } from '../../redux/fetchMoviesApi';
 import { useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import SliderItem from './SliderItem';
@@ -161,6 +161,7 @@ import getGenreName from "../../../utils/getGenreName";
 import Button from "../buttons/Button";
 import OutlineButton from "../buttons/OutlineButton";
 import BannerBackground from "./BannerBackground";
+import formatReleaseDate from '../../../utils/releaseDateFormatter';
 
 const AfriPremiereBanner = () => {
     const navigate = useNavigate();
@@ -186,11 +187,12 @@ const AfriPremiereBanner = () => {
             try {
                 const fetchedMovies = await fetchAllMovies(); // Fetch all movies
                 fetchGenres(dispatch)
+                fetchAgeRatings(dispatch)
                 const filtered = fetchedMovies.filter(
                     (movie) => movie?.metadata?.movie_type === "premiere"
                 );
                 setAfriPremiereMovies(filtered); // Store filtered movies
-                setBannerContent(filtered[0]); // Set the first movie as banner content
+                setBannerContent(filtered[1]); // Set the first movie as banner content
             } catch (error) {
                 console.error("Error fetching movies:", error);
             }
@@ -199,18 +201,19 @@ const AfriPremiereBanner = () => {
         initFetchMovies();
     }, [dispatch]);
     
-    // useEffect(() => {
-    //     const initSetAge = () => {
-    //         if (bannerContent)
-    //             if (bannerContent.age_rating_id > 0 && ageRatings.length > 0)
-    //                 setAge(ageRatings[bannerContentInfo.age_rating_id].min_age);
-    //     };
+    useEffect(() => {
+        const initSetAge = () => {
+            if (bannerContent)
+                // if (bannerContent.age_rating_id > 0 && ageRatings.length > 0)
+                if (bannerContent.age_rating_id > 0)
+                    setAge(ageRatings[bannerContent.age_rating_id].min_age);
+        };
 
-    //     setTimeout(() => {
-    //         initSetAge();
-    //     }, 1500);
-    // }, [ageRatings, bannerContent]);
-   
+        setTimeout(() => {
+            initSetAge();
+        }, 1500);
+    }, [ageRatings, bannerContent]);
+   console.log(ageRatings)
     return (
         <section>
             <div className="hero">
@@ -219,11 +222,12 @@ const AfriPremiereBanner = () => {
                         {
                             bannerContent ? (
                                 <div className="hero-content">
-                                    {/* <div className='genre-year-age-container'>
-                                        <p>{getGenreName(bannerContent.movie_genres, genres)}</p>
-                                        <p>{bannerContent.year}</p>
+                                    <div className='genre-year-age-container'>
+                                        <p>{getGenreName(bannerContent.genres, genres)}</p>
+                                        {/* <p>{formatReleaseDate(bannerContent?.metadata?.release_date)}</p> */}
+                                        <p>{bannerContent?.year}</p>
                                         <p className='age'>{age}+</p>
-                                    </div> */}
+                                    </div> 
                                     <h1>{bannerContent.title}</h1>
                                     <p className="lines-max-4 hero-content-description">{bannerContent.description}</p>
                                     <br />
