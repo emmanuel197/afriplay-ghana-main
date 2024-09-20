@@ -4,7 +4,7 @@ footer {
   background: #090016;
   color: #fff;
   padding: 3rem 20px;
-  font-size: 13px;
+  font-size: 14px;
   position: relative;
   z-index: 9;
 
@@ -18,12 +18,19 @@ footer {
     margin-right: 0;
 
     ul li {
-      font-size: small;
+      font-size: large;
+
+      &:hover {
+        color: $kg_color;
+      }
     }
   }
 
   .logo img {
-    width: 130px
+    width: 130px;
+    @media only screen and (max-width: 500px) {
+       min-width: 150px;
+    }
   }
 
   .footer-wrapper {
@@ -40,6 +47,7 @@ footer {
 
     @media only screen and (max-width: 500px) {
       margin-bottom: 10px;
+      flex-direction: column;
     }
   }
 
@@ -63,7 +71,10 @@ footer {
 
   li {
     list-style: none;
-
+    @media only screen and (max-width: 500px) {
+      margin-bottom: 10px;
+    
+    }
     a {
       text-decoration: none;
       color: #fff;
