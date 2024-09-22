@@ -36,6 +36,7 @@ const Reel = ({ title, movies }) => {
         if (title === 'AFRIPREMIERE') return <HomeBannerSlider title='AFRIPREMIERE' />
         if (title === 'AFRIPLAY LIVE') return <ReelGenreWrapper title='AFRIPLAY LIVE'  movies={movies} />
         if (title === 'UPCOMING') return <ReelGenreWrapper title='UPCOMING'  movies={movies} />
+        if (title === 'NOW SHOWING') return <ReelGenreWrapper title='NOW SHOWING'  movies={movies} />
         if (title === 'RECENTLY ADDED' && recentlyadded?.length > 0) return <ReelGenreWrapper title='RECENTLY ADDED' allMovies={_allMovies} movies={recentlyadded} />
         if (title === 'COMING SOON' && comingSoon?.length > 0) return <ReelGenreWrapper title='COMING SOON' allMovies={_allMovies} movies={comingSoon} />
         

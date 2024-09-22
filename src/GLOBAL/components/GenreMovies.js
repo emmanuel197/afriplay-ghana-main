@@ -18,6 +18,8 @@ const GenreMovies = () => {
   const [seriesOnly, setSeriesOnly] = useState([]);
   const [genreMovies, setGenreMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
   console.log(moviesOnly);
   console.log(activeGenreId);
   useEffect(() => {
@@ -86,7 +88,15 @@ const GenreMovies = () => {
         const filtered = VODArray.filter(
           (movie) => movie?.metadata?.movie_type === "live"
         );
-        setFilteredMovies(filtered)
+        const trending = filtered.filter(
+          (movie) => movie?.metadata?.category?.toLowerCase() === "trending"
+        );
+        const upcoming = filtered.filter(
+          (movie) => movie?.metadata?.category?.toLowerCase() === "upcoming"
+        );
+
+        setTrendingMovies(trending);
+        setUpcomingMovies(upcoming);
       } else {
         // Filter based on the active genre ID
         for (let i = 0; i < VODArray.length; i++) {
@@ -107,8 +117,9 @@ const GenreMovies = () => {
   if (window.location.pathname === "/afriplaylive")
     return (
       <>
-      <Reel title="UPCOMING" movies={filteredMovies}/>
-      {/* <Reel title="RECENTLY ADDED"/> */}
+      {/* <Reel title="UPCOMING" movies={filteredMovies}/> */}
+      <Reel title="UPCOMING" movies={upcomingMovies} />
+      <Reel title="NOW SHOWING" movies={trendingMovies} />
       </>
     );
   if (activeGenreTab !== "ALL")

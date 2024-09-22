@@ -37,8 +37,8 @@ const Home = () => {
                 <Reel title='OMG' />
                 <Reel title='SUGGESTED MOVIES FOR YOU' />
                 <Reel title='READY SET POPCORN' />
-                <Reel title='AFRIPREMIERE' />
-                <Reel title='COMING SOON' />
+                {/* <Reel title='AFRIPREMIERE' /> */}
+                {/* <Reel title='COMING SOON' /> */}
                 {/* <Reel title='AFRIPLAY LIVE' /> */}
                 {/* <Reel title=''/> */}
                 {/* <Reel title='MOST WATCHED' />

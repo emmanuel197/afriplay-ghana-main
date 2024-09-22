@@ -23,7 +23,7 @@ const AfriplayLive = () => {
             <GenreMovies/>
             <br />
             <br />
-           <Reel title='TRENDING' />
+           {/* <Reel title='TRENDING' /> */}
             {/* <Reel title='RECENTLY ADDED' /> */}
             {/* <Reel title='AFRIPLAY LIVE' />  */}
             <Footer />

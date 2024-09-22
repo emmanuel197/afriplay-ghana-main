@@ -25,7 +25,7 @@ const MovieCard = ({ movie, type }) => {
   const imageId = movie?.image_id;
   const imageStoreId = movie?.image_store_id;
   const movie_image = imageId || imageStoreId;
-  console.log(movie);
+  // console.log(movie);
   useEffect(() => {
     const initFetchChannelInfo = async () => {
       setChannelInfo(await fetchChannelInfo(movie.id));

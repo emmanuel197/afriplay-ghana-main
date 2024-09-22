@@ -56,7 +56,7 @@ const MovieDetailsBanner = () => {
   }, [dispatch, id]);
 
   if (loading) return <Loader />;
-  console.log(movieDetails)
+
   return (
     <div className="details-movie">
       <div className="details-page-banner">
