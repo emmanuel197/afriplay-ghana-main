@@ -16,6 +16,7 @@ const MovieDetailsBanner = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [watchlisted, setWatchlisted] = useState(false); // Initially false
+  const [showFullDescription, setShowFullDescription] = useState(false); // Track description expansion
   const { movieDetails, loading, watchlist } = useSelector((state) => state.fetchMovies);
   const { premiumSub } = useSelector((state) => state.fetchPackages);
 
@@ -26,15 +27,14 @@ const MovieDetailsBanner = () => {
   };
 
   const navigateToMovie = async (includeTrailer = false) => {
-    const trailerData = includeTrailer ? await fetchTrailer(movieDetails.id) : null;
-    const state = trailerData ? { trailer: trailerData } : {};
-    navigate(`/watch/movie/${movieDetails.uid}`, { state });
+    const state = { variant: "movie" } 
+    navigate(`/watch/movie/${movieDetails.uid}`, { state: state });
   };
 
   const handleWatchTrailer = async () => {
     // Always fetch the trailer, regardless of whether the user is premium or not
     const trailerData = await fetchTrailer(movieDetails.id);
-    navigate(`/watch/movie/${movieDetails.uid}`, { state: { trailer: trailerData } });
+    navigate(`/watch/movie/${movieDetails.uid}`, { state: { trailer: trailerData, variant: "trailer"} });
   };
 
   const handleWatchMovie = () => {
@@ -106,7 +106,10 @@ const MovieDetailsBanner = () => {
               </div>
             </div>
             <div className="description">
-              <p>{movieDetails.description}</p>
+              <p className={`description-text ${showFullDescription ? 'show-full' : 'show-less'}`}>{movieDetails.description}</p>
+              <div className="toggle-description" onClick={() => setShowFullDescription(!showFullDescription)}>
+                {showFullDescription ? "Show Less" : "Show More"}
+              </div>
             </div>
           </div>
         </div>

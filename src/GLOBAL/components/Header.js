@@ -13,7 +13,10 @@ import { errorLog } from "../logger";
 import { COOKIES } from "../../utils/constants";
 import { useHandleNavigation } from "../components/navigationHelpers";
 const user_info = COOKIES.get("user_info");
-console.log(user_info)
+
+export const navigateHandler = (link) => {
+  window.location.href  = link
+}
 const Header = (prop) => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -23,7 +26,7 @@ const Header = (prop) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const { profile } = useSelector((state) => state.account);
-
+  
   const _toggleDrawer = (state) => dispatch(toggleDrawer(state));
   const handleClick = useHandleNavigation(); // Reuse the navigation logic
   useEffect(() => {
@@ -64,7 +67,10 @@ const Header = (prop) => {
                       featured
                     </p>
                   </Link> */}
-                  <Link to="/movies" className="nav-link">
+                  <Link 
+                  // to="/movies"
+                   onClick={() => navigateHandler("/movies")}
+                   className="nav-link">
                     <p
                       className={
                         location.pathname === "/movies" ? "active-link" : ""
@@ -208,10 +214,13 @@ const Header = (prop) => {
                         <p className="sign-in-text">SIGN IN</p>
                       </div>
                     </Link>
-                    <div className="access-packs" onClick={() => handleClick('/subscriptions')}>
-                        <div>
-                            <p>ACCESS PACKS</p>
-                        </div>
+                    <div
+                      className="access-packs"
+                      onClick={() => handleClick("/subscriptions")}
+                    >
+                      <div>
+                        <p>ACCESS PACKS</p>
+                      </div>
                     </div>
                   </>
                 ) : (
@@ -230,7 +239,10 @@ const Header = (prop) => {
                 )}
               </div>
               {!showSearch ? (
-                <div className={`menu-btn ${user_info && "not-user-info"}`} onClick={() => _toggleDrawer(true)}>
+                <div
+                  className={`menu-btn ${user_info && "not-user-info"}`}
+                  onClick={() => _toggleDrawer(true)}
+                >
                   <svg
                     clipRule="evenodd"
                     fillRule="evenodd"
@@ -280,7 +292,9 @@ const Logo = () => {
 
   return (
     <div id="logo">
-      <Link to={homeLink}>
+      <Link 
+      // to={homeLink}
+       onClick={() => navigateHandler("/home")}>
         <img src={logoTextSrc} alt="afriplay-logo" />
       </Link>
     </div>

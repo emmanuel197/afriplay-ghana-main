@@ -6,7 +6,7 @@ import OPERATORS from "../../utils/operators"
 import { errorLog } from "../logger"
 import { sendLog } from "../redux/account"
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children}) => {
     const user_info = COOKIES.get("user_info")
 
     // TODO: uncomment when going live
@@ -45,7 +45,8 @@ const ProtectedRoute = ({ children }) => {
         // localStorage.setItem('afri_selected_operator', JSON.stringify(OPERATORS.afriplayghana))
         // console.warn("%%%%%%", user_info)
         return <Navigate replace to='/signup' />
-    }
+    } 
+    
     // return <Navigate replace to='/select-network' />
     return children
 }

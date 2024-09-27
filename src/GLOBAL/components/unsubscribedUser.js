@@ -1,23 +1,40 @@
 // src/components/UnsubscribedUser.jsx
-import React from 'react';
-import '../components/styles/unsubscribedUser.scss'
-import { nocart } from '../../utils/assets'; // Ensure you have the empty cart icon in this path
-import Button from './buttons/Button';
-import { useNavigate } from 'react-router-dom';
-const UnsubscribedUser = () => {
-  const navigate = useNavigate()
-  return (
+import React from "react";
+import "../components/styles/unsubscribedUser.scss";
+import { nocart } from "../../utils/assets"; // Ensure you have the empty cart icon in this path
+import Button from "./buttons/Button";
+import { useLocation, useNavigate } from "react-router-dom";
+const UnsubscribedUser = ({  variant, trailer }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  if (location.pathname.includes("/live")) {
+    return (
+      <div className="unsubscribed-user">
+        <img src={nocart} alt="Empty Cart Icon" className="empty-cart-icon" />
+        <p className="unsubscribed-message">
+          You have no active subscriptions. Choose your desired data bundle from
+          the available data bundles list to enjoy amazing MTN TV+ content
+        </p>
+        <div className="unsubscribed-button">
+          <Button action={() => navigate("/subscriptions")} label="Subscribe" />
+        </div>
+      </div>
+    );
+  } else {
+    return (
     <div className="unsubscribed-user">
       <img src={nocart} alt="Empty Cart Icon" className="empty-cart-icon" />
       <p className="unsubscribed-message">
-        You have no active subscriptions. Choose your desired data bundle from the available data bundles list to enjoy amazing MTN TV+ content
+        {(trailer &&  variant !== "movie")
+          ? "Trailer Was Not Found"
+          : "You have no active subscriptions. Choose your desired data bundle from the available data bundles list to enjoy amazing MTN TV+ content"}
       </p>
-      <div className='unsubscribed-button'>
-      <Button action={() => navigate('/subscriptions')}  label='Subscribe'/>
+      <div className="unsubscribed-button">
+        <Button action={() => navigate(-1)} label="Back" />
       </div>
-      
-    </div>
-  );
+    </div>)
+  }
 };
 
 export default UnsubscribedUser;

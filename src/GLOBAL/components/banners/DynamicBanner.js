@@ -33,8 +33,9 @@ const fetchDataForBannerSlider = (recentlyAdded) => {
   indexes.forEach((index) => {
     const item = recentlyAdded[index];
     if (!slides.includes(item)) {
-      if (item?.type === "series") seriesSlides.push(item);
-      else slides.push(item);
+      // if (item?.type === "series") seriesSlides.push(item);
+      // else 
+      slides.push(item);
     }
   });
 
@@ -84,10 +85,11 @@ const DynamicBanner = ({ showSlides = true, className }) => {
   const [trailer, setTrailer] = useState("");
   const { recentlyadded } = useSelector((state) => state.fetchMovies);
   const movieDetailsFetched = useRef(false);
+  const [loading, setLoading] = useState(true); // Add a loading state
   const slides = useMemo(
     () => fetchDataForBannerSlider(recentlyadded),
     [recentlyadded]
-  );
+  );  
   const [allSlides, setAllSlides] = useState([]);
   const [isMuted, setIsMuted] = useState(true);
   const [showTitle, setShowTitle] = useState(false);
@@ -182,12 +184,6 @@ const DynamicBanner = ({ showSlides = true, className }) => {
       <div className={`hero ${className}`} onClick={() => setShowTitle(true)}>
         <div className="hero-container">
           <div className="hero-content-wrapper">
-            {/* {showTitle && (
-              <div
-                className={`hero-content ${
-                  location.pathname === "/" && "landing-content-padding"
-                }`}
-              > */}
             <HeroContent title={title} description={description}>
               {selectedMovie && (
                 <div className={`hero-buttons ${className}`}>

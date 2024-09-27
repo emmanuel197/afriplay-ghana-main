@@ -6,7 +6,7 @@ import { logout } from "../redux/account";
 import { toggleDrawer } from '../redux/slice/drawerSlice';
 import Button from "./buttons/Button";
 import './styles/Drawer.scss';
-
+import { navigateHandler } from "./Header";
 const Drawer = () => {
     const dispatch = useDispatch();
     const location = useLocation();
@@ -31,9 +31,13 @@ const Drawer = () => {
                     {user_info ? (
                         <ul>
                             {/* <li><Link to='/home'>Featured</Link></li> */}
-                            <li><Link to='/movies'>Movies</Link></li>
+                            <li><Link
+                            //  to='/movies'
+                             onClick={() => navigateHandler('/movies')}>Movies</Link></li>
                             {/* e */}
-                            <li><Link to='/livetv'>Live TV</Link></li>
+                            <li><Link 
+                            // to='/livetv'
+                             onClick={() => navigateHandler('/livetv')}>Live TV</Link></li>
                             <li><Link to='/afripremiere'>AfriPremiere</Link></li>
                             <li><Link to='/afriplaylive'>Live Drama</Link></li>
                             <li>

@@ -5,28 +5,17 @@ const ButtonGroup = ({ location, selectedMovieId, selectedMovieUid }) => {
     return (
       <>
         <Button
-          page={`/movie/${selectedMovieId}`}
-          selectedMovie={selectedMovieId}
+          page="/home"
           label="WATCH MOVIE"
           className="landing-page-dynamic-btns"
         />
         <Button
-          page={
-            location.pathname === "/series"
-              ? `/series/${selectedMovieId}`
-              : `/watch/movie/${selectedMovieUid}`
-          }
-          selectedMovie={selectedMovieId}
+           page="/home"
           label="TRAILER"
           className="landing-page-dynamic-btns"
         />
         <Button
-          page={
-            location.pathname === "/series"
-              ? `/series/${selectedMovieId}`
-              : `/watch/movie/${selectedMovieUid}`
-          }
-          selectedMovie={selectedMovieId}
+           page="/home"
           label="SHARE"
           className="landing-page-dynamic-btns"
         />

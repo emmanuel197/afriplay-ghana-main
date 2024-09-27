@@ -16,7 +16,7 @@ import DynamicBanner from '../components/banners/DynamicBanner';
 import { fetchGenres, fetchMovie, fetchTrendingAndRecentlyAddedMovies } from "../redux/fetchMoviesApi";
 import { setActiveGenreTab } from "../redux/slice/genreTabSlice"
 import Reel from "../components/reels/Reel"
-
+import { Navigate } from "react-router-dom"
 import { COOKIES } from "../../utils/constants";
 const Landing = () => {
   // I am setting cookies that ll later check for user browser when user logs in
@@ -25,7 +25,11 @@ const Landing = () => {
   // and it ll load when the user visits page or refreshes page with useEffect beneath this
   // const isAuthenticated = JSON.parse(window.localStorage.getItem('isAuthenticated'))
   const dispatch = useDispatch()
-  // const user_info = COOKIES.get('user_info')
+  const user_info = COOKIES.get('user_info')
+  
+
+  // If user is logged in, redirect to home page
+ 
   useEffect(() => {
 //     const _setActiveGenreTab = (_genreTab = 'ALL') => dispatch(setActiveGenreTab(_genreTab))
 //     _setActiveGenreTab('ALL')
@@ -46,6 +50,10 @@ const Landing = () => {
     initSendLogs()
   }, []);
   // console.log(user_info)
+
+  if (user_info) {
+    return <Navigate replace to="/home" />;
+  }
   return (
     <>
       <main style={{ background: ' #1a052b' }}>
