@@ -32,9 +32,10 @@ const fetchDataForBannerSlider = (recentlyAdded) => {
 
   indexes.forEach((index) => {
     const item = recentlyAdded[index];
+    console.log(`item ${JSON.stringify(item)}`);
     if (!slides.includes(item)) {
       // if (item?.type === "series") seriesSlides.push(item);
-      // else 
+      // else
       slides.push(item);
     }
   });
@@ -89,7 +90,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
   const slides = useMemo(
     () => fetchDataForBannerSlider(recentlyadded),
     [recentlyadded]
-  );  
+  );
   const [allSlides, setAllSlides] = useState([]);
   const [isMuted, setIsMuted] = useState(true);
   const [showTitle, setShowTitle] = useState(false);
@@ -221,19 +222,21 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                 {...dynamicBannerSliderSettings}
                 className="hero-slider-main"
               >
-                {allSlides.map((movie) => (
-                  <SliderItem
-                    onClicked={() => _setSelectedMovie(movie)}
-                    title={movie?.title}
-                    image_id={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${
-                      location.pathname === "/series"
-                        ? movie.images.POSTER
-                        : movie?.image_id
-                    }?accessKey=WkVjNWNscFhORDBLCg==`}
-                    isSelected={selectedMovie?.id === movie?.id}
-                    key={movie?.id}
-                  />
-                ))}
+                {allSlides
+                  .filter((movie) => movie?.image_id !== undefined) // Only include movies with defined image_id
+                  .map((movie) => (
+                    <SliderItem
+                      onClicked={() => _setSelectedMovie(movie)}
+                      title={movie?.title}
+                      image_id={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${
+                        location.pathname === "/series"
+                          ? movie.images.POSTER
+                          : movie?.image_id
+                      }?accessKey=WkVjNWNscFhORDBLCg==`}
+                      isSelected={selectedMovie?.id === movie?.id}
+                      key={movie?.id}
+                    />
+                  ))}
               </Slider>
             </div>
           )}
