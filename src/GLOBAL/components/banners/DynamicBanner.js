@@ -196,7 +196,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                         selectedMovieUid={selectedMovie.uid}
                       />
 
-                      <div className="mute-icon">
+                     {trailer && <div className="mute-icon">
                         <img
                           onClick={() => setIsMuted(!isMuted)}
                           src={
@@ -206,7 +206,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
                           }
                           alt={isMuted ? "speaker icon" : "mute icon"}
                         />
-                      </div>
+                      </div>}
                     </div>
                   )}
                 </div>
