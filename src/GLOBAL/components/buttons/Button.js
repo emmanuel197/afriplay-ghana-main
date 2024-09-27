@@ -119,8 +119,12 @@ const Button = ({ label, action, page, isDisabled = false, selectedMovie, classN
     } else {
       if (selectedMovie) {
         dispatch(selectedMovieReducer(selectedMovie));
+        
       }
-      navigate(page);
+       
+      const state = { variant: "movie" }
+     
+      navigate(page, {state: state});
     }
     console.log(page)
   };

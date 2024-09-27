@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { AiTwotoneStar } from "react-icons/ai";
@@ -17,6 +17,8 @@ const MovieDetailsBanner = () => {
   const navigate = useNavigate();
   const [watchlisted, setWatchlisted] = useState(false); // Initially false
   const [showFullDescription, setShowFullDescription] = useState(false); // Track description expansion
+  const [hasOverflow, setHasOverflow] = useState(false); // Track if content has overflow
+  const descriptionRef = useRef(null); // Reference to description text container
   const { movieDetails, loading, watchlist } = useSelector((state) => state.fetchMovies);
   const { premiumSub } = useSelector((state) => state.fetchPackages);
 
@@ -55,6 +57,14 @@ const MovieDetailsBanner = () => {
     fetchWatchlist(dispatch);
   }, [dispatch, id]);
 
+  useEffect(() => {
+    // Check if the description content has overflow
+    if (descriptionRef.current) {
+      const hasOverflowContent =
+        descriptionRef.current.scrollHeight > descriptionRef.current.clientHeight;
+      setHasOverflow(hasOverflowContent);
+    }
+  }, [movieDetails.description, showFullDescription]); // Trigger on description change or toggle
   if (loading) return <Loader />;
 
   return (
@@ -106,10 +116,21 @@ const MovieDetailsBanner = () => {
               </div>
             </div>
             <div className="description">
-              <p className={`description-text ${showFullDescription ? 'show-full' : 'show-less'}`}>{movieDetails.description}</p>
-              <div className="toggle-description" onClick={() => setShowFullDescription(!showFullDescription)}>
-                {showFullDescription ? "Show Less" : "Show More"}
-              </div>
+            <p
+                ref={descriptionRef}
+                className={`description-text ${showFullDescription ? "show-full" : "show-less"}`}
+              >
+                {movieDetails.description}
+              </p>
+              {/* Conditionally render the toggle link only if there is overflow */}
+              {hasOverflow && (
+                <div
+                  className="toggle-description"
+                  onClick={() => setShowFullDescription(!showFullDescription)}
+                >
+                  {showFullDescription ? "Show Less" : "Show More"}
+                </div>
+              )}
             </div>
           </div>
         </div>

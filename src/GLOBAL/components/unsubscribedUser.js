@@ -31,7 +31,7 @@ const UnsubscribedUser = ({  variant, trailer }) => {
           : "You have no active subscriptions. Choose your desired data bundle from the available data bundles list to enjoy amazing MTN TV+ content"}
       </p>
       <div className="unsubscribed-button">
-        <Button action={() => navigate(-1)} label="Back" />
+        <Button action={() => (trailer &&  variant !== "movie") ? navigate(-1) : navigate("/subscriptions")} label={(trailer &&  variant !== "movie") ? "Back" : "Subscribe"} />
       </div>
     </div>)
   }
