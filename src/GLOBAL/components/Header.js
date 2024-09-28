@@ -26,8 +26,9 @@ const Header = (prop) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const { profile } = useSelector((state) => state.account);
-  
-  const _toggleDrawer = (state) => dispatch(toggleDrawer(state));
+ 
+  const { showDrawer } = useSelector(state => state.drawer);
+  const _toggleDrawer = ( ) => dispatch(toggleDrawer(!showDrawer));
   const handleClick = useHandleNavigation(); // Reuse the navigation logic
   useEffect(() => {
     if (location.pathname === "/search") setShowSearch(true);
@@ -241,7 +242,7 @@ const Header = (prop) => {
               {!showSearch ? (
                 <div
                   className={`menu-btn ${user_info && "not-user-info"}`}
-                  onClick={() => _toggleDrawer(true)}
+                  onClick={() => _toggleDrawer()}
                 >
                   <svg
                     clipRule="evenodd"
