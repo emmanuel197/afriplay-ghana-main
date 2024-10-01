@@ -126,7 +126,7 @@ const Watch = () => {
       setLoading(false);
     }
   };
-  console.log(location.state?.trailer)
+
   return (
     <div className="watch-movie">
       <button onClick={() => navigate(-1)} className="sign-up">
@@ -149,7 +149,7 @@ const Watch = () => {
             <UnsubscribedUser variant={location?.state?.variant} trailer={location?.state?.trailer === undefined}/>):(
             <ReactPlayer
               ref={_ref}
-              url={location?.state?.variant === "trailer" ?  trailer : video}
+              url={location?.state?.trailer || (location?.state?.variant === "trailer" ?  trailer : video)}
               width="100vw"
               height="90vh"
               muted={false}
