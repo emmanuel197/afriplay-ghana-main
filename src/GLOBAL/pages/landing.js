@@ -66,7 +66,7 @@ const Landing = () => {
         {/* <Devices /> */}
         {/* <DataFriendly /> */}
         <Faq />
-        <Logo w='200px' />
+        {/* <Logo w='200px' /> */}
         <Footer />
       </main>
     </>
