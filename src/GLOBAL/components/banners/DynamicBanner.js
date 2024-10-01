@@ -93,7 +93,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
   );
   const [allSlides, setAllSlides] = useState([]);
   const [isMuted, setIsMuted] = useState(true);
-  const [showTitle, setShowTitle] = useState(false);
+  const [showTitle, setShowTitle] = useState(true);
   const [bannerContent, setBannerContent] = useState([]);
   const [playTrailer, setPlayTrailer] = useState(true);
   const [isPlayingTrailer, setIsPlayingTrailer] = useState(true);
