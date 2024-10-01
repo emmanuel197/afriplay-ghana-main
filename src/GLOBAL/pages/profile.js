@@ -134,11 +134,11 @@ const ProfileCard = ({ active }) => {
         <div className="profile-image" />
         <div className="flex">
           <b>My profile</b>
-          <small>
+          {/* <small>
             Last Login 01, Oct 2022. 04:00AM
             <br />
             Mac OS, Lagos, NG
-          </small>
+          </small> */}
         </div>
         <br />
         <div className="flex">
