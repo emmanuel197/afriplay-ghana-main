@@ -3,7 +3,7 @@
 footer {
   background: #090016;
   color: #fff;
-  padding: 3rem 20px;
+  padding: 2rem 20px;
   font-size: 14px;
   position: relative;
   z-index: 9;
@@ -11,23 +11,11 @@ footer {
   @media only screen and (max-width: 500px) {
     padding: 1rem 15px ;
   }
-  
-  .col {
-    line-height: 35px;
-    // margin: 0 80px;
-    margin-right: 0;
 
-    ul li {
-      font-size: large;
-
-      &:hover {
-        color: $kg_color;
-      }
-    }
-  }
 
   .logo img {
     width: 130px;
+    // margin-bottom: 10px;
     @media only screen and (max-width: 500px) {
        min-width: 150px;
     }
@@ -45,6 +33,57 @@ footer {
     flex-wrap: wrap;
     align-items: center;
 
+    .col {
+      height: auto;
+      padding: 0 5vw;
+      display: flex !important;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center !important;
+      column-gap: 30px;
+      row-gap: 10px;
+      // color: #fff;
+      margin-bottom: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1440px;
+      // display: flex !important;
+      // justify-content: space-evenly   ;
+      // width: 80%;
+      // line-height: 35px;
+      // margin-bottom: 20px;
+      // flex-wrap: wrap;
+      // @media only screen and (max-width: 500px) {
+      //   width: 100%;
+      //   padding-left: 20px;
+      //   padding-right: 20px;
+      //   column-gap: 20px;
+      // }
+     
+    
+      @media only screen and (max-width: 500px) {
+        padding: 0 1vw;
+      }
+      @media only screen and (max-width: 414px) {
+        column-gap: 15px;
+        padding: 0 5vw;
+      }
+     & li {
+        font-size: 1.2rem;
+        @media only screen and (max-width: 500px) {
+          font-size: 1rem;
+        }
+        @media only screen and (max-width: 360px) {
+          font-size: 0.9rem;
+        }
+        @media only screen and (max-width: 360px) {
+          font-size: 0.8rem;
+        }
+        &:hover {
+          color: $kg_color;
+        }
+      }
+    }
     @media only screen and (max-width: 500px) {
       margin-bottom: 10px;
       flex-direction: column;
@@ -52,29 +91,20 @@ footer {
   }
 
   .date-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    text-align: center;
+    // display: flex !important;
+    // align-items: center;
+    // justify-content: space-between;
     flex-wrap: wrap;
     
-
-    ul {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-
-      a {
-        padding: 10px;
-      }
-    }
   }
 
   li {
     list-style: none;
-    @media only screen and (max-width: 500px) {
-      margin-bottom: 10px;
+    // @media only screen and (max-width: 500px) {
+    //   margin-bottom: 10px;
     
-    }
+    // }
     a {
       text-decoration: none;
       color: #fff;
@@ -88,7 +118,7 @@ footer {
 
   .links {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
 
     div {
       line-height: 40px;
@@ -100,72 +130,4 @@ footer {
   }
 }
 
-// .footer {
-//   background-color: $secondary_color;
-//   padding-top: 2rem;
-//   padding-bottom: 1rem;
 
-//   .footer {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-
-//     img {
-//       display: block;
-//       margin: 0 auto;
-//     }
-//   }
-//   .nav {
-//     margin-top: 3rem;
-//     display: flex;
-//     width: 70%;
-//     text-align: center;
-//     a {
-//       flex: 1;
-//       color: white;
-//       font-size: $normal_font;
-//       text-decoration: none;
-//     }
-//   }
-//   p {
-//     margin-top: 3rem;
-//     color: $kg_color;
-//     font-size: $normal_font;
-//   }
-// }
-
-@media only screen and (max-width: 650px) {
-  .date-footer {
-    flex-direction: column-reverse;
-
-    ul {
-      margin-bottom: 30px;
-      margin-left: -10px;
-    }
-  }
-
-  footer {
-
-    .col {
-      margin-top: 30px;
-    }
-
-    // .links {
-    //   margin-left: -80px;
-    // }
-  }
-
-  // .nav {
-  //   flex-direction: column;
-  //   a {
-  //     font-size: $m_normal_font !important;
-  //     margin-top: 1rem;
-  //     text-decoration: none;
-  //   }
-  // }
-
-  // .footer p {
-  //   font-size: $m_normal_font;
-  // }
-}

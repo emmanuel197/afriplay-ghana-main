@@ -544,10 +544,14 @@
             width: 100%;
             max-height: 300px;
 
-            @media screen and (max-width: 768px) {
-                display: none;
-            }
-
+            // @media screen and (max-width: 768px) {
+            //     display: none;
+            // }
+            // @media screen and (max-width: 768px) {
+            //     display: block;  // Make sure the slider is displayed on mobile.
+            //     max-height: 150px;  // You can adjust the height for mobile responsiveness.
+            // }
+        
             .active-hero-slider-item {
                 filter: grayscale(1);
             }

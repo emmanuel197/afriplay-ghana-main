@@ -255,7 +255,7 @@ const AfriPremiereBanner = () => {
                     </div>
 
                     <div className='hero-slider-container'>
-                        <Slider {...sliderSettings(3, 1)} className='hero-slider-main'>
+                        <Slider {...sliderSettings(3, 1, 2)} className='hero-slider-main'>
                             {afriPremiereMovies.map((movie) => {
                                 return (
                                     <SliderItem

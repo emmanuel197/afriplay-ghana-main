@@ -8,6 +8,22 @@ const Footer = () => {
     <footer>
       <div className="footer-wrapper">
         <div className="footer-top">
+        <ul className="col">
+              {/* <b>WATCH</b> */}
+              
+              <li><Link to='/home'>Featured</Link></li>
+                <li><Link to='/movies'>Movies</Link></li>
+                {/* <li><Link to='/series'>COMMUNITY</Link></li> */}
+                <li><Link to='/livetv'>Live TV</Link></li>
+                {/* <li><Link to='/livetv'>FEEDBACK</Link></li> */}
+                
+                <li><Link to='/policy'>Our Policy</Link></li>
+             
+            </ul>
+        <div className="links">
+            
+            
+          </div>
           <div className="left">
             <div className="logo">
               <img
@@ -16,8 +32,36 @@ const Footer = () => {
               />
             </div>
           </div>
-          <div className="links">
-            {/* <ul className="col">
+          
+        </div>
+        <div className="date-footer">
+          
+          <ul></ul>
+          <p>&copy;{new Date().getFullYear()} AFRIPLAY ALL RIGHTS RESERVED.</p>
+          <ul></ul>
+          
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+
+{/* <ul>
+            <li><Link to='/livetv'>FEEDBACK</Link></li>
+            <li><Link to='/#faq'>HELP &amp; FAQ</Link></li>
+            <li><Link to='/livetv'>TERMS &amp; CONDITIONS</Link></li>
+          </ul> */}
+
+{/* <ul>
+            <li><Link to='/'>ABOUT</Link></li>
+            <li><Link to='/series'>COMMUNITY</Link></li>
+            <li><Link to='/livetv'>POLICY</Link></li>
+          </ul> */}
+
+{/* <ul className="col">
               <b>AFRIPLAY</b>
               <ul>
                 <li><Link to='/afripremiere'>AFRIPREMIERE</Link></li>
@@ -32,38 +76,3 @@ const Footer = () => {
                 <li><Link to='/livetv'>LIVE TV</Link></li>
               </ul>
             </ul> */}
-            <ul className="col">
-              {/* <b>WATCH</b> */}
-              <ul>
-              <li><Link to='/home'>Featured</Link></li>
-                <li><Link to='/movies'>Movies</Link></li>
-                {/* <li><Link to='/series'>COMMUNITY</Link></li> */}
-                <li><Link to='/livetv'>Live TV</Link></li>
-                {/* <li><Link to='/livetv'>FEEDBACK</Link></li> */}
-                
-                <li><Link to='/policy'>Our Policy</Link></li>
-              </ul>
-            </ul>
-          </div>
-        </div>
-        <div className="date-footer">
-          {/* <ul>
-            <li><Link to='/'>ABOUT</Link></li>
-            <li><Link to='/series'>COMMUNITY</Link></li>
-            <li><Link to='/livetv'>POLICY</Link></li>
-          </ul> */}
-          <ul></ul>
-          <p>&copy;{new Date().getFullYear()} AFRIPLAY ALL RIGHTS RESERVED.</p>
-          <ul></ul>
-          {/* <ul>
-            <li><Link to='/livetv'>FEEDBACK</Link></li>
-            <li><Link to='/#faq'>HELP &amp; FAQ</Link></li>
-            <li><Link to='/livetv'>TERMS &amp; CONDITIONS</Link></li>
-          </ul> */}
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-export default Footer;

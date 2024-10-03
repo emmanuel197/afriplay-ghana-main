@@ -65,15 +65,7 @@
   @media only screen and (max-width: 600px) {
     padding: 0 2vw;
   }
-  
-  .terms-of-use {
-    display: flex;
-    justify-content: center;
-    background-color: $kg_color;
-    color: black;
-    width: 80%;
-    border-radius: 10px;
-  }
+
   .subscription-card {
     
     background-color: $kinder_color;
@@ -212,4 +204,16 @@
 
 .subscriptions-container::-webkit-scrollbar {
   display: none;
+}
+
+  
+.terms-of-use {
+ text-align: center;
+  // justify-content: center;
+  // align-items: center;
+  padding: 7px;
+  background-color: $kg_color;
+  color: black;
+  width: 80%;
+  border-radius: 10px;
 }

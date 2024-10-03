@@ -123,7 +123,8 @@ const DynamicBanner = ({ showSlides = true, className }) => {
           setSelectedMovie(_allSlides[0]);
         } else if (slides.length) {
           setAllSlides(slides);
-          setSelectedMovie(slides[0]);
+          setSelectedMovie(slides[0] !== undefined ? slides[0] : slides[1]);
+          console.log(slides[0])
         }
       };
 
