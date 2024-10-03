@@ -153,7 +153,10 @@ html .movie-card {
         /* Consistent height for images */
         object-fit: contain;
         border-radius: 14px;
-    
+        
+        @media only screen and (max-width: 1211px) {
+            height: 240px;
+          }
         // margin-bottom: 10px;
     }
 
