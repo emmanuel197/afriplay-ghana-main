@@ -36,7 +36,7 @@ const AfriplayLiveBanner = ({className}) => {
                     </div>
 
                     <div className='hero-slider-container'>
-                        <p className="slider-title">Live on Pay-Per-View</p>
+                        {/* <p className="slider-title">Live on Pay-Per-View</p> */}
                         <Slider {...dynamicBannerSliderSettings} className='hero-slider-main'>
                             {afriPlaylive.map((_movie) => {
                                 // TODO: uncomment when channels are ready for reel
