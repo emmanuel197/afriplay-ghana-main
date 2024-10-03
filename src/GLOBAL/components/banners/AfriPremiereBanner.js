@@ -205,15 +205,15 @@ const AfriPremiereBanner = () => {
         const initSetAge = () => {
             if (bannerContent)
                 // if (bannerContent.age_rating_id > 0 && ageRatings.length > 0)
-                if (bannerContent.age_rating_id > 0)
-                    setAge(ageRatings[bannerContent.age_rating_id].min_age);
+                if (bannerContent?.age_rating_id > 0)
+                    setAge(ageRatings[bannerContent?.age_rating_id]?.min_age);
         };
 
         setTimeout(() => {
             initSetAge();
         }, 1500);
     }, [ageRatings, bannerContent]);
-   console.log(ageRatings)
+   console.log(bannerContent)
     return (
         <section>
             <div className="hero">

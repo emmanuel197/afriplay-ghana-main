@@ -68,7 +68,7 @@ html .livetv-movie-card {
     color: #fff;
 
     .slider-section-name {
-        display: flex;
+        // display: flex;
         align-items: center;
 
         img {
@@ -278,6 +278,7 @@ html .livetv-movie-card {
         line-height: 30px;
         margin-top: -5px;
 
+        
         .price {
             display: none;
         }
