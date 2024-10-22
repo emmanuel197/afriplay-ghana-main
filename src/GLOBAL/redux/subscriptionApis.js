@@ -20,7 +20,7 @@ export const purchasePackage = async (product_id, subscriber_uid) => {
         const body = {
             subscriber_uid: subscriber_uid,
             subscription_type: 'one-off',
-            bill: true,
+            bill: false,
             product_id: product_id,
             medium: 'web'
         };
