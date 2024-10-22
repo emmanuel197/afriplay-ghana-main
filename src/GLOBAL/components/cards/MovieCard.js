@@ -25,7 +25,9 @@ const MovieCard = ({ movie, type }) => {
   const imageId = movie?.image_id;
   const imageStoreId = movie?.image_store_id;
   const movie_image = imageId || imageStoreId;
-  // console.log(movie);
+
+  
+  // console.log(movie_image);
   useEffect(() => {
     const initFetchChannelInfo = async () => {
       setChannelInfo(await fetchChannelInfo(movie.id));
@@ -48,7 +50,9 @@ const MovieCard = ({ movie, type }) => {
     isHovering && fetchMovieTrailer();
   }, [movie.id, isHovering]);
 
+  
   const MovieCardComponent = () => (
+   
     <div
       className="movie-card"
       // onMouseEnter={() => setIsHovering(true)}
@@ -75,18 +79,18 @@ const MovieCard = ({ movie, type }) => {
               className="trailer-player"
             />
           ) : ( */}
-            <LazyLoadImage
-  src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie_image}?accessKey=WkVjNWNscFhORDBLCg==`}
-  alt={movie.alt}
-  width="100%"
-  placeholder={<div className="poster-img-placeholder"></div>}
-  effect="blur" // Add a blur effect during lazy loading
-  threshold={200} // Load images a bit before they come into view
-  key={movie.id} // Use a unique key to prevent re-rendering
-  afterLoad={() => {
-    // Optionally, handle actions after the image has been loaded
-  }}
-/>
+          <LazyLoadImage
+            src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie_image}?accessKey=WkVjNWNscFhORDBLCg==`}
+            alt={movie.alt}
+            width="100%"
+            placeholder={<div className="poster-img-placeholder"></div>}
+            effect="blur" // Add a blur effect during lazy loading
+            threshold={200} // Load images a bit before they come into view
+            key={movie.id} // Use a unique key to prevent re-rendering
+            afterLoad={() => {
+              // Optionally, handle actions after the image has been loaded
+            }}
+          />
 
           {/* )} */}
         </div>
@@ -94,9 +98,13 @@ const MovieCard = ({ movie, type }) => {
     </div>
   );
 
-  if (location === "/livetv" && type === "livetv" && EPGInfo) {
+  
+
+  if (type === "livetv" && EPGInfo ) {
+
     return (
-      <div className="movie-card livetv-movie-card">
+      // channelInfo.image_stores[0].id !== undefined && 
+      (<div className="movie-card livetv-movie-card">
         <Link to={`/watch/live/${channelInfo?.uid}`}>
           <div className="movie-box">
             <div className="poster-div">
@@ -104,6 +112,7 @@ const MovieCard = ({ movie, type }) => {
                 <LazyLoadImage
                   src={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${channelInfo?.image_stores[0]?.id}?accessKey=WkVjNWNscFhORDBLCg==`}
                   alt={movie.alt}
+                  className="livetv-movie-card"
                   width="100%"
                   placeholder={
                     <div className="poster-img-placeholder livetv-poster-img-placeholder"></div>
@@ -121,7 +130,7 @@ const MovieCard = ({ movie, type }) => {
             </div>
           </div>
         </Link>
-      </div>
+      </div>)
     );
   }
 

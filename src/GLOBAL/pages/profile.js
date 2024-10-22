@@ -9,6 +9,8 @@ import FAQs from "../components/profileTabs/Faqs";
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("watchlist");
   const setActiveTabName = (str) => setActiveTab(str);
+  // Add logging to check if the activeTab updates correctly
+  console.log("Active Tab:", activeTab);
 
   return (
     <>

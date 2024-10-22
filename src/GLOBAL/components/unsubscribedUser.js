@@ -14,7 +14,7 @@ const UnsubscribedUser = ({  variant, trailer }) => {
         <img src={nocart} alt="Empty Cart Icon" className="empty-cart-icon" />
         <p className="unsubscribed-message">
           You have no active subscriptions. Choose your desired data bundle from
-          the available data bundles list to enjoy amazing MTN TV+ content
+          the available data bundles list to enjoy amazing AfriPlay content
         </p>
         <div className="unsubscribed-button">
           <Button action={() => navigate("/subscriptions")} label="Subscribe" />
@@ -28,7 +28,7 @@ const UnsubscribedUser = ({  variant, trailer }) => {
       <p className="unsubscribed-message">
         {(trailer &&  variant !== "movie")
           ? "Trailer Was Not Found"
-          : "You have no active subscriptions. Choose your desired data bundle from the available data bundles list to enjoy amazing MTN TV+ content"}
+          : "You have no active subscriptions. Choose your desired data bundle from the available data bundles list to enjoy amazing AfriPlay content"}
       </p>
       <div className="unsubscribed-button">
         <Button action={() => (trailer &&  variant !== "movie") ? navigate(-1) : navigate("/subscriptions")} label={(trailer &&  variant !== "movie") ? "Back" : "Subscribe"} />

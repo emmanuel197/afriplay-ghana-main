@@ -93,9 +93,9 @@ const fetchMovieSlice = createSlice({
    
     fetchMoviesByCategory: (state, action) => {
       const { category, movies } = action.payload;
-      console.log(movies);
+      // console.log(movies);
       const categoryKey = category.toLowerCase() + "Category";
-      console.log(movies);
+      // console.log(movies);
       state[categoryKey] = movies; // Dynamically set the category, no need to check existence.
       state.loaders.category = false;
     },
@@ -119,7 +119,7 @@ const fetchMovieSlice = createSlice({
         bingeworthy
       } = action.payload;
       // Reset state for all categories.
-      console.log(moviesByCategories)
+      // console.log(moviesByCategories)
       // Execute only when the location pathname is "/".
       if (window.location.pathname === "/") {
         state.trending = trending?.length > 0 ? trending : [];
@@ -133,7 +133,7 @@ const fetchMovieSlice = createSlice({
           moviesByCategories
         )) {
           const categoryKey = category.toLowerCase();
-          console.log(categoryKey)
+          // console.log(categoryKey)
           if (state[categoryKey]) {
             state[categoryKey] =
               categoryMovies.length > 0 && categoryMovies[0]["content"]

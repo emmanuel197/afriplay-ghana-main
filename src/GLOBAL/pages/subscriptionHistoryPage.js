@@ -69,7 +69,7 @@ const SubscriptionHistoryPage = () => {
                 : <div id="history-card" className="history-card" style={{height: '70%'}}>
                 <div className="card-container card-wrapper card-wrapper-no-data">
                   <img  className='no-data-img' src={nocart} alt="no active subscriptions image" title="no active subscriptions"/>
-                  <div className="card-content" style={{height: 'auto'}}>You have no {active ? 'active' : ''} subscriptions. Choose your desired data bundle from the available data bundles list to enjoy amazing MTN TV+ content</div></div></div>}
+                  <div className="card-content" style={{height: 'auto'}}>You have no {active ? 'active' : ''} subscriptions. Choose your desired data bundle from the available data bundles list to enjoy amazing AfriPlay content</div></div></div>}
             </div>
           </div></>}
         </div>

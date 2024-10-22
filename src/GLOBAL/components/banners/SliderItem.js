@@ -6,9 +6,10 @@ const SliderItem = (props) => {
 
     if (type === 'afripremiere') return (
         <div
+            // style={{width: "100%"}}
             className={isSelected ? 'afripremiere-hero-slider-item active-afripremiere-hero-slider-item' : 'afripremiere-hero-slider-item'}
             onClick={onClicked}>
-            <img src={image_id} alt={title} />
+            <img src={image_id} alt={title} className="afripremiere-hero-slider-item-img" />
             <div className="text-content">
                 <div>
                     <p>{genre_id ? getGenreName(genre_id[0], allGenres) : null}</p>

@@ -1,3 +1,113 @@
+// const sliderSettings = (slidesToShow = 7, slidesToScroll = 5, dots = false, numOfSlidesOnMobile = 2) => {
+//   return {
+//     infinite: false,
+//     speed: 500,
+//     slidesToShow: slidesToShow,
+//     slidesToScroll: slidesToScroll,
+//     initialSlide: 0,
+//     dots: dots,
+//     responsive: [
+//       {
+//         breakpoint: 1024,
+//         settings: {
+//           slidesToShow: 5,
+//           slidesToScroll: 3,
+//           infinite: true,
+//           dots: false
+//         }
+//       },
+//       {
+//         breakpoint: 900,
+//         settings: {
+//           slidesToShow: 4,
+//           slidesToScroll: 2,
+//           initialSlide: 2
+//         }
+//       },
+//       {
+//         breakpoint: 600,
+//         settings: {
+//           slidesToShow: 3,
+//           slidesToScroll: 2,
+//           initialSlide: 2
+//         }
+//       },
+//       {
+//         breakpoint: 480,
+//         settings: {
+//           slidesToShow: numOfSlidesOnMobile,
+//           slidesToScroll: numOfSlidesOnMobile
+//         }
+//       }
+//     ]
+//   };
+
+// }
+
+// export default sliderSettings
+
+export const sliderSettingsAfripremiere = (slidesToShow = 7, slidesToScroll = 5, dots = false, numOfSlidesOnMobile = 1) => {
+  return {
+    infinite: false,
+    speed: 500,
+    slidesToShow: slidesToShow,
+    slidesToScroll: slidesToScroll,
+    initialSlide: 0,
+    dots: dots,
+    responsive: [
+      {
+        breakpoint: 1024, // Desktop
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          initialSlide: 1,
+          // dots: false
+        }
+      },
+      {
+        breakpoint: 900, // Tablet (landscape)
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          initialSlide: 1,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 768, // Tablet (portrait)
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          initialSlide: 1,
+          dots: true,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 600, // Small tablets/large phones
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          dots: true,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 480, // Mobile phones
+        settings: {
+          slidesToShow: numOfSlidesOnMobile,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          dots: true,
+          infinite: true,
+        }
+      }
+    ]
+  };
+}
+
 const sliderSettings = (slidesToShow = 7, slidesToScroll = 5, dots = false, numOfSlidesOnMobile = 2) => {
   return {
     infinite: false,
@@ -8,7 +118,7 @@ const sliderSettings = (slidesToShow = 7, slidesToScroll = 5, dots = false, numO
     dots: dots,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1024, // Desktop
         settings: {
           slidesToShow: 5,
           slidesToScroll: 3,
@@ -17,31 +127,46 @@ const sliderSettings = (slidesToShow = 7, slidesToScroll = 5, dots = false, numO
         }
       },
       {
-        breakpoint: 900,
+        breakpoint: 900, // Tablet (landscape)
         settings: {
           slidesToShow: 4,
           slidesToScroll: 2,
-          initialSlide: 2
+          initialSlide: 1,
+          infinite: true,
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 768, // Tablet (portrait)
         settings: {
           slidesToShow: 3,
           slidesToScroll: 2,
-          initialSlide: 2
+          initialSlide: 1,
+          dots: true,
+          infinite: true,
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 600, // Small tablets/large phones
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          dots: true,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 480, // Mobile phones
         settings: {
           slidesToShow: numOfSlidesOnMobile,
-          slidesToScroll: numOfSlidesOnMobile
+          slidesToScroll: 1,
+          initialSlide: 1,
+          dots: true,
+          infinite: true,
         }
       }
     ]
   };
-
 }
 
-export default sliderSettings
+export default sliderSettings;

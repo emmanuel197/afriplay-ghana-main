@@ -30,8 +30,8 @@ const Reel = ({ title, movies }) => {
         afriPlaylive,
         afriPremiere,
     }
-    console.log(movies)
-    console.log(trending)
+    // console.log(movies)
+    // console.log(trending)
     if (activeGenreTab === 'ALL') {
         if (title === 'AFRIPREMIERE') return <HomeBannerSlider title='AFRIPREMIERE' />
         if (title === 'AFRIPLAY LIVE') return <ReelGenreWrapper title='AFRIPLAY LIVE'  movies={movies} />

@@ -20,7 +20,7 @@ export const purchasePackage = async (product_id, subscriber_uid) => {
         const body = {
             subscriber_uid: subscriber_uid,
             subscription_type: 'one-off',
-            bill: false,
+            bill: true,
             product_id: product_id,
             medium: 'web'
         };
@@ -36,7 +36,7 @@ export const purchasePackage = async (product_id, subscriber_uid) => {
     } catch (error) {
         store.dispatch(fetchPackageReducer(false))
         TOAST.error(ERROR_MESSAGES.SUBSCRIPTION.subscriptionFailed)
-        console.error('An error occurred:', error.message);
+        // console.error('An error occurred:', error.message);
     }
 }
 
@@ -67,7 +67,7 @@ export const fetchPurchaseHistory = async (dispatch, active) => {
 
 
     } catch (error) {
-        console.error('An error occurred:', error.message);
+        // console.error('An error occurred:', error.message);
     }
 }
 
@@ -95,7 +95,7 @@ export const cancelSubscription = async (product_id) => {
         
         // Making POST request using Axios with async/await
         const response = await axios.post(url, body, { headers });
-        console.log(`cancel sub response1: ${JSON.stringify(response)}`)
+        // console.log(`cancel sub response1: ${JSON.stringify(response)}`)
         // console.log(response)
         if (response.data.status === "ok") {
             const url = `https://tvanywhereonline.com/cm/api/purchase/?operator_uid=${operator_uid}&method=update`
@@ -113,6 +113,6 @@ export const cancelSubscription = async (product_id) => {
 
     } catch (error) {
         TOAST.error(ERROR_MESSAGES.SUBSCRIPTION.subscriptionFailed)
-        console.error('An error occurred:', error.message);
+        // console.error('An error occurred:', error.message);
     }
 }

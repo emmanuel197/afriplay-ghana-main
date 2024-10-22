@@ -2,7 +2,7 @@ import React from 'react';
 // import { PrevArrow } from '../../pages/seriesDetails';
 // import { purchasePackage } from '../../redux/subscriptionApis'
 import Button from '../../components/buttons/Button'
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { androidImg, appleImg, checkImg, webImg } from '../../../utils/assets';
 import { subscriptionModalReducer } from '../../redux/slice/subscriptionSlice';
 
@@ -12,7 +12,7 @@ const SubscriptionCard = (subscription) => {
     
     // const { isLoading } = useSelector(state => state.fetchPackages)
     const dispatch = useDispatch()
-    
+    const { isLoading } = useSelector((state) => state.fetchPackages);
     const _initPurchasePackage = () => {
 
       dispatch(subscriptionModalReducer({ isOpen: true, productId: ID, productName: Name, productPrice: Price, currency: Currency }))
@@ -50,7 +50,7 @@ const SubscriptionCard = (subscription) => {
           
         </div>
         <div className='button-wrapper'>
-        <Button action={() => {_initPurchasePackage()}} label='Subscribe'/>
+        <Button isDisabled={isLoading} action={() => {_initPurchasePackage()}} label='Subscribe'/>
         </div>
         {/* <div
           className="icons-container-wrapper"

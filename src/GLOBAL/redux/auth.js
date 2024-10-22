@@ -129,7 +129,7 @@ export const generateOTP = async (isPhoneNumber, mobileNumber, email) => {
   }
 
   catch (e) {
-    console.error(e)
+    // console.error(e)
     TOAST.error(ERROR_MESSAGES.errorOccured)
   }
 }
@@ -208,7 +208,7 @@ const validateOTP = async (mobileNumber, OTPCode) => {
     });
     return OTP.data;
   } catch (error) {
-    console.error('Error occurred during OTP validation:', error);
+    // console.error('Error occurred during OTP validation:', error);
     throw error;
   }
 }

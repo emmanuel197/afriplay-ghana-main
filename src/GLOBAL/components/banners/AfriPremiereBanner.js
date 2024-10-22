@@ -155,7 +155,7 @@ import { fetchAgeRatings, fetchAllMovies, fetchGenres } from '../../redux/fetchM
 import { useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import SliderItem from './SliderItem';
-import sliderSettings from '../../../utils/sliderConfig/sliderSettings';
+import {sliderSettingsAfripremiere} from '../../../utils/sliderConfig/sliderSettings';
 import '../../components/styles/banners/dynamicBanner.scss';
 import getGenreName from "../../../utils/getGenreName";
 import Button from "../buttons/Button";
@@ -181,6 +181,7 @@ const AfriPremiereBanner = () => {
         setShowTitle(false);
     }, 5000);
 
+    
     // Fetch movies from `fetchAllMovies` and filter `premiere` type movies
     useEffect(() => {
         const initFetchMovies = async () => {
@@ -194,7 +195,7 @@ const AfriPremiereBanner = () => {
                 setAfriPremiereMovies(filtered); // Store filtered movies
                 setBannerContent(filtered[1]); // Set the first movie as banner content
             } catch (error) {
-                console.error("Error fetching movies:", error);
+                // console.error("Error fetching movies:", error);
             }
         };
 
@@ -213,7 +214,7 @@ const AfriPremiereBanner = () => {
             initSetAge();
         }, 1500);
     }, [ageRatings, bannerContent]);
-   console.log(bannerContent)
+//    console.log(bannerContent)
     return (
         <section>
             <div className="hero">
@@ -240,12 +241,12 @@ const AfriPremiereBanner = () => {
                                             <div className='hero-buttons'>
                                                 <Button page={`/watch/movie/${bannerContent.uid}`} selectedMovie={bannerContent.id} label='PLAY' />
                                                 <OutlineButton page={`/movie/${bannerContent.id}`} label="Info" />
-                                                <div className="mute-icon">
+                                                {/* <div className="mute-icon">
                                                     {isMuted
                                                         ? <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/muted.svg" alt="mute icon" />
                                                         : <img onClick={() => { setIsMuted(!isMuted) }} src="/assets/svg/speaker.svg" alt="speaker icon" />
                                                     }
-                                                </div>
+                                                </div> */}
                                             </div>
                                         ) : <></>
                                     }
@@ -255,7 +256,7 @@ const AfriPremiereBanner = () => {
                     </div>
 
                     <div className='hero-slider-container'>
-                        <Slider {...sliderSettings(3, 1, 2)} className='hero-slider-main'>
+                        <Slider {...sliderSettingsAfripremiere(3, 1, 2)} className='hero-slider-main'>
                             {afriPremiereMovies.map((movie) => {
                                 return (
                                     <SliderItem
@@ -267,6 +268,7 @@ const AfriPremiereBanner = () => {
                                         image_id={`https://ott.tvanywhereafrica.com:28182/api/client/v1/global/images/${movie?.image_store_id}?accessKey=WkVjNWNscFhORDBLCg==`}
                                         isSelected={false}
                                         key={movie.id}
+                                        
                                     />
                                 );
                             })}

@@ -58,9 +58,9 @@ import SliderWrapper from "../SliderWrapper";
 const ReelGenreWrapper = ({ allMovies, movies, title }) => {
     const [moviesOnly, setMoviesOnly] = useState([]);
     const [seriesOnly, setSeriesOnly] = useState([]);
-    console.log(movies)
-    processLog(`seriesOnly: ${seriesOnly}`);
-    processLog(`moviesOnly: ${moviesOnly}`);
+    // console.log(movies)
+    // processLog(`seriesOnly: ${seriesOnly}`);
+    // processLog(`moviesOnly: ${moviesOnly}`);
     
     useEffect(() => {
         if (movies && movies.length > 0) {

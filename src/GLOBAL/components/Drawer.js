@@ -18,7 +18,7 @@ const Drawer = () => {
     const toggleDropdown = () => setShowDropdown(!showDropdown);
 
     useEffect(() => {
-        console.warn('location changed!');
+        // console.warn('location changed!');
         _hideDrawer();
     }, [location]);
 

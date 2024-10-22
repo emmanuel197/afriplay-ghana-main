@@ -51,9 +51,12 @@ const LiveTvReelSlider = () => {
                                                 return movieItem.id === epg.id
                                             })
 
-                                            if (_epg.length > 0) _movie.shows = _epg[0].shows
-
-                                            return <MovieCard key={movieItem.id + index} type='livetv' movie={_movie} />
+                                            if (_epg.length > 0) {
+                                                _movie.shows = _epg[0].shows
+                                                
+                                            } 
+                                            
+                                            return  <MovieCard key={movieItem.id + index} type='livetv' movie={_movie} />
                                         }) : <></>
                                     }
                                 </Slider>

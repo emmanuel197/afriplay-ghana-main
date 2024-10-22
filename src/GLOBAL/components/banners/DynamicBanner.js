@@ -32,7 +32,7 @@ const fetchDataForBannerSlider = (recentlyAdded) => {
 
   indexes.forEach((index) => {
     const item = recentlyAdded[index];
-    console.log(`item ${JSON.stringify(item)}`);
+    // console.log(`item ${JSON.stringify(item)}`);
     if (!slides.includes(item)) {
       // if (item?.type === "series") seriesSlides.push(item);
       // else
@@ -40,7 +40,7 @@ const fetchDataForBannerSlider = (recentlyAdded) => {
     }
   });
 
-  console.warn("seriesSlides", seriesSlides);
+  // console.warn("seriesSlides", seriesSlides);
 
   return window.location.pathname === "/series" ? seriesSlides : slides;
 };
@@ -124,7 +124,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
         } else if (slides.length) {
           setAllSlides(slides);
           setSelectedMovie(slides[0] !== undefined ? slides[0] : slides[1]);
-          console.log(slides[0])
+          // console.log(slides[0])
         }
       };
 
@@ -173,7 +173,7 @@ const DynamicBanner = ({ showSlides = true, className }) => {
     if (location.pathname === "/") {
       const initFetchBannerContent = async () => {
         const bannerContent = await fetchLandingBanners();
-        console.warn(bannerContent);
+        // console.warn(bannerContent);
         setBannerContent(bannerContent);
       };
 

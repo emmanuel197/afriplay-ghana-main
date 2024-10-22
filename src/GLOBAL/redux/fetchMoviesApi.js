@@ -112,7 +112,7 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
         }
       }
     );
-    console.log(categories)
+    // console.log(categories)
     const _categories = categories.data.data
 
     dispatch(setGenreCategories(_categories))
@@ -132,7 +132,7 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
         }
       }
     );
-    console.log(movies)
+    // console.log(movies)
     // switch (activeGenre) {
     // case 'DRAMA':
     //   dispatch(fetchMoviesByCategory({
@@ -184,7 +184,7 @@ export const fetchMovieByGenre = async (activeGenre, dispatch) => {
   }
 
   catch (e) {
-    console.log(e.message)
+    // console.log(e.message)
   }
 }
 
@@ -381,7 +381,7 @@ export const fetchAllSeries = async (dispatch) => {
         }
       }
     );
-    console.log(`response: ${response.data}`);
+    // console.log(`response: ${response.data}`);
 
     const response_ = await axios.get(
       `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/series?series_id=${convertArrayToString(
@@ -394,7 +394,7 @@ export const fetchAllSeries = async (dispatch) => {
       }
     );
 
-    console.log("response_:", JSON.stringify(response_.data.data, null, 2));
+    // console.log("response_:", JSON.stringify(response_.data.data, null, 2));
 
     // dispatch(fetchAllSeriesReducer(response_.data.data))
 
@@ -814,7 +814,7 @@ export const fetchMovie = async (dispatch) => {
             },
           }
         );
-        console.log(movies)
+        // console.log(movies)
         const categorizedMovies = {
           mostwatched: [],
           recentlyadded: [],
@@ -875,7 +875,7 @@ export const fetchMovie = async (dispatch) => {
     }
   } catch (error) {
     dispatch(fetchMovies_error());
-    console.error('Error fetching movies:', error);
+    // console.error('Error fetching movies:', error);
   }
 };
 // export const fetchMovie = async (dispatch) => {
@@ -1508,6 +1508,7 @@ export const fetchWatchlist = (dispatch) => {
 
     axios(config)
       .then((response) => {
+        // console.log(response.data.data)
         dispatch(fetchWatchlistReducer(response.data.data.movie_bookmarks));
       })
       .catch(() => {
@@ -1558,7 +1559,7 @@ export const updateWatchlist = async (id, _type, lengthWatchedInMs = 0) => {
 
     let url;
     const bookmarkName = id;
-
+    // console.log(bookmarkName)
     if (_type === "series")
       url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/bookmarks/episodes/${id}`;
     if (_type === "movie")
@@ -1647,7 +1648,7 @@ export const fetchBannerContent = async (type) => {
         }
       }
     );
-    console.log(response.data.data)
+    // console.log(response.data.data)
     response.data.data.filter((item) => {
       if (item.vod_type === "MOVIE") movieBanners.push(item);
       if (item.vod_type === "SERIES") seriesBanners.push(item);
@@ -1680,7 +1681,7 @@ export const fetchBannerContent = async (type) => {
       let _ = movieBanners[Math.round(Math.random() * movieBanners.length)];
       if (_) randomBanner = _;
       else randomBanner = movieBanners[0];
-      console.log(randomBanner)
+      // console.log(randomBanner)
     }
 
     if (currentRoute === "/series") {
