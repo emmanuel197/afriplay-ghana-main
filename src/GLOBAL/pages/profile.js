@@ -10,7 +10,7 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState("watchlist");
   const setActiveTabName = (str) => setActiveTab(str);
   // Add logging to check if the activeTab updates correctly
-  console.log("Active Tab:", activeTab);
+  // console.log("Active Tab:", activeTab);
 
   return (
     <>
@@ -171,8 +171,58 @@ const Support = ({ active }) => {
   if (active === "support")
     return (
       <>
-        <h3>Support</h3>
-        <a href="mailto:support@afriplay.tv">support@afriplay.tv</a>
+        <h2 className="support-header">Support</h2>
+        {/* <a href="mailto:support@afriplay.tv">support@afriplay.tv</a> */}
+        <div className="support-body">
+        <div className="support-row">
+          <div className="support-row-text">
+            <h3>Call Us (Toll Free)</h3>
+            <p>100</p>
+          </div>
+        </div>
+        <div className="support-row">
+          <div className="support-row-text">
+            <h3>From any other phone</h3>
+            <p>0244 300 000</p>
+          </div>
+        </div>
+        <div className="support-row">
+          <div className="support-row-text">
+            <h3>Whatsapp</h3>
+            <p>0554 300 000</p>
+          </div>
+        </div>
+        <div className="support-row">
+          <div className="support-row-text">
+            <h3>Ayoba</h3>
+            <p>0554 300 000</p>
+          </div>
+        </div>
+        <div className="support-row">
+          <div className="support-row-text">
+            <h3>Email Us</h3>
+            <p>
+              mymtn.gh@mtn.com
+            </p>
+            {/* <p>
+              <a href="mailto:mymtn.gh@mtn.com">mymtn.gh@mtn.com</a>
+            </p> */}
+          </div>
+        </div>
+        <div className="support-row">
+          <div className="support-row-text">
+            <h3>Facebook</h3>
+            <p>@MTNGhana</p>
+          </div>
+        </div>
+        <div className="support-row">
+          <div className="support-row-text">
+            <h3>Twitter</h3>
+            <p>@MTNghana</p>
+          </div>
+        </div>
+        </div>
+        
       </>
     );
   return <></>;
