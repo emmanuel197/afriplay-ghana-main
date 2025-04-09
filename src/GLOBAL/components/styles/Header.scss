@@ -33,11 +33,11 @@ nav {
 }
 
 .header {
-  padding: 1rem;
+  padding: clamp(10px, .8333vw, 16px);
  
     position: sticky;
     top: 0;
-    z-index: 1000000; // Ensure the header is above other content
+    z-index: 1000; // Ensure the header is above other content
     background-color: $primary_color; // Ensure the background color is consistent with your design
     width: 100%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Optional: Add a subtle shadow for a floating effect
@@ -79,7 +79,7 @@ nav {
     display: flex;
     align-items: center;
     color: $kg_color;
-
+    align-items: center;
     .search-wrapper {
       display: flex;
       align-items: center;
@@ -103,6 +103,7 @@ nav {
     .search-icon {
       margin-top: 5px;
       margin-right: 10px !important;
+      width: clamp(20px, 1.25vw, 24px)
     }
   }
 
@@ -310,10 +311,16 @@ nav {
   .menu-btn.not-user-info {
     display: block;
     margin-left: 20px;
+
+    svg {
+      width: clamp(20px, 1.25vw, 24px);
+      aspect-ratio: 1 / 1;
+    }
   }
 
   .header .right-content .search-icon {
     margin-right: -20px;
+  
   }
 
   :root {
@@ -333,7 +340,7 @@ nav {
 @media screen and (max-width: 490px) {
   .header {
     #logo img {
-      width: 100px
+      width: clamp(80px, 5.2083vw, 100px)
       
     }
   }

@@ -1491,7 +1491,8 @@ export const fetchMovieVideo = (dispatch, id, type) => {
     });
 };
 
-export const fetchWatchlist = (dispatch) => {
+
+export const fetchWatchlist = async (dispatch) => {
   try {
     const { user_id, operator_uid, access_token } = user_info.data.data;
 
@@ -1505,15 +1506,15 @@ export const fetchWatchlist = (dispatch) => {
         "Content-Type": "application/json"
       }
     };
-
-    axios(config)
-      .then((response) => {
+    const response = await axios(config);
+    console.log(response)
+    if (response.data.status === "ok") {
         // console.log(response.data.data)
         dispatch(fetchWatchlistReducer(response.data.data.movie_bookmarks));
-      })
-      .catch(() => {
+      }
+      else {
         dispatch(fetchMovieVideo_error());
-      });
+      };
   } catch (e) {
     // console.error(e.message);
   }
@@ -1554,18 +1555,18 @@ export const updateWatchlist = async (id, _type, lengthWatchedInMs = 0) => {
     if (!id) return;
 
     const { user_id, operator_uid, access_token } = user_info.data.data;
-
     interceptResponse();
 
     let url;
     const bookmarkName = id;
-    // console.log(bookmarkName)
-    if (_type === "series")
+    if (_type === "series") {
       url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/bookmarks/episodes/${id}`;
-    if (_type === "movie")
+    }
+    if (_type === "movie") {
       url = `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/bookmarks/movies/${id}/${bookmarkName}`;
+    }
 
-    await axios.put(
+    const response = await axios.put(
       url,
       {
         time: lengthWatchedInMs,
@@ -1577,10 +1578,25 @@ export const updateWatchlist = async (id, _type, lengthWatchedInMs = 0) => {
         }
       }
     );
+
+    // Check the response status similar to fetchWatchlist
+    if (response.data.status === "ok") {
+      // You can now return or process the returned data (if any)
+      console.log(response)
+      return response.data.data;
+
+    } else {
+      // Handle the error case if necessary
+      // e.g., you might throw an error or log a message here
+      return null;
+    }
   } catch (e) {
-    // console.error("update length err", e);
+    // Optionally log the error or handle it further
+    // console.error("updateWatchlist error", e);
+    return null;
   }
 };
+
 
 export const removeWatchlist = async (id, _type) => {
   try {

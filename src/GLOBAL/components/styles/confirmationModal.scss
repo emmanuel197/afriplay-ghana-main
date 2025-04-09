@@ -1,0 +1,106 @@
+@import '../../../global.scss';
+
+.modalBackground {
+    width: 100vw;
+    height: 100vh;
+
+    transform: translateY(-50%);
+    // top: 0;
+    left: 0;
+    /*; Adjusted to full height */
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    /* Optional overlay if you want a dim background */
+    .modalContainer {
+
+        /* Adjusted for responsiveness */
+        width: clamp(500px, 26.042vw, 1000px);
+        /* Added maximum width */
+        height: auto;
+        /* Changed to auto for dynamic height */
+        border-radius: 12px;
+        background-color: $tertopas_color;
+        color: $tertiary_color;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        background-color: #000;
+        outline: 1px solid $kg_color;
+
+        .title {
+            display: inline-block;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            h1 {
+                font-size: clamp(14px, 1.042vw, 20px) !important;
+            }
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .titleCloseBtn {
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                background-color: transparent;
+                border: none;
+                font-size: clamp(10px, 1.042vw, 20.006px);
+                color: $tertiary_color;
+                cursor: pointer;
+
+                &:hover {
+                    transition: all ease 1s;
+                    color: $kg_color;
+                }
+            }
+
+        }
+
+        .footer {
+            flex: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .cancelBtn {
+                background-color: $primary_color !important;
+
+                &:hover {
+                    transition: all ease 1s;
+                    background-color: darken($primary_color, 5%) !important;
+                }
+            }
+
+            button {
+                width: clamp(70px, 7.813vw, 150.01px);
+
+                aspect-ratio: 150 / 45;
+                margin: 10px;
+                border: none;
+                background-color: $kg_color;
+                color: white;
+                border-radius: 8px;
+                font-size: clamp(7px, 0.833vw, 15.994px);
+                cursor: pointer;
+
+                &:hover {
+                    transition: all ease 1s;
+                    background-color: darken($kg_color, 20%);
+                }
+            }
+
+
+        }
+
+    }
+}

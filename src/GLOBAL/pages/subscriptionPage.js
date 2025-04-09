@@ -20,7 +20,7 @@ const SubscriptionPage = () => {
 
   // Call fetchPackageMovies when the component mounts
   useEffect(() => {
-    console.warn("location changed!");
+    // console.warn("location changed!");
     dispatch(fetchPackageMoviesReducer(SubscriptionsData));
   }, [dispatch]);
 

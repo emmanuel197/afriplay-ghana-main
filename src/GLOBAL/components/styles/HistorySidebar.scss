@@ -66,7 +66,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     overflow: hidden;
     user-select: none;
-    z-index: 99;
+    z-index: 1000;
 
     // &::-webkit-scrollbar {
     //     width: 8px;
@@ -161,9 +161,9 @@ label[for="nav-toggle"] {
     direction: rtl;
     overflow-x: hidden;
     transition: width 0.2s;
-
+    height: 100%;
     &::-webkit-scrollbar {
-        width: 8px;
+        width: clamp(4px, .4167vw, 8px);
         height: 8px;
       }
       

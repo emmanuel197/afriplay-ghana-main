@@ -1,0 +1,47 @@
+@import "../../../global.scss";
+
+.devices-tab {
+    .devices-tab-header {
+
+    }
+    .devices-list {
+        .device-wrapper {
+            display: flex;
+            align-items: center;
+            .device-svg {
+                width: clamp(16px, 1.563vw, 30.006px) ;
+                aspect-ratio: 1 / 1;
+                margin-right: 1.042vw;
+
+              
+            }
+            .device-details {
+                display: flex;
+                flex-direction: column;
+                gap: 0.521vw;
+                .device-uid {
+                    font-weight: 700;
+                    font-size: clamp(13px, 1.25vw, 24px);
+                }
+
+                .device-class {
+                    font-size: clamp(10px, 0.938vw, 18px);
+                }
+            }
+
+           .delete-device {
+                width: clamp(16px, 1.563vw, 30.006px) !important ;
+                margin-left: auto;
+                path {
+                    fill: rgb(224, 28, 21);
+                }
+
+                &:hover {
+                    path {
+                        fill: rgb(120, 10, 10);
+                    }
+                }
+           }
+        }
+    }
+}

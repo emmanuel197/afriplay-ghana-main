@@ -53,9 +53,13 @@ main {
 
 
 .history-cards-wrapper {
+ 
   overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100% - 60px);
-  
+  @media (max-width: 400px) {
+    height: 100vh;
+  }
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -99,20 +103,16 @@ main {
     justify-content: center;
     background-color: transparent !important;
     text-align: center;
-    gap: 1rem;
+    gap: clamp(30px, 2.6042vw, 50px);
     
 
     
     .no-data-img {
-      width:  20%;
-      height: auto;
+      width:  clamp(80px, 8.8542vw, 170px);
+      aspect-ratio: 1 / 1;
       object-fit: contain;
 
-      @media screen and (max-width: 1024px) {
-        max-width: 40%;
-        min-width:  30%;
-        
-      }
+    
     }
   }
 
@@ -130,7 +130,10 @@ main {
       height: 100%;
       padding-left: 10px;
       padding-right: 5px;
-
+      width: 80%;
+      @media (max-width: 500px) {
+        width: 100%;
+      }
       .img-wrapper {
         padding-top: 8px;
         padding-bottom: 8px;
@@ -154,7 +157,7 @@ main {
         width: 100%;
         justify-content: space-around;
         align-items: center;
-
+        font-size: clamp(10px, 1.0417vw, 20px);
         >* {
           flex: 1;
           /* Make children of text-content equally take up available space */

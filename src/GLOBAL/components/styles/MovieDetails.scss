@@ -35,7 +35,7 @@
 
   .container {
     position: relative;
-
+    z-index: 10;
     .image-movie-details {
       display: flex;
       

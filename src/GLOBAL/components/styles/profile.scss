@@ -212,10 +212,14 @@ body {
 
 .support-body {
     margin-top: 1rem;
+    display: flex;
+    gap: clamp(20px, 1.5625vw, 30px);
+    flex-direction: column;
 }
 .support-row {
 
     display: flex;
+    
     .support-row-text {
         display: flex;
         flex-direction: column;

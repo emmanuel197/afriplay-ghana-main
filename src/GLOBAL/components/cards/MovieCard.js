@@ -100,8 +100,8 @@ const MovieCard = ({ movie, type }) => {
 
   
 
-  if (type === "livetv" && EPGInfo ) {
-
+  if (type === "livetv" && EPGInfo && channelInfo) {
+    console.log(channelInfo)
     return (
       // channelInfo.image_stores[0].id !== undefined && 
       (<div className="movie-card livetv-movie-card">

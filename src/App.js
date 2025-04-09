@@ -46,14 +46,14 @@ function App() {
         <Route path="/subscription-history" element={<ProtectedRoute><SubscriptionHistoryPage /></ProtectedRoute>} />
         
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/series/:id" element={<ProtectedRoute><SeriesDetails /></ProtectedRoute>} />
+        {/* <Route path="/series/:id" element={<ProtectedRoute><SeriesDetails /></ProtectedRoute>} /> */}
         <Route path="/movies" element={<ProtectedRoute><Movies /></ProtectedRoute>} />
         {/* <Route path="/series" element={<ProtectedRoute><Series /></ProtectedRoute>} /> */}
-        <Route path="/afripremiere" element={<ProtectedRoute><AfriPremiere /></ProtectedRoute>} />
-        <Route path="/afriplaylive" element={<ProtectedRoute><AfriplayLive /></ProtectedRoute>} />
+        {/* <Route path="/afripremiere" element={<ProtectedRoute><AfriPremiere /></ProtectedRoute>} /> */}
+        {/* <Route path="/afriplaylive" element={<ProtectedRoute><AfriplayLive /></ProtectedRoute>} /> */}
         <Route path="/livetv" element={<ProtectedRoute><LiveTV /></ProtectedRoute>} />
         <Route path="/search" element={<ProtectedRoute><Search /></ProtectedRoute>} />
-        <Route path="/pay-per-view/:id/:genre" element={<ProtectedRoute><PayPerView /></ProtectedRoute>} />
+        {/* <Route path="/pay-per-view/:id/:genre" element={<ProtectedRoute><PayPerView /></ProtectedRoute>} /> */}
         <Route path="/out-of-region" element={<ErrorPage text='Service is only available in Ghana and Nigeria' />} />
         <Route path="/movie/:id" element={<MovieDetailsPage />} />
         <Route path="/watch/:type/:id" element={<ProtectedRoute><Watch /></ProtectedRoute>} />

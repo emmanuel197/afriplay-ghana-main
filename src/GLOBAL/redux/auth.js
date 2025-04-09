@@ -35,18 +35,22 @@ const prefixedMobileNumber = mobileNumber => {
 const validateUserData = (isPhoneNumber, mobileNumber, email, password, rePassword) => {
   if (!isPhoneNumber) {
     if (_verifyEmail(email)) {
+      store.dispatch(isLoadingReducer(false))  // <-- hide loader on validation fail
       TOAST.error(ERROR_MESSAGES.AUTH.invalidEmail);
       return false;
     }
   } else if (mobileNumber && mobileNumber.length < 10) {
+    store.dispatch(isLoadingReducer(false))  // <-- hide loader on validation fail
     TOAST.error(ERROR_MESSAGES.AUTH.invalidMobileNumber);
     return false;
   } else {
     // Password validation
     if (password && password.length < 7) {
+      store.dispatch(isLoadingReducer(false))  // <-- hide loader on validation fail
       TOAST.error(ERROR_MESSAGES.AUTH.invalidPassword);
       return false;
      } else if (rePassword && password !== rePassword) {
+      store.dispatch(isLoadingReducer(false))  // <-- hide loader on validation fail
       TOAST.error(ERROR_MESSAGES.AUTH.passwordMismatch);
       return false;
      }

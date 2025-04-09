@@ -18,7 +18,7 @@ export const fetchChannelEPGInfo = async (channels) => {
 
         return response.data.data
     } catch (e) {
-        console.warn(e.message)
+        // console.warn(e.message)
     }
 }
 

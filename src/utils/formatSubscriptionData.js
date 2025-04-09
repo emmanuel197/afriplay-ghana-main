@@ -13,7 +13,7 @@ const SubscriptionsData = [
     Currency: "GHS",
     DataBonus: "200 MB",
     Details: [
-      "Selected Live TV Channels only",
+      "Live TV Channels only",
       // `Rentals
       // (TVOD)`,
       `200Mb data bonus`
@@ -31,7 +31,7 @@ const SubscriptionsData = [
     Currency: "GHS",
     DataBonus: "320 MB",
     Details: [
-      `Selected Movies & Shows Only`,
+      `Movies & Shows Only`,
     //   `Rentals
     // (TVOD)`,
       `320Mb data bonus`

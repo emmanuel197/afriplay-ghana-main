@@ -131,25 +131,64 @@ export const initGetPurchases = (dispatch) => {
         });
 }
 
+
 export const fetchUserDevices = async () => {
     try {
-        // const operator_uid = 'glotv'
-        const subscriber_uid = 'g08156676289'
-
-        const { access_token, user_id, operator_uid } = user_info.data.data
-
-        // const response = await axios.get(`https://tvanywhereonline.com/api/client/v1/${operator_uid}/users/${user_id}/devices?operator_uid=${operator_uid}&subscriber_uid=${subscriber_uid}&limit=30&status=Active`)
-
-        const response = await axios.get(`https://tvanywhereonline.com/api/client/v1/${operator_uid}/users/${user_id}/devices`)
-
-        // console.log("DEVICES ----", response.data.data)
-
-        if (response.data.status === "ok") return response.data.data
-
+      // const operator_uid = 'glotv'
+      const subscriber_uid = "g08156676289";
+  
+      const { access_token, user_id, operator_uid } = user_info.data.data;
+      console.log(user_id);
+      // const response = await axios.get(`https://tvanywhereonline.com/api/client/v1/${operator_uid}/users/${user_id}/devices?operator_uid=${operator_uid}&subscriber_uid=${subscriber_uid}&limit=30&status=Active`)
+      var config = {
+        method: "get",
+        url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/devices`,
+        headers: {
+          Authorization: `Bearer ${access_token}`
+        }
+      };
+      // const response = await axios.get(`https://ott.com/api/client/v1/${operator_uid}/users/${user_id}/devices`)
+      // Use `await` to get the response
+      const response = await axios(config);
+  
+      // Return the data if status is OK
+      if (response.data.status === "ok") {
+        return response.data.data; // <-- Return the devices array
+      } else {
+        // Handle error scenario
+        return null;
+      }
     } catch (e) {
-        // console.error('fetchUserDevices', e.message)
+      // console.error('fetchUserDevices', e.message)
     }
-}
+  };
+
+  export const deleteUserDevice =  async (device_id) => {
+    try {
+  
+      console.log(device_id)
+      const { access_token, user_id, operator_uid } = user_info.data.data;
+      var config = {
+        method: "delete",
+        url: `https://ott.tvanywhereafrica.com:28182/api/client/v1/${operator_uid}/users/${user_id}/devices/${device_id}`,
+        headers: {
+          Authorization: `Bearer ${access_token}`
+        }
+      };
+      const response = await axios(config);
+      if (response.data.status === "ok") {
+        console.log("Devices inside fetchUserDevices:", response.data.data);
+        return response.data.data; // <-- Return the devices array
+      } else {
+        // Handle error scenario
+        return null;
+      }
+    }
+      catch (e) {
+        // console.error('fetchUserDevices', e.message)
+        
+      }
+  }
 
 export const initGetMessages = (dispatch) => {
     const selectedOperator = window.localStorage.getItem("afri_selected_operator")

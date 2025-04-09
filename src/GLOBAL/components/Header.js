@@ -98,7 +98,7 @@ const Header = (prop) => {
                       live TV
                     </p>
                   </Link>
-                  <Link className="nav-link" to="/afripremiere">
+                  {/* <Link className="nav-link" to="/afripremiere">
                     <p
                       className={
                         location.pathname === "/afripremiere"
@@ -108,8 +108,8 @@ const Header = (prop) => {
                     >
                       afripremiere
                     </p>
-                  </Link>
-                  <Link className="nav-link" to="/afriplaylive">
+                  </Link> */}
+                  {/* <Link className="nav-link" to="/afriplaylive">
                     <p
                       className={
                         location.pathname === "/afriplaylive"
@@ -119,7 +119,7 @@ const Header = (prop) => {
                     >
                       live drama
                     </p>
-                  </Link>
+                  </Link> */}
                   <div className="dropdown">
                     <button
                       onClick={() => setShowAccessDropdown(!showAccessDropdown)}
@@ -248,8 +248,6 @@ const Header = (prop) => {
                     clipRule="evenodd"
                     fillRule="evenodd"
                     fill="#fff"
-                    width={33}
-                    height={33}
                     strokeLinejoin="round"
                     strokeMiterlimit="2"
                     viewBox="0 0 24 24"

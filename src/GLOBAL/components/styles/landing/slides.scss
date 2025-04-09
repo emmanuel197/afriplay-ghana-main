@@ -220,6 +220,9 @@ html {
 }
 
 html .livetv-movie-card {
+    &.undefined {
+        display: none;
+    }
     .movie-box {
         display: flex;
         justify-content: space-between;
@@ -271,6 +274,7 @@ html .livetv-movie-card {
     .slides-wrapper {
         max-width: 1500px;
         margin: auto;
+        margin-bottom: clamp(20px, 3.6458vw, 70px);
         // padding: 1rem;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
