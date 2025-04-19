@@ -20,8 +20,8 @@ const GenreMovies = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
-  console.log(moviesOnly);
-  console.log(activeGenreId);
+  // console.log(moviesOnly);
+  // console.log(activeGenreId);
   useEffect(() => {
     // console.log("activeGenreTab", activeGenreTab)
     fetchMovieByGenre(activeGenreTab, dispatch);

@@ -4,7 +4,8 @@ import { store } from "../redux/store";
 import { ERROR_MESSAGES, TOAST } from '../../utils/constants'
 import { checkActiveSubscription } from "../../utils/activeSubs";
 export const purchasePackage = async (product_id, subscriber_uid) => {
-
+    console.log(`subscription_uid: ${subscriber_uid}`)
+    console.log(`product_uid: ${product_id}`)
     try {
         store.dispatch(fetchPackageReducer(true))
         // API URL
@@ -29,7 +30,7 @@ export const purchasePackage = async (product_id, subscriber_uid) => {
         const response = await axios.post(url, body, { headers });
         if (response.data.status === "ok") {
             store.dispatch(paymentInitiatedReducer(response.data.payment_status));
-            window.location.href = '/home'
+            window.location.href = response.data.redirect_url       
         }
         store.dispatch(fetchPackageReducer(false))
 

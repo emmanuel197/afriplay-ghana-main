@@ -30,7 +30,12 @@ const MovieCard = ({ movie, type }) => {
   // console.log(movie_image);
   useEffect(() => {
     const initFetchChannelInfo = async () => {
-      setChannelInfo(await fetchChannelInfo(movie.id));
+      const result = await fetchChannelInfo(movie.id)
+      console.log(result)
+      if (result !== null) {
+        setChannelInfo(result);
+      }
+      
     };
     initFetchChannelInfo();
   }, [movie.id]);

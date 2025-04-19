@@ -47,6 +47,7 @@ const fetchMovieSlice = createSlice({
     dataFromCache: false, // Track if data came from cache
     error: false,
     loading: false,
+    channels: [],
     loaders: {
       category: true,
       series: true,
@@ -69,6 +70,10 @@ const fetchMovieSlice = createSlice({
     },
     fetchAgeRatingsReducer: (state, action) => {
       state.ageRatings = action.payload;
+    },
+    fetchChannelsReducer: (state, action) => {
+      console.log(action.payload)
+      state.channels = action.payload
     },
     fetchSimilarMoviesReducer: (state, action) => {
       state.similarMovies = action.payload;

@@ -8,7 +8,7 @@ function SubscriptionModal() {
   const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
-
+ 
   const closeModal = async () => {
     dispatch(subscriptionModalReducer({ isOpen: false }));
   };

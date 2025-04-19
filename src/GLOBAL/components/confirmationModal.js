@@ -1,14 +1,8 @@
 import React from "react";
-import "../components/styles/confirmationModal.scss"; // Use your existing .scss if you like
+import "../components/styles/confirmationModal.scss";
 
-const ConfirmationModal = ({
-  isOpen,
-  title,
-  message,
-  onConfirm,
-  onCancel
-}) => {
-  // if (!isOpen) return null; // Don't render if closed
+const ConfirmationModal = ({ isOpen, title, message, onConfirm, onCancel }) => {
+  if (!isOpen) return null; // Don't render if the modal isn't open
 
   return (
     <div className="modalBackground">

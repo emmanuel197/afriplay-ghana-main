@@ -1,74 +1,81 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { fetchChannelEPGInfo } from "../../../redux/channels";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchChannelEPGInfo, fetchChannels } from "../../../redux/channels";
 import Slider from "react-slick";
 import sliderSettings from "../../../../utils/sliderConfig/sliderSettings";
 import MovieCard from "../../cards/MovieCard";
 import SliderWrapper from "../../SliderWrapper";
 
 const LiveTvReelSlider = () => {
-    const { channelCategories } = useSelector((state) => state.fetchMovies)
-    const [EPGs, setEPGs] = useState([])
+    const dispatch = useDispatch();
+    const { channels, channelCategories } = useSelector((state) => state.fetchMovies);
+    const [EPGs, setEPGs] = useState([]);
 
+    // Fetch eligible channels
     useEffect(() => {
-        const getAllChanelsIDs = () => {
-            const channelIDs = []
+        const initFetchChannel = async () => {
+            await fetchChannels(dispatch);
+        };
+        initFetchChannel();
+    }, [dispatch]);
 
-            for (let i = 0; i < channelCategories.length; i++) {
-                const element = channelCategories[i];
-                let channels = element.channels
+    // Fetch EPG data only for eligible channels
+    useEffect(() => {
+        const fetchEPG = async () => {
+            if (channels.length === 0) return;
+            const channelIDs = channels.map(ch => ch.id).toString();
+            const epgData = await fetchChannelEPGInfo(channelIDs);
+            setEPGs(epgData);
+        };
+        fetchEPG();
+    }, [channels]); // Depend on channels instead of channelCategories
 
-                for (let j = 0; j < channels.length; j++) {
-                    channelIDs.push(channels[j].id)
-                }
-            }
+    // Create Set of eligible channel IDs for quick lookup
+    const eligibleChannelIds = new Set(channels.map(ch => ch.id));
 
-            initFetchChannelEPGInfo(channelIDs.toString())
-        }
-
-        const initFetchChannelEPGInfo = async (channelIDs) => {
-            setEPGs(await fetchChannelEPGInfo(channelIDs))
-        }
-
-        getAllChanelsIDs()
-    }, [channelCategories])
-    // console.log(channelCategories)
     return (
         <div>
-            {
-                channelCategories.map((channel, index) => {
-                    return (
-                        <div key={channel.id + index}>
-                            <SliderWrapper title={channel.name}>
-                                <Slider {...sliderSettings(5)}>
-                                    {
-                                        EPGs ? channel.channels.map((movieItem, index) => {
+            {channelCategories.map((category) => {
+                // Filter category channels to only eligible ones
+                const filteredChannels = category.channels.filter(catChannel => 
+                    eligibleChannelIds.has(catChannel.id)
+                );
 
-                                            const _movie = { ...movieItem }
-                                            
-                                            const _epg = EPGs.filter(epg => {
-                                               
-                                                return movieItem.id === epg.id
-                                            })
+                // Skip rendering if no channels in category
+                if (filteredChannels.length === 0) return null;
 
-                                            if (_epg.length > 0) {
-                                                _movie.shows = _epg[0].shows
-                                                
-                                            } 
-                                            
-                                            return  <MovieCard key={movieItem.id + index} type='livetv' movie={_movie} />
-                                        }) : <></>
+                return (
+                    <div key={category.id}>
+                        <SliderWrapper title={category.name}>
+                            <Slider {...sliderSettings(5)}>
+                                {filteredChannels.map((movieItem, index) => {
+                                    const _movie = { ...movieItem };
+                                    const _epg = EPGs.filter(epg => 
+                                        movieItem.id === epg.id
+                                    );
+
+                                    if (_epg.length > 0) {
+                                        _movie.shows = _epg[0].shows;
                                     }
-                                </Slider>
-                            </SliderWrapper>
-                            <br />
-                            <br />
-                        </div>
-                    )
-                })
-            }
-        </div>
-    )
-}
 
-export default LiveTvReelSlider
+                                    return (
+                                        <MovieCard 
+                                            key={movieItem.id + index} 
+                                            type='livetv' 
+                                            movie={_movie} 
+                                        />
+                                    );
+                                })}
+                            </Slider>
+                        </SliderWrapper>
+                        <br />
+                        <br />
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
+
+export default LiveTvReelSlider;
+

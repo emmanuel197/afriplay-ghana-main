@@ -18,7 +18,7 @@ const landingPageBanner = () => {
 
         initFetchBannerContent()
     }, [])
-    console.log(bannerContent)
+    // console.log(bannerContent)
     return (
         <section>
             <div className="hero">

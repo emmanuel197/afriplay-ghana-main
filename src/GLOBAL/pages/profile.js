@@ -202,7 +202,7 @@ const Support = ({ active }) => {
           <div className="support-row-text">
             <h3>Email Us</h3>
             <p>
-              mymtn.gh@mtn.com
+            support@afriplay.tv
             </p>
             {/* <p>
               <a href="mailto:mymtn.gh@mtn.com">mymtn.gh@mtn.com</a>
